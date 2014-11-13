@@ -1,3 +1,5 @@
-$(function(){
-	// some init
+define(["app"], function(App) {
+	$(function(){
+		App.start();
+	});
 });

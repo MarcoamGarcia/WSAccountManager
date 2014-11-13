@@ -2,3 +2,15 @@ extends layout
 
 block content
   h1 Backbone App
+
+  div.initialContent
+    = appData
+
+  div.app
+
+  script(id='usertemplate', type="text/x.handlebars")
+    <a href= "#" class="name">{{username}}</a> with email: {{email}}
+
+  script(id='detailedUsertemplate', type="text/x.handlebars")
+    h2 {{username}}
+    p {{email}}

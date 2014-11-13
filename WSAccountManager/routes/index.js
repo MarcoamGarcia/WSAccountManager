@@ -6,7 +6,13 @@ var helloworld = require('../controllers/helloworld')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index');
+    req.db.users.find(function(err, users) {
+        if(err) return;
+        var data = JSON.stringify(users);
+        res.render("index", {
+            appData: data
+        });
+    });
 });
 
 /* GET Hello World page. */
@@ -19,6 +25,6 @@ router.get('/newuser', user.newUser);
 /* POST to Add User Service */
 router.post('/adduser', user.addUser);
 
-router.get('/user/:id', user.userInfo);
+//router.get('/user/:id', user.userInfo);
 
 module.exports = router;
