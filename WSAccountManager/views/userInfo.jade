@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1.
+        User Info
+    p User ID: #{userInfo._id}:
+    li
+        p User name: #{userInfo.username}
+    li
+        p User email: #{userInfo.email}
