@@ -2,7 +2,6 @@ define(["backbone", "events", "collections/user", "views/userCollection", "views
   var Router = Backbone.Router.extend({
     initialize: function() {
       var self = this;
-      self._setupCollection();
       Events.on("router:navigate", function(url) {
         self.navigate(url, { trigger: true });
       });
@@ -22,9 +21,13 @@ define(["backbone", "events", "collections/user", "views/userCollection", "views
     },
     index: function() {
       var self = this;
+    },
+    clients: function() {
+      var self = this;
       // because we have access to data we don't need next line... but i think that with
       // data on the page through initialContent is very insecure (user ids on page)
       //collection.fetch({ reset: true });
+      self._setupCollection();
       var view = new UserCollectionView({ collection: self.collection});
       self._renderView(view);
     },

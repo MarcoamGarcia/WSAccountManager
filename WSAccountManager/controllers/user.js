@@ -1,3 +1,6 @@
+var sjcl = require('sjcl');
+var Secret_Passphrase = "afrgaer#dkWPEOKF";
+
 /* GET Userlist page. */
 exports.userList = function(req, res, next) {
     var db = req.db;
@@ -18,11 +21,13 @@ exports.addUser = function(req, res) {
     // Get our form values. These rely on the "name" attributes
     var userName = req.body.username;
     var userEmail = req.body.useremail;
+    var encrypt_password = sjcl.encrypt(Secret_Passphrase, req.body.userpassword);
 
     // Submit to the DB
     db.users.insert({
         "username" : userName,
-        "email" : userEmail
+        "email" : userEmail,
+        "password" : encrypt_password
     }, function (err, doc) {
         if (err) {
             // If it failed, return error

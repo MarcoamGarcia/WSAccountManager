@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var flash    = require('connect-flash');
+var passport = require('passport');
 
 var db = require("./database.js");
 
@@ -23,6 +25,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Configuring Passport
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+var initPassport = require('./config/passport');
+initPassport(passport);
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
