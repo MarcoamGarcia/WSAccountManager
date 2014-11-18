@@ -8,6 +8,7 @@ define(["backbone", "events", "collections/user", "views/userCollection", "views
     },
     routes: {
       "": "index",
+      "/clients": "clients",
       "user/:id": "singleUser"
     },
     _setupCollection: function() {

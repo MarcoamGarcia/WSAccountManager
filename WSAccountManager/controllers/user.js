@@ -11,7 +11,7 @@ exports.userList = function(req, res, next) {
 
 /* GET New User page. */
 exports.newUser = function(req, res, next) {
-    res.render('newuser', { title: 'Add New User' });
+    res.render('newuser', { title: 'Invite New User' });
 }
 
 exports.addUser = function(req, res) {
@@ -22,12 +22,17 @@ exports.addUser = function(req, res) {
     var userName = req.body.username;
     var userEmail = req.body.useremail;
     var encrypt_password = sjcl.encrypt(Secret_Passphrase, req.body.userpassword);
+    var is_admin = false;
+    if (typeof req.body.admin_checkbox != "undefined" && req.body.admin_checkbox != null) {
+        is_admin = true;
+    };
 
     // Submit to the DB
     db.users.insert({
         "username" : userName,
         "email" : userEmail,
-        "password" : encrypt_password
+        "password" : encrypt_password,
+        "is_admin" : is_admin
     }, function (err, doc) {
         if (err) {
             // If it failed, return error

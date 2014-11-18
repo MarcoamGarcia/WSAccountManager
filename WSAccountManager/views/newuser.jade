@@ -1,9 +1,22 @@
 extends layout
 
 block content
-    h1= title
-    form#formAddUser(name="adduser",method="post",action="/adduser")
-        input#inputUserName(type="text", placeholder="username", name="username")
-        input#inputUserEmail(type="text", placeholder="useremail", name="useremail")
-        input#inputUserPassWord(type='password', placeholder="password", name="userpassword")
-        button#btnSubmit(type="submit") submit
+    div.container
+        div.row
+            div.col-sm-6.col-md-4.col-md-offset-4
+                h3.text-center.newuser-title= title
+                    br
+                    br
+                    div.account-wall
+                        form#formAddUser(name="adduser",method="post",action="/adduser")
+                            input#inputUserName.form-control(type="text", placeholder="Username", name="username",required, autofocus)
+                            br
+                            input#inputUserEmail.form-control(type="text", placeholder="Email", name="useremail",required)
+                            br
+                            input#inputUserPassWord.form-control(type='password', placeholder="Password", name="userpassword",required)
+                            .checkbox
+                                label(style='display: inline-block')
+                                    input(type='checkbox', id='admin_checkbox', value='admin_checkbox', name="admin_checkbox") 
+                                    | User Admin
+
+                            button#btnSubmit.btn.btn-success.btn-lg(type='submit') Send Invitation

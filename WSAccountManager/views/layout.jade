@@ -6,5 +6,31 @@ html
     link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/javascripts/lib/require.js', data-main="/javascripts/require.config.js")
+
   body
+    .container
+      .row
+          .span12
+            .head
+              .row-fluid
+                .span12
+                  .span6
+                    a(href='/home')
+                      h1.muted WS Account Manager
+              .navbar
+                .navbar-inner
+                  .container
+                    ul.nav
+                      li
+                        a(href='/home') Alerts
+                      li
+                        a(href='/clients') Clients List
+                      li
+                        a(href='#') Calendar
+                      li
+                        a(href='#') My Profile
+                      li
+                        a(href='/newuser') Invite User
+                      li
+                    a.btn.pull-right(type='button', href='/signout') Logout
     block content

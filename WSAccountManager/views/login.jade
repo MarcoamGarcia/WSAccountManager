@@ -1,4 +1,4 @@
-extends layout
+extends public_layout
  
 block content
   div.container
@@ -17,7 +17,6 @@ block content
               br
               button(class='btn btn-primary', type='submit') Sign in
               span.clearfix
-          a(href='/signup', class='text-center new-account btn btn-info') Create an account
           #message
           if message
             h1.text-center.error-message #{message}

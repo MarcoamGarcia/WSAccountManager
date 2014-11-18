@@ -14,7 +14,7 @@ var isAuthenticated = function (req, res, next) {
 }
 
 /* GET home page. */
-/*router.get('/', function(req, res) {
+router.get('/clients', isAuthenticated, function(req, res) {
     req.db.users.find(function(err, users) {
         if(err) return;
         var data = JSON.stringify(users);
@@ -22,31 +22,31 @@ var isAuthenticated = function (req, res, next) {
             appData: data
         });
     });
-});*/
+});
 
 router.get('/', function(req, res) {
-// Display the Login page with any flash message, if any
-res.render('login', { message: req.flash('message') });
+	// Display the Login page with any flash message, if any
+	res.render('login', { message: req.flash('message') });
 });
 
 /* Handle Login POST */
 router.post('/login', passport.authenticate('login', {
-successRedirect: '/home',
-failureRedirect: '/',
-failureFlash : true 
+	successRedirect: '/home',
+	failureRedirect: '/',
+	failureFlash : true 
 }));
 
 /* GET Registration Page */
-router.get('/signup', function(req, res){
+/*router.get('/signup', function(req, res){
 res.render('register',{message: req.flash('message')});
-});
+});*/
 
 /* Handle Registration POST */
-router.post('/signup', passport.authenticate('signup', {
+/*router.post('/signup', passport.authenticate('signup', {
 successRedirect: '/home',
 failureRedirect: '/signup',
 failureFlash : true 
-}));
+}));*/
 
 /* Handle Logout */
 router.get('/signout', function(req, res) {
@@ -56,7 +56,7 @@ router.get('/signout', function(req, res) {
 
 /* GET Home Page */
 router.get('/home', isAuthenticated, function(req, res){
-  res.render('home', { user: req.user });
+  res.render('showAlerts', { user: req.user });
 });
 
 /* GET Hello World page. */

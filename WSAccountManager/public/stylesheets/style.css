@@ -10,3 +10,25 @@ a {
 div.initialContent {
 	display: none;
 }
+
+div.alert-row {
+    margin-top: 0 40px;
+    padding: 0 10px;
+}
+
+div.alert-clickable {
+    cursor: pointer;   
+}
+
+div.alert-panel-heading div {
+  margin-top: -18px;
+  font-size: 15px;
+}
+
+div.alert-panel-heading div span {
+  margin-left: 5px;
+}
+
+div.alert-panel-body {
+  display: none;
+}
