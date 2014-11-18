@@ -7,8 +7,7 @@ define(["backbone", "events", "collections/user", "views/userCollection", "views
       });
     },
     routes: {
-      "": "index",
-      "/clients": "clients",
+      "clients": "clients",
       "user/:id": "singleUser"
     },
     _setupCollection: function() {
@@ -19,9 +18,6 @@ define(["backbone", "events", "collections/user", "views/userCollection", "views
     },
     _renderView: function(view) {
       $(".app").html(view.render().el);
-    },
-    index: function() {
-      var self = this;
     },
     clients: function() {
       var self = this;

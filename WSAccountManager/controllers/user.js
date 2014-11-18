@@ -14,7 +14,7 @@ exports.newUser = function(req, res, next) {
     res.render('newuser', { title: 'Invite New User' });
 }
 
-exports.addUser = function(req, res) {
+exports.inviteUser = function(req, res) {
     // Set our internal DB variable
     var db = req.db;
 
