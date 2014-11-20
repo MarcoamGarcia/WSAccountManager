@@ -1,10 +1,9 @@
 define(["backbone", "handlebars", "jquery", "events"], function(Backbone, Handlebars, $, Events) {
-  var UserView = Backbone.View.extend({
+  var ClientView = Backbone.View.extend({
     events: {
-      "click .name": "singleUserLink"
+      "click .client_detail": "singleUserLink"
     },
-    tagName: "li",
-    className: "user",
+    className: "client",
     render: function() {
       var self = this;
       var template = $("#clienttemplate").html();
@@ -22,5 +21,5 @@ define(["backbone", "handlebars", "jquery", "events"], function(Backbone, Handle
     }
   });
 
-  return UserView;
+  return ClientView;
 });

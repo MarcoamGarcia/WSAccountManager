@@ -1,4 +1,5 @@
-define(["backbone", "events", "collections/user", "views/userCollection", "views/detailedUser"], function(Backbone, Events, UserCollection, UserCollectionView, DetailedUserView) {
+define(["backbone", "events", "collections/user", "views/userCollection", "views/detailedUser", "collections/client", "views/clientCollection"], 
+  function(Backbone, Events, UserCollection, UserCollectionView, DetailedUserView, ClientCollection, ClientCollectionView) {
   var Router = Backbone.Router.extend({
     initialize: function() {
       var self = this;
@@ -25,7 +26,7 @@ define(["backbone", "events", "collections/user", "views/userCollection", "views
       // data on the page through initialContent is very insecure (user ids on page)
       //collection.fetch({ reset: true });
       self._setupCollection();
-      var view = new UserCollectionView({ collection: self.collection});
+      var view = new ClientCollectionView({ collection: self.collection});
       self._renderView(view);
     },
     singleUser: function(id) {

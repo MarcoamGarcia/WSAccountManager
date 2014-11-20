@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
-var helloworld = require('../controllers/helloworld')
-    , user = require('../controllers/user');
+var user = require('../controllers/user')
+    , client = require('../controllers/client');
 
 // As with any middleware it is quintessential to call next()
 // if the user is authenticated
@@ -59,15 +59,14 @@ router.get('/company', isAuthenticated, function(req, res) {
     });
 });
 
-/* GET Hello World page. */
-router.get('/helloworld', isAuthenticated, helloworld.helloworld);
-
-/* GET Userlist page. */
-router.get('/userlist', isAuthenticated, user.userList);
+/* GET Clientlist page. */
+router.get('/clientlist', isAuthenticated, client.clientList);
 /* GET New User page. */
-router.get('company/newuser', isAuthenticated, user.newUser);
+router.get('/company/newuser', isAuthenticated, user.newUser);
 /* POST to Add User Service */
 router.post('/inviteuser', isAuthenticated, user.inviteUser);
+/* GET New Client page. */
+router.get('/company/newclient', isAuthenticated, client.newClient);
 
 //router.get('/user/:id', user.userInfo);
 

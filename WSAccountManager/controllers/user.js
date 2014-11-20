@@ -4,7 +4,7 @@ var Secret_Passphrase = "afrgaer#dkWPEOKF";
 /* GET Userlist page. */
 exports.userList = function(req, res, next) {
     var db = req.db;
-    db.users.find(function(err, docs) {
+    db.clients.find(function(err, docs) {
         res.json(docs);
     });
 }
