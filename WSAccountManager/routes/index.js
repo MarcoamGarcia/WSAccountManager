@@ -50,7 +50,7 @@ router.get('/home', isAuthenticated, function(req, res){
 
 /* GET home page. */
 router.get('/company', isAuthenticated, function(req, res) {
-    req.db.users.find(function(err, users) {
+    req.db.clients.find(function(err, users) {
         if(err) return;
         var data = JSON.stringify(users);
         res.render("index", {
@@ -67,6 +67,10 @@ router.get('/company/newuser', isAuthenticated, user.newUser);
 router.post('/inviteuser', isAuthenticated, user.inviteUser);
 /* GET New Client page. */
 router.get('/company/newclient', isAuthenticated, client.newClient);
+/* GET Userlist page. */
+router.get('/userlist', isAuthenticated, user.userList);
+/* POST to Add Client */
+router.post('/addclient', isAuthenticated, client.addClient);
 
 //router.get('/user/:id', user.userInfo);
 

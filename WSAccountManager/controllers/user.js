@@ -4,7 +4,7 @@ var Secret_Passphrase = "afrgaer#dkWPEOKF";
 /* GET Userlist page. */
 exports.userList = function(req, res, next) {
     var db = req.db;
-    db.clients.find(function(err, docs) {
+    db.users.find(function(err, docs) {
         res.json(docs);
     });
 }
@@ -18,33 +18,38 @@ exports.inviteUser = function(req, res) {
     // Set our internal DB variable
     var db = req.db;
 
-    // Get our form values. These rely on the "name" attributes
-    var userName = req.body.username;
-    var userEmail = req.body.useremail;
-    var encrypt_password = sjcl.encrypt(Secret_Passphrase, req.body.userpassword);
-    var is_admin = false;
-    if (typeof req.body.admin_checkbox != "undefined" && req.body.admin_checkbox != null) {
-        is_admin = true;
-    };
+    if ((typeof req.body.username != "undefined" && req.body.username != null && req.body.username != "")
+        && (typeof req.body.useremail != "undefined" && req.body.useremail != null && req.body.useremail != "")
+        && (typeof req.body.userpassword != "undefined" && req.body.userpassword != null && req.body.userpassword != "")) {
+        
+        // Get our form values. These rely on the "name" attributes
+        var userName = req.body.username;
+        var userEmail = req.body.useremail;
+        var encrypt_password = sjcl.encrypt(Secret_Passphrase, req.body.userpassword);
+        var is_admin = false;
+        if (typeof req.body.admin_checkbox != "undefined" && req.body.admin_checkbox != null) {
+            is_admin = true;
+        };
 
-    // Submit to the DB
-    db.users.insert({
-        "username" : userName,
-        "email" : userEmail,
-        "password" : encrypt_password,
-        "is_admin" : is_admin
-    }, function (err, doc) {
-        if (err) {
-            // If it failed, return error
-            res.send("There was a problem adding the information to the database.");
-        }
-        else {
-            // If it worked, set the header so the address bar doesn't still say /adduser
-            res.location("userlist");
-            // And forward to success page
-            res.redirect("userlist");
-        }
-    });
+        // Submit to the DB
+        db.users.insert({
+            "username" : userName,
+            "email" : userEmail,
+            "password" : encrypt_password,
+            "is_admin" : is_admin
+        }, function (err, doc) {
+            if (err) {
+                // If it failed, return error
+                res.send("There was a problem adding the information to the database.");
+            }
+            else {
+                // If it worked, set the header so the address bar doesn't still say /adduser
+                res.location("userlist");
+                // And forward to success page
+                res.redirect("userlist");
+            }
+        });
+    };
 }
 
 exports.userInfo = function(req, res, next) {

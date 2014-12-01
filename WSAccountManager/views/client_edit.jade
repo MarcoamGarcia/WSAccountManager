@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    div.container
+        div.app
+
+
+    script(id='editclienttemplate', type="text/x.handlebars")
+        .alert-row
+          table#dev-table.table.table-hover
+            tbody
+              tr
+                td.clients Company Name
+                td.clients {{companyname}}
+              tr
+                td.clients First Name
+                td.clients {{firstname}}
+              tr
+                td.clients Last Name
+                td.clients {{lastname}}
+              tr
+                td.clients First Contact
+                td.clients_1 {{firstcontact}}
+              tr
+                td.clients_1 Second Contact
+                td.clients_1 {{secondcontact}}

@@ -4,6 +4,28 @@ block content
   .container
     div.initialContent
       = appData
+    div.initialContent_clients
+      = appData_clients
+    div.table
+      .alert-row
+        .col-md-6
+          .panel.panel-primary
+            .alert-alert-panel-heading
+              h3.panel-title Clients
+              a.client_add.btn.btn-primary.pull-right(type='button', href='/company/newclient') Add Client
+              .pull-right
+                span.alert-clickable.filter(data-toggle='tooltip', title='Toggle table filter', data-container='body')
+                  i.glyphicon.glyphicon-filter
+            .alert-panel-body
+              input#dev-table-filter.form-control(type='text', data-action='filter', data-filters='#dev-table', placeholder='Filter Developers')
+            table#dev-table.client_table_header.table.table-hover
+              thead
+                tr
+                  th #
+                  th Company Name
+                  th First Name
+                  th First Contact
+                  th
 
     div.app
 
@@ -11,47 +33,45 @@ block content
     <!--<a href= "#" class="name">{{username}}</a> with email: {{email}}-->
 
     .alert-row
-      .col-md-6
-        .panel.panel-primary
-          .alert-alert-panel-heading
-            h3.panel-title Clients
-            a.btn.btn-primary.pull-right(type='button', href='/company/newclient') Add Client
-            .pull-right
-              span.alert-clickable.filter(data-toggle='tooltip', title='Toggle table filter', data-container='body')
-                i.glyphicon.glyphicon-filter
-          .alert-panel-body
-            input#dev-table-filter.form-control(type='text', data-action='filter', data-filters='#dev-table', placeholder='Filter Developers')
-          table#dev-table.table.table-hover
-            thead
-              tr
-                th #
-                th First Name
-                th Last Name
-                th Username
-                th
-            tbody
-              tr
-                td 1
-                td {{username}}
-                td {{email}}
-                td kilgore
-                td
-                  a.btn.btn-success.pull-right(type='button') Edit
-              tr
-                td 2
-                td Bob
-                td Loblaw
-                td boblahblah
-                td
-                  a.client_detail.btn.btn-success.pull-right(type='button') Edit
-              tr
-                td 3
-                td Holden
-                td Caulfield
-                td penceyreject
-                td
-                  a.btn.btn-success.pull-right(type='button', href='#') Edit
+      table#dev-table.table.table-hover
+        thead
+          tr
+            th.clients 
+            th.clients 
+            th.clients 
+            th.clients 
+            th.clients 
+            th.clients_1
+        tbody
+          tr
+            td.clients {{index}}
+            td.clients {{companyname}}
+            td.clients {{firstname}}
+            td.clients {{firstcontact}}
+            td.clients_1
+              a.edit_client.btn.btn-success.pull-right(type='button') Edit
 
   script(id='detailedUsertemplate', type="text/x.handlebars")
     h2 {{username}}
     p {{email}}
+
+  script(id='editclienttemplate', type="text/x.handlebars")
+    .alert-row
+      form.form-horizontal(role='form')
+        .form-group.control-group
+          .col-sm-10
+            input#inputEmail3.form-control(type='company_name', placeholder='Company Name', value='{{companyname}}')
+        .form-group.control-group
+          .col-sm-10
+            input#inputEmail3.form-control(type='first_name', placeholder='First Name', value='{{firstname}}')
+        .form-group.control-group
+          .col-sm-10
+            input#inputEmail3.form-control(type='last_name', placeholder='Last Name', value='{{lastname}}')
+        .form-group.control-group
+          .col-sm-10
+            input#inputEmail3.form-control(type='first_contact', placeholder='First Contact', value='{{firstcontact}}')
+        .form-group.control-group
+          .col-sm-10
+            input#inputEmail3.form-control(type='second_contact', placeholder='Second Contact', value='{{secondcontact}}')
+        .form-group.control-group
+            a.cancel(class="cancel btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

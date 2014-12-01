@@ -8,7 +8,9 @@ define(["backbone", "views/client"], function(Backbone, ClientView) {
     render: function() {
       var self = this;
       self.$el.html("");
+      var index = 1;
       self.collection.each(function(client){
+        client.attributes.index = index++;
         var clientView = new ClientView({ model: client });
         self.$el.append(clientView.render().el);
       }, self);

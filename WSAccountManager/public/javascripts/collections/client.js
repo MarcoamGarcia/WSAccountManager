@@ -1,6 +1,6 @@
-define(["backbone", "models/user"], function(Backbone, User) {
+define(["backbone", "models/client"], function(Backbone, Client) {
   return Backbone.Collection.extend({
-    model: User,
+    model: Client,
     url: "/clientlist"
   });
 });

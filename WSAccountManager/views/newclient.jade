@@ -8,15 +8,15 @@ block content
                     br
                     br
                     div.account-wall
-                        form#formAddClient(name="adduser",method="post",action="/adduser")
-                            input#inputCompanyName.form-control(type="text", placeholder="Company Name", name="Company Name",required, autofocus)
+                        form#formAddClient(name="addclient",method="post",action="/addclient")
+                            input#inputCompanyName.form-control(type="text", placeholder="Company Name", name="company_name",required, autofocus)
                             br
-                            input#inputFirstName.form-control(type="text", placeholder="First Name", name="First Name",required)
+                            input#inputFirstName.form-control(type="text", placeholder="First Name", name="first_name",required)
                             br
-                            input#inputLastName.form-control(type="text", placeholder="Last Name", name="Last Name",required)
+                            input#inputLastName.form-control(type="text", placeholder="Last Name", name="last_name",required)
                             br
-                            input#inputFirstContact.form-control(type="text", placeholder="First Contact", name="First Contact",required)
+                            input#inputFirstContact.form-control(type="text", placeholder="First Contact", name="first_contact",required)
                             br
-                            input#inputSecondContact.form-control(type="text", placeholder="Second Contact", name="Second Contact")
+                            input#inputSecondContact.form-control(type="text", placeholder="Second Contact", name="second_contact")
                             br
                             button#btnSubmit.btn.btn-success.btn-lg(type='submit') Add Client
