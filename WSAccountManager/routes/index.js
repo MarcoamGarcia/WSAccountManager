@@ -71,6 +71,8 @@ router.get('/company/newclient', isAuthenticated, client.newClient);
 router.get('/userlist', isAuthenticated, user.userList);
 /* POST to Add Client */
 router.post('/addclient', isAuthenticated, client.addClient);
+/* PUT to Add Client */
+router.put('/client/:id', isAuthenticated, client.editclient);
 
 //router.get('/user/:id', user.userInfo);
 

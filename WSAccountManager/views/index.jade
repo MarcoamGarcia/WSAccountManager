@@ -57,21 +57,23 @@ block content
 
   script(id='editclienttemplate', type="text/x.handlebars")
     .alert-row
-      form.form-horizontal(role='form')
+      form.form-horizontal(role='form',method="post")
         .form-group.control-group
           .col-sm-10
-            input#inputEmail3.form-control(type='company_name', placeholder='Company Name', value='{{companyname}}')
+            input#companyname.form-control(type='company_name', placeholder='Company Name', name="company_name", value='{{companyname}}')
         .form-group.control-group
           .col-sm-10
-            input#inputEmail3.form-control(type='first_name', placeholder='First Name', value='{{firstname}}')
+            input#firstname.form-control(type='first_name', placeholder='First Name', name="first_name", value='{{firstname}}')
         .form-group.control-group
           .col-sm-10
-            input#inputEmail3.form-control(type='last_name', placeholder='Last Name', value='{{lastname}}')
+            input#lastname.form-control(type='last_name', placeholder='Last Name', name="last_name", value='{{lastname}}')
         .form-group.control-group
           .col-sm-10
-            input#inputEmail3.form-control(type='first_contact', placeholder='First Contact', value='{{firstcontact}}')
+            input#firstcontact.form-control(type='first_contact', placeholder='First Contact', name="first_contact", value='{{firstcontact}}')
         .form-group.control-group
           .col-sm-10
-            input#inputEmail3.form-control(type='second_contact', placeholder='Second Contact', value='{{secondcontact}}')
+            input#secondcontact.form-control(type='second_contact', placeholder='Second Contact', name="second_contact", value='{{secondcontact}}')
         .form-group.control-group
+            button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+            &nbsp
             a.cancel(class="cancel btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

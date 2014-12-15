@@ -39,9 +39,27 @@ define(["backbone", "handlebars", "jquery", "events"], function(Backbone, Handle
         var field_value = self.model.get(field_name);
         field.val(field_value);
         $(this).hide();
-        $(this).removeClass('dirty');
+        $(this).find('form-horizontal');
         // stop event propagation to avoid scrolling to the top.
         e.preventDefault();
+      });
+
+      self.$el.find(".save").click(function(e) {
+        var companyname = self.$el.find("#companyname")[0].value;
+        var firstname = self.$el.find("#firstname")[0].value;
+        var lastname = self.$el.find("#lastname")[0].value;
+        var firstcontact = self.$el.find("#firstcontact")[0].value;
+        var secondcontact = self.$el.find("#secondcontact")[0].value;
+
+        self.model.save({ companyname: companyname, firstname: firstname, lastname: lastname, firstcontact: firstcontact
+        , secondcontact: secondcontact }, {
+          success: function () {
+            console.log("sucesso!!!!!!!!!!!!!!!!!!!!!");
+          },
+          error: function(error, e) {
+            console.log("======================= erro: " + error);
+          }
+        });
       });
 
       return self;
