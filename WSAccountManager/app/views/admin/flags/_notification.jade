@@ -1,0 +1,18 @@
+div.clear
+div(id='flag_' + notification._id)
+    - if(!notification["closed"])
+        div Resolve conflict!
+    div.tahoma_black_10pt(class='left_margin top_margin')
+    - notification["flags"].forEach(function(flag){
+        div Flagged by: #{actor_properties[flag.actor_id].short_name}
+        div Reason: #{flag.reason}
+    - })
+    div(class='top_margin')
+        != partial('admin/flags/_flag_commands', {locals: { object: notification, type: "noti"} }) 
+    //- flags in notifications.
+    != partial('notifications/_notification', { notification: notification, locals: { actor_properties: actor_properties, all_info: false} })
+    div.large_dashed_break
+    div.clear
+    div(style='border-bottom: 1px solid red')
+    div.clear
+    

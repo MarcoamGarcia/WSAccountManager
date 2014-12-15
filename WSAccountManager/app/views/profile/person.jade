@@ -1,0 +1,26 @@
+extends ../public_layout
+block content
+    .page-header
+        -if((actor.name_security == 1 || actor.name_security == 2) && !public || actor.name_security == 2 && public)
+            h1 #{actor.name} Profile
+        -else 
+            h1 Anonymous Profile 
+    div#general_info        
+            h3.bottom_margin General
+        address
+            -if((actor.email_security == 1 || actor.email_security == 2) && !public || actor.email_security == 2 && public)
+                span Email: 
+                strong #{actor.email}
+        address
+            -if((actor.about_me_security == 1 || actor.about_me_security == 2) && !public || actor.about_me_security == 2 && public)
+                span Bio: 
+                strong #{actor.about_me}
+    hr
+    div#general_info        
+            h3.bottom_margin Links/Social Networks
+            div (Coming Soon)
+    hr
+    div#general_info        
+            h3.bottom_margin Recent Activity
+            div (Coming Soon)
+    hr

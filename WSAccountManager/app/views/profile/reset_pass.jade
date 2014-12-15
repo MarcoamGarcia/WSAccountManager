@@ -1,0 +1,20 @@
+extends ../public_layout
+block content
+    div.grid_3(id='left_col') &nbsp;
+    div.grid_8(id='large_center_col')
+        form(method='POST')
+            input(type='hidden', name="_csrf", value='#{csrf_token}'))
+            div.top_margin
+              h3 Choose a new password:
+            div.control-group(class='top_margin #{account_pass_error}')
+              div.controls
+                  input(type='password', id='account_pass', name='account[pass]', placeholder='New password')
+                  - if(errors["pass"]) 
+                     span(class="help-inline") #{errors["pass"]}
+            div.control-group(class='#{pass_confirm_error}')
+              div.controls
+                  input(type='password', id='account_pass_confirm', name='account[pass_confirm]', placeholder='Re-enter new password')
+                  - if(errors["pass_confirm"]) 
+                       span(class="help-inline") #{errors["pass_confirm"]}
+            div.control-group(class='top_margin')
+              input(type='submit', class="btn btn-primary", value="Change")

@@ -1,0 +1,21 @@
+extends ../public_layout
+block content
+
+    .row(style='background: #00B7CC;padding-top: 40px;')
+            .col-md-1
+            .col-md-6(style='color:white; font-size: 20px')
+              p So you forgot your password. No worries.
+              p Just add your e-mail account in bellow and we will send instructions on how to set a new password.
+            .col-md-3
+    .row(style='background: #00B7CC;padding-bottom: 40px')
+            .col-md-1
+              p &nbsp;
+            .col-md-4(style='color: white')
+              form#form-forgotpass(role='form', method='POST')
+                input(type='hidden', name="_csrf", value='#{csrf_token}')
+                .form-group 
+                    input.form-control.form-control-blue.input_blue.register_input(type='text', id='email', name='email', placeholder='EMAIL', value=email)
+                    - if(errors["email"]) 
+                        span(class="help-inline") #{errors["email"]}
+                .form-group
+                    button.button_blue.register_input(type='submit') RESET

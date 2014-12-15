@@ -1,0 +1,29 @@
+
+tr(id='user_' + actor._id)
+  td
+    -if (actor.photo) 
+       a(href=url_mount('/account/' + actor._id))
+          img(src=url_mount("/logo/"+ actor._id))
+  td
+    div
+        #{actor.name}
+    div
+        Skills:
+        -each skill in actor.skills
+            #{skill.value} /" +
+            		"" +
+            		"" +
+            		"    " +
+        form(method='POST', action=url_mount('/admin/tags/'+ tag._id + '/update'), data-remote="true", data-type="json")
+        div.left_info
+            input(id='tagName', name='tag[name]', value=tag.name)
+        div.right_info
+            input(type='submit', value='Save')
+            a.show(href=url_mount('/admin/tags/' + tag._id + "/show"), data-method='put', data-type="json") [cancel]
+        div(style='clear:both')
+    div
+        Tags:
+        -each upinskill in actor.upinskills
+            #{upinskill.value} / 
+  td
+      a.edit(href=url_mount('/admin/users/' + actor._id + "/edit"), data-method='put', data-type="json") [c]

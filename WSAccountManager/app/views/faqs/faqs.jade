@@ -1,0 +1,114 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{company.name} FAQs
+    div(class="row")         
+          div#faqs_wrapper(class="span12")
+                div
+                  a#new_faq(href=url_mount('/company/#{session.active_company_id}/faqs/new'), class='btn')
+                      i(class="icon-plus")
+                      span FAQ
+                br
+                br
+                table#faqs_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Name
+                          th Description
+                          th Site
+                          th Script
+                          th(style='width: 100px;') Stats
+                          th Changed by
+                          th 
+                          th(style='width: 100px;') &nbsp;
+                  tbody
+                      - if (faqs.length == 0)
+                          tr.empty_table
+                              td(colspan='8') (there aren't any FAQs)
+                      - faqs.forEach(function(faq_info){
+                          tr
+                            
+                              td   #{faq_info.name}
+                              td   #{faq_info.description}
+                              td
+                                  - if (faq_info.site != null)
+                                      #{faq_info.site.name}
+                              td
+                                a.script_link(href='#') Show
+                                div(class="script_info hide")
+                                    pre #{faq_info.script}
+                              td.stats
+                                div
+                                    i.icon-eye-open
+                                    span.stats-open(class='right_margin')  (#{faq_info.view})
+                                div
+                                    i.icon-hand-up
+                                    span.stats-up(class='right_margin')  (#{faq_info.up})
+                                div
+                                    i.icon-hand-down
+                                    span.stats-down(class='right_margin')  (#{faq_info.down})
+                              td
+                                  - if (faq_info.updated_by != null)
+                                      #{faq_info.updated_by.name}
+                              td
+                                    a.preview(href=url_mount('/company/#{company.id}/faq/#{faq_info.id}/preview')) Preview
+                              td
+                                  a.edit_lnk(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", href=url_mount('/company/#{company.id}/faq/#{faq_info.id}'), data-complete="Edited!") 
+                                      i(class="icon-pencil")
+                                  a.delete_lnk(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", href=url_mount('/company/#{company.id}/faq/#{faq_info.id}'), data-complete="Deleted!") 
+                                      i(class="icon-trash")
+                      - })
+    
+                      
+    script.
+          $(".delete_lnk").click(function(e) {
+              var self = $(this);
+              var href = self.attr("href");
+              bootbox.confirm("Are you sure?", function(confirmed) {
+                  if(confirmed) {
+                        var csrf_val = $("meta[name='_csrf']").attr('content');
+                        $.ajax({url: href, type: "DELETE",
+                            beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-Token', csrf_val);},
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            error: function(data) {
+                                show_error($("form"), data.responseText);
+                            },
+                            success: function(data) {
+                                after_save(self, data);
+                            }
+                        });
+                  }
+              });
+              e.preventDefault();
+          });
+                              
+          function after_save(elem, data) {
+              if(_.isObject(data)) {
+                  var errors = data.errors;
+                  if(_.isObject(errors)) {
+                      show_error($("form.faqs_list"), data);
+                  } else {
+                      elem.parents("tr").fadeOut('slow');
+                  }
+              } else {
+                  show_error("form.faqs_list", data);
+              }
+          }
+          
+          $(".script_link").click(function (e) {
+            var script_info_el = $(this).next(".script_info");
+             if(script_info_el.is(":visible")) {
+                 script_info_el.hide(true);
+                 $(this).text("Show");
+             } else {
+                 script_info_el.show(true);
+                 $(this).text("Hide");
+             }
+          });

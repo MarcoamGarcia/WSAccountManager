@@ -1,0 +1,12 @@
+div.help_area [class^="helppier-icon-"], div.help_area [class*=" helppier-icon-"] {
+    background-image: url("//widget.dev.host.port/helppier/img/glyphicons-halflings.png") !important;
+}
+
+div.help_area .helppier-icon-white {
+    background-image: url("//widget.dev.host.port/helppier/img/glyphicons-halflings-white.png") !important;
+}
+
+a.helppier-JustifyLeft, a.helppier-JustifyCenter, a.helppier-JustifyRight,
+a.helppier-InsertUnorderedList, a.helppier-InsertOrderedList, a.helppier-image, a.helppier-link {
+  background: url('//widget.dev.host.port/helppier/img/yellow_texteditor.png') no-repeat !important;
+}

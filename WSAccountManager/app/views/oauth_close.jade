@@ -1,0 +1,9 @@
+html
+body
+    script
+
+        alert("dasdsa");
+        var loggedIn = #{everyauth.loggedIn};
+        window.opener.SocialloggedIn = loggedIn;
+        alert(loggedIn);
+        window.close();

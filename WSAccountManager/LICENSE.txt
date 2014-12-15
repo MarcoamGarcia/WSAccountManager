@@ -1,0 +1,3 @@
+// Helppier Application
+// Copyright 2010-2014 Helppier.com
+// All Rights Reserved.

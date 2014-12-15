@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>!importantjs</title>
+    <!-- <script src="../../mishmash/console/console.js"></script> -->
+    <!-- <script src=http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js></script> -->
+    <script src="jquery.js"></script>
+    <script src="../important.js"></script>
+    
+
+<!-- document-level !important rules for #elem -->
+<style id="style-elem">
+#elem {
+    background-color: darkblue !important;
+    color: yellow !important;
+}
+</style>
+<!-- end document-level !important rules for #elem -->
+    
+    
+    
+    <!-- general styling for demo -->
+    <style>
+        body {
+            padding:0.62em;
+            margin:0;
+        }
+        h1[title]:not(a > *), p[title]:not(a > *), span[title]:not(a > *) {
+            cursor:help;
+        }
+        h1 {
+            font-size:1.38em;
+            font-weight:bold;
+            padding:0.62em;
+            margin:0;
+            position:absolute;
+            top:0.62em;
+            left:1.38%;
+            z-index:2;
+            font-family:monospace;
+        }
+        h1 span {
+            float:left;
+            position:relative;
+        }
+        h1 .slashslash {
+            color:#777;
+            margin:0.34em 0.34em 0 0;
+            font-family:monospace;
+        }
+        h1 .important {
+            color:red;
+            font-family:serif;
+        }
+        h1 .dot {
+            color:white;
+            font-family:sans;
+            font-size:0.62em;
+            margin-top:1em;
+        }
+        h1 .js {
+            color:gray;
+            font-family:sans;
+            font-size:0.62em;
+            margin-top:1em;
+        }
+        h1 .sep {
+            color:#777;
+            margin:0.34em 0.34em 0 0.62em;
+        }
+        h1 .console {
+            color:#777;
+            margin:0.34em 0.34em 0 0;
+            font-family:monospace;
+        }
+        .code {
+            color:#ccc;
+            font-family:monospace;
+        }
+        
+        #contents {
+            position:relative;
+        }
+    
+        #elem {            
+            border:1px solid #888;
+            overflow:auto;
+            width:38.2em;
+            /*
+            max-width:38.2%;
+            min-width:16em;
+            */
+            padding:2.62em 1.62% 0.62%;
+            float:left;
+            top:0;
+            left:0;
+            margin:0 0.62em 0.62em 0;
+            font-family:monospace;
+        }
+        #elem pre {
+            border-top-width:1px;
+            border-top-style:solid;
+            line-height:1.38em;
+        }
+        #elem code.background-color {
+            color:#ccc;
+            border-width:1px;
+            border-style:solid;
+            font-weight:bold;
+        }
+        #elem code.color {
+            background-color:black;
+            border-width:1px;
+            border-style:solid;
+            font-weight:bold;
+        }
+        #elem code.comment {
+            color:#777;
+        }
+        #elem #var-important-flag {
+            border-width:1px;
+            border-style:solid;
+        }
+    
+        #controls {
+            float:left;
+            position:relative;
+            max-width:38.2%;
+            /*
+            width:56.8%;
+            */
+            margin:0 0.62em 0.62em 2.62em;
+        }
+        #controls h2 {
+            color:#555;
+            font-size:1em;
+            margin:0;
+            padding:0;
+            float:left;
+            text-transform:lowercase;
+        }
+        #controls .code {
+            color:#999;
+            font-size:1em;
+            float:left;
+        }
+        #controls ol {
+            margin:0;
+            padding:0;
+        }
+        #controls button {
+            font-size:1em;
+            width:100%;
+            text-align:left;
+            color:white;
+            background-color:black;
+            border:1px solid white;
+            padding:1%;
+            margin:0.38% 0;
+            cursor:pointer;
+        }
+        #controls button:hover {
+            color:#ffc;
+            background-color:#c33;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <a href="http://github.com/premasagar/important">
+            <span class=slashslash>//</span>
+            <span class=important title="...but not urgent">!important</span>
+            <span class=dot>.</span>
+            <span class=js>js</span>
+            <span class=sep>:</span>
+            <span class=console>console</span>
+        </a>
+    </h1>
+
+    <!-- #contents -->
+    <div id=contents>
+
+
+
+<!-- #elem -->
+<div id=elem style="
+    background-color:darkred;
+    color:lightpink;
+">
+
+<!-- console -->
+<pre><code id=elem-outer>
+<code class=comment>&lt;!-- elem: a div element in the &lt;body&gt; of this document --&gt;</code>
+&lt;div id=elem style=&quot;
+<code id=elem-attr class=colours></code>
+&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+<pre><code id=style-outer>
+<code class=comment>&lt;!-- a style element in the &lt;head&gt; of this document --&gt;</code>
+&lt;style id=style-elem&gt;<code id=style-csstext class=colours></code>&lt;/style&gt;
+</code></pre>
+
+<pre><code id=var-elem>
+<code class=comment>&lt;!-- CSS style properties of the element,
+    using JavaScript DOM API & jQuery methods --&gt;</code>
+&lt;script&gt;
+    <code class=comment>/* Global variables (you can access these via
+        your browser console, e.g. Firebug) */</code>
+    var
+        elem = document.getElementById('elem'),
+        styleElem = document.getElementById('style-elem');
+
+    <code class=comment>// CSS DOM API</code>
+    elem.style.backgroundColor = <code id=var-style-background-color class=background-color></code>;
+    elem.style.color = <code id=var-style-color class=color></code>;
+
+    var computed = window.getComputedStyle(elem, null);
+    computed.backgroundColor = <code id=var-computedStyle-background-color class=background-color></code>;
+    computed.color = <code id=var-computedStyle-color class=color></code>;
+
+    elem.cssText = <code id=var-cssText></code>;
+
+    <code class=comment>// jQuery methods</code>
+    $(elem).css('background-color') = <code id=var-background-color class=background-color></code>;
+    $(elem).css('color') = <code id=var-color class=color></code>;
+
+    $.curCSS(elem, 'background-color', true) = <code id=var-curcss-background-color class=background-color></code>;
+    $.curCSS(elem, 'color', true) = <code id=var-curcss-color class=color></code>;
+
+    <code class=comment>// IE proprietary</code>
+    elem.currentStyle.backgroundColor = <code id=var-currentStyle-background-color class=background-color></code>;
+    elem.currentStyle.color = <code id=var-currentStyle-color class=color></code>;
+
+    <code class=comment>// !important flag, set by the plugin</code>
+    jQuery.important = <code id=var-important-flag></code>;
+&lt;/script&gt;
+</code></pre>
+<!-- end console -->
+
+</div>
+<!-- end #elem -->    
+
+    
+    
+        <div id=controls>
+            <h2>Controls</h2>
+            <span class=code>:[</span>
+            <ol></ol>
+            <span class=code>];</span>
+        </div>
+    </div>
+    <!-- end #contents -->
+
+ 
+    
+    <script>
+// Set up the demo
+(function($){
+
+    var
+        // target elements
+        $elem = $('#elem'),
+        $style = $('#style-elem'),
+        
+        elem = $elem[0],
+        styleElem = $style[0],
+
+        elemStyle = elem.style,
+        computedStyle = window.getComputedStyle,
+        currentStyle = elem.currentStyle,
+        
+        elemjQueryCssBg = '',
+        elemjQueryCssColor = '',
+        
+        elemjQueryCurCssBg = '',
+        elemjQueryCurCssColor = '',
+        
+        elemStyleBg = '',
+        elemStyleColor = '',
+        
+        elemComputedStyleBg = '',
+        elemComputedStyleColor = '',
+        
+        elemCurrentStyleBg = '',
+        elemCurrentStyleColor = '',s
+        
+        // colour it like it says
+        colorIt = function(cssText){
+            return cssText.replace(/((background-)?color\s*:\s*)([\w#]+)(\s*?)(\s?!)? ?(important)?(\s*[;$])/g, '$1<code style="$2color:$3;" class="$2color">$3$5$6</code>$7')
+        },
+        
+        // write out report
+        report = function(){
+            // Read JavaScript CSS DOM properties
+            elemjQueryCssBg = $elem.css('background-color');
+            elemjQueryCssColor = $elem.css('color');
+
+            elemjQueryCurCssBg = $.curCSS(elem, 'background-color', true);
+            elemjQueryCurCssColor = $.curCSS(elem, 'color', true);
+            
+            elemStyleBg = elemStyle.backgroundColor;
+            elemStyleColor = elemStyle.color;
+            
+            elemComputedStyleBg = computedStyle ? computedStyle(elem, null).backgroundColor : '';
+            elemComputedStyleColor = computedStyle ? computedStyle(elem, null).color : '';
+            
+            elemCurrentStyleBg = currentStyle ? currentStyle.backgroundColor : '';
+            elemCurrentStyleColor = currentStyle ? currentStyle.color : '';
+        
+
+            // Update console
+            $('#elem-attr')
+                .html(colorIt('    ' + $elem.attr('style').replace(/;\s*/, ';\n    ').replace(/^\n\s*/, '')));
+                
+            $('#style-csstext')
+                .html(colorIt($style.html()));
+                
+            $('#var-background-color')
+                .text(elemjQueryCssBg)
+                .important({'background-color': elemjQueryCssBg});
+                
+            $('#var-color')
+                .text(elemjQueryCssColor)
+                .important({'color': elemjQueryCssColor});
+                
+            $('#var-curcss-background-color')
+                .text(elemjQueryCurCssBg)
+                .important({'background-color': elemjQueryCurCssBg});
+                
+            $('#var-curcss-color')
+                .text(elemjQueryCurCssColor)
+                .important({'color': elemjQueryCurCssColor});
+                
+            $('#var-style-background-color')
+                .text(elemStyleBg)
+                .important({'background-color': elemStyleBg});
+                
+            $('#var-style-color')
+                .text(elemStyleColor)
+                .important({'color': elemStyleColor});
+                
+            $('#var-cssText')
+                .text(elem.cssText);
+                
+            $('#var-computedStyle-background-color')
+                .text(elemComputedStyleBg)
+                .important({'background-color': elemComputedStyleBg});
+                
+            $('#var-computedStyle-color')
+                .text(elemComputedStyleColor)
+                .important({'color': elemComputedStyleColor});
+                
+            $('#var-currentStyle-background-color')
+                .text(elemCurrentStyleBg)
+                .important({'background-color': elemCurrentStyleBg});
+                
+            $('#var-currentStyle-color')
+                .text(elemCurrentStyleColor)
+                .important({'color': elemCurrentStyleColor});
+
+            $('#var-important-flag')
+                .text($.important.status)
+                .important({'background-color': $.important.status ? 'darkgreen' : 'darkred'});
+                
+            $('h1 .important')
+                .important({'color': $.important.status ? 'lightgreen' : 'red'});
+        },
+        tests = [
+            {
+                text:'$(elem).important();',
+                fn:function(){
+                    $(elem).important();
+                },
+                desc:"Make all the css properties in the element's style attribute use the !important statement."
+            },
+            {
+                text:'$(elem).important(false);',
+                fn:function(){
+                    $(elem).important(false);
+                },
+                desc:"Make all the css properties in the element's style attribute not use the !important statement."
+            },
+            {
+                text:'$(styleElem).important(false);',
+                fn:function(){
+                    $(styleElem).important(false);
+                },
+                desc:"Make all the css rules in the style element not use the !important statement."
+            },
+            {
+                text:'$(styleElem).important();',
+                fn:function(){
+                    $(styleElem).important();
+                },
+                desc:"Make all the css rules in the style element use the !important statement."
+            },
+            {
+                text:"$(elem).important('background-color');",
+                fn:function(){
+                    $(elem).important('background-color');
+                },
+                desc:"Make the background-color property in the element's style attribute use the !important statement."
+            },
+            {
+                text:"$(elem).important('background-color', false);",
+                fn:function(){
+                    $(elem).important('background-color', false);
+                },
+                desc:"Make the background-color property in the element's style attribute not use the !important statement."
+            },
+            {
+                text:"$(elem).css('background-color', 'darkorange');",
+                fn:function(){
+                    $(elem).css('background-color', 'darkorange');
+                },
+                desc:"Attempt to run a standard jQuery method - this attempts to update the element's .style DOM property, but it doesn't normally work when !important rules are involved. However, it will work when $.important() is called first."
+            },
+            {
+                text:"$(elem).css({'background-color':'darkorange', color:'green'}, true);",
+                fn:function(){
+                    $(elem).css({'background-color':'darkorange', color:'green'}, true);
+                },
+                desc:"Change the colours, by passing boolean true as the last argument to the overloaded .css() jQuery method."
+            },
+            {
+                text:"$(elem).important({'background-color':'darkgreen', color:'lightblue'});",
+                fn:function(){
+                    $(elem).important({'background-color':'darkgreen', color:'lightblue'});
+                },
+                desc:"Change the colours, using the .important() jQuery method."
+            },
+            {
+                text:"$.important(); $(elem).css('background-color', 'black'); $.important(false);",
+                fn:function(){
+                    $.important(function(){$(elem).css('background-color', 'black');});
+                },
+                desc:"Turn the !important flag on, then run a jQuery method, then turn the !important flag off again."
+            },
+            {
+                text:"$.important(function(){$(elem).css('background-color', 'brown');});",
+                fn:function(){
+                    $.important(function(){$(elem).css('background-color', 'brown');});
+                },
+                desc:"Pass a function to be executed in the context of the !important flag."
+            },
+            {
+                text:'$.important();',
+                fn:function(){
+                    $.important();
+                },
+                desc:"Switch on the !important flag."
+            },
+            {
+                text:'$.important(false);',
+                fn:function(){
+                    $.important(false);
+                },
+                desc:"Switch off the !important flag."
+            },
+            {
+                text:'$.important.noConflict();',
+                fn:function(){
+                    $.important.noConflict();
+                },
+                desc:"Restore the overridden, css-related methods in jQuery, returning back the original methods. After executing this, passing boolean true $(elem).css() will have no effect."
+            }
+        ];
+    
+    $.each(tests, function(i, test){
+        $('<button>' + test.text + '</button></li>')
+            .attr('title', test.desc || '')
+            .click(function(){
+                test.fn();
+                report();
+            })
+            .appendTo(
+                $('<li></li>')
+                    .appendTo('#controls ol:first')
+            );
+    });
+
+    // Initial report
+    report();
+
+    // Global vars, for console debugging
+    $.extend(
+        window,
+        {
+            elem: elem,
+            styleElem: styleElem,
+            computed: window.getComputedStyle(elem, null),
+            report: report
+        }
+    );
+}(jQuery));
+    </script>
+
+    <a href=http://github.com/premasagar/important title="!important code repository, on GitHub"><img style="position: absolute; top: 0; right: 0; border: 0;" src=http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png alt="Fork me on GitHub" /></a> 
+</body>
+
+   
+<!--
+    <strong>Style element:</strong> <code id=style-inner></code>
+    <br>
+    <strong>Current style:</strong> <code id=current-style></code>
+
+    <p>This is an element with id <code>elem</code>.</p>
+    <p>The containing document has an inline style element with id <code>style</code>.</p>
+    <p>
+        <pre><code>
+$('#elem').important(); // adds the !important statement to all of this element's inline styles
+
+$('#elem').important(false); // removes the !important statement from all of this element's inline styles
+
+$('#elem').important({padding:'1em'}) ===
+$('#elem').css({padding:'1em'}); // add an inline style, using the !important statement. This will override any existing CSS properties of this type.
+
+// TO BE IMPLEMENTED
+$('#elem').important('width', '1.62em') ===
+$('#elem').width('1.62em', true); // do $('#elem').width('1.62em') using the !important statement
+
+// and similar, for other native jQuery methods:
+$('#elem').important('height');
+$('#elem').important('show');
+$('#elem').important('hide');
+$('#elem').important('animate');
+
+$('#elem').important('padding'); // make this one inline style property !important
+
+$('#elem').important('padding', false); // make this one inline style property not !important
+
+//  !important === sudo
+        </code></pre>
+    </p>
+-->
+</html>

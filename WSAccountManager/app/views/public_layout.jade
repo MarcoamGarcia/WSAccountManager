@@ -1,0 +1,130 @@
+doctype html
+html(lang='en')
+  head
+  
+    link(rel="shortcut icon", href=url_mount("/images/favicon.ico"), type="image/x-icon")
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content='')
+    meta(name="author", content='')
+    
+    link(href='https://fonts.googleapis.com/css?family=Varela+Round|Montez|Tangerine|Pacifico|Leckerli+One', rel='stylesheet', type='text/css')
+
+    != js('public')
+    != css('public')
+    
+    //- http://stackoverflow.com/questions/20547819/vertical-align-with-bootstrap-3
+    style.
+    
+      body {
+        font-family: 'Varela Round', sans-serif;
+        color: #666666;
+      }
+      
+      .round_font {
+        font-family: 'Leckerli One', cursive;
+      }
+      .vcenter {
+          display: inline-block;
+          vertical-align: middle;
+          float: none;
+      }
+      
+      .header_link, .header_sign_up {
+        border: 1px solid #FF9FA2;
+        padding: 10px 30px 10px 30px;
+        color: #FF9FA2;
+      }
+
+      .header_blog {
+        color: #848484;
+      }
+      
+      .signup_input {
+        border: 1px solid #FF5B61;
+        color: #FF9FA2;
+        background: white;
+        border-radius: 0px;
+        height: 50px;
+        text-align: center;
+      }
+      
+      .input_blue {
+        border: 0px;
+        color: #FF9FA2;
+        background: white;
+        border-radius: 0px;
+        height: 50px;
+        text-align: center;
+      }
+      
+      .signup_button {
+        border: 0px;
+        background-color: #FF5B61;
+        color: white;
+      }
+      
+      .button_blue {
+        border: 0px;
+        background-color: #00B7CC;
+        color: white;
+      }
+      
+      .register_input {
+        text-align: left;
+      }
+      
+      .register_input {
+        border: 1px solid white;
+        height: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      
+      .form-control::-webkit-input-placeholder {
+          color: #FF9FA2;
+       }
+       
+       .form-control:-moz-placeholder { /* Firefox 18- */
+          color: #FF9FA2;  
+       }
+       
+       .form-control::-moz-placeholder {  /* Firefox 19+ */
+          color: #FF9FA2;  
+       }
+       
+       .form-control:-ms-input-placeholder {  
+          color: #00B7CC;  
+       }
+       
+       .form-control-blue::-webkit-input-placeholder {
+          color: #00B7CC;
+       }
+       
+       .form-control-blue:-moz-placeholder { /* Firefox 18- */
+          color: #00B7CC;  
+       }
+       
+       .form-control-blue::-moz-placeholder {  /* Firefox 19+ */
+          color: #00B7CC;  
+       }
+       
+       .form-control-blue:-ms-input-placeholder {  
+          color: #00B7CC;  
+       }
+
+    title Wsam - #{title}
+
+    include _partial
+
+  body
+      .container-fluid
+        .row(style='background: #fff; padding-top: 30px')
+          .col-md-1.vcenter
+          .col-md-5.vcenter
+            a(class="brand", href=url_mount("/")) 
+              img(src=url_mount('/img/logo.png'))
+          .col-md-1.vcenter
+          .col-md-5.vcenter
+            a.header_link(href=url_mount("/login"), style='margin-right: 20px') > LOGIN
+        block content

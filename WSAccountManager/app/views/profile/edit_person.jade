@@ -1,0 +1,91 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{title} profile
+            div        
+                a(href=url_mount('/profile/#{user.id}/password')) Change Password
+    hr
+    div#general_info
+    //-    h3.bottom_margin General
+    //-        a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
+    //-            i(class="icon-pencil")
+    //-    address
+    //-        span Name: 
+    //-        strong #{user.name}
+    //-        br
+    //-    address
+    //-        span Email: 
+    //-        strong #{user.email}
+    //-        br
+    //-hr
+        
+    //-div
+    //-    h3.bottom_margin Contacts
+    //-        a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
+    //-            i(class="icon-pencil")
+    //-    address
+    //-        span Name: 
+    //-        strong #{user.name}
+    //-        br
+    //-    address
+    //-        span Email: 
+    //-        strong #{user.email}
+    //-        br
+    //-hr       
+    //-div
+    //-    h3.bottom_margin Links / Social Networks
+    //-        a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
+    //-            i(class="icon-pencil")
+    //-    address
+    //-        span Name: 
+    //-        strong #{user.name}
+    //-        br
+    //-    address
+    //-        span Email: 
+    //-        strong #{user.email}
+    //-        br
+    
+    //- profile props info templates
+    div#show-main-template(style='display:none')
+        include main/_b_main
+        
+    div#edit-main-template(style='display:none')
+        include main/_b_edit_main 
+         
+    //- contacts templates
+    div#show-contact-template(style='display:none')
+        include contacts/_b_contact 
+        
+    div#edit-contact-template(style='display:none')
+        include contacts/_b_edit_contact
+    
+    //- links templates
+    div#show-link-template(style='display:none')
+        include links/_b_link
+        
+    div#edit-link-template(style='display:none')
+        include links/_b_edit_link
+     
+    //- edit image form
+    div#edit-image(style='display:none')
+        include main/_edit_image 
+        
+    //- TODO: Fetch profile id from the URL.
+    script(type='text/javascript').
+        var profile_id = "#{actor._id}";
+        var profile_name = "#{actor.name}";
+        var profile_type = "#{actor.type}";
+        var profile_main_info = !{JSON.stringify(main)};
+        var profile_contacts = !{JSON.stringify(actor.contacts)};
+        var profile_links = !{JSON.stringify(actor.links)};
+        
+    != js('app/profile')

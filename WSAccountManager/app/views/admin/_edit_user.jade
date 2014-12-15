@@ -1,0 +1,8 @@
+div(id='tag_' + tag._id)
+    form(method='POST', action=url_mount('/admin/tags/'+ tag._id + '/update'), data-remote="true", data-type="json")
+        div.left_info
+            input(id='tagName', name='tag[name]', value=tag.name)
+        div.right_info
+            input(type='submit', value='Save')
+            a.show(href=url_mount('/admin/tags/' + tag._id + "/show"), data-method='put', data-type="json") [c]
+        div(style='clear:both')

@@ -1,0 +1,41 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td {{name}}
+        td {{description}}
+        td {{site}}
+        td.page {{page}}
+        td.stats
+            div
+                i.icon-eye-open
+                span.stats-open(class='right_margin') ({{view}})
+            div
+                i.icon-hand-up
+                span.stats-up(class='right_margin')  ({{up}})
+            div
+                i.icon-hand-down
+                span.stats-down(class='right_margin')  ({{down}})
+        td.flagged
+            i.is_flagged(class='left_margin')
+            span.number_of_flags
+            a.show_flags(href='#', class='hide left_margin') Show
+            .flagged_info(class='hide')
+        td 
+            a.updated_by(href='#') {{updated_by}}
+        td
+            div
+                span.edit_buttons(class='hide')
+                    a.default(class='btn btn-info tiny_left_margin', data-active="Set as default", data-loading="Changing...", data-complete="Changed!", href='#', title="Set as page default") 
+                        i(class="icon-screenshot") 
+                    a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Changing...", data-complete="Changed!", title="Edit", href='#') 
+                        i(class="icon-pencil")
+            hr
+            div
+                span
+                    a.flag(class='btn btn-warning tiny_left_margin', data-active="Flag", data-loading="Flagging...", data-complete="Flagged!", title='Flag', href='#') 
+                        i(class="icon-flag")
+                        span
+                span.edit_buttons(class='hide')
+                    a.delete(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", title="Delete", href='#') 
+                        i(class="icon-trash")
+     

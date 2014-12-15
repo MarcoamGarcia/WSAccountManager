@@ -1,0 +1,12 @@
+extends ../layout
+block content
+    .page-header
+        h1 Dashboard
+    .div
+        h3 Overview
+        div.top_margin
+        span(class="badge badge-info") #{number_of_helpsets}
+        span &nbsp;
+        a(href=url_mount('/profile/#{user.id}/helps')) My Helps
+    
+    hr

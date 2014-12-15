@@ -1,0 +1,103 @@
+/**
+*
+*	Yellow Text 
+*	========================================
+*	This is a pre-made theme for the Yellow
+*	text editor and it's not needed to run
+*	the plugin. 
+*
+*
+*was changed to be used only by Helppier!!!
+*
+*/
+div.helppier-js-editor-container {
+  margin-top: 0.5em !important;
+  border: 1px solid #c9c8c8 !important;
+  border-radius: 3px !important;
+  margin-left: 5px !important;
+}
+
+/**
+*
+*	Buttons
+*	========================================
+*	This section styles the buttons and the 
+*	button bar, that holds all the buttons.
+*
+*/
+div.helppier-js-editor-buttons {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #d2d1d1)) !important;
+  background-image: -webkit-linear-gradient(#e8e8e8, #d2d1d1) !important;
+  background-image: -moz-linear-gradient(#e8e8e8, #d2d1d1) !important;
+  background-image: -o-linear-gradient(#e8e8e8, #d2d1d1) !important;
+  background-image: linear-gradient(#e8e8e8, #d2d1d1) !important;
+}
+
+div.helppier-js-editor-buttons > a {
+  display: block !important;
+  float: left !important;
+  width: 15px !important;
+  height: 15px !important;
+  margin: 8px !important;
+  font: 12px Georgia !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px #fff !important;
+  cursor: pointer !important;
+}
+
+.helppier-bold {
+  font-weight: bold;
+}
+
+.helppier-underline {
+  text-decoration: underline;
+}
+
+.helppier-italic {
+  font-style: italic;
+}
+
+.helppier-strikethrough {
+  text-decoration: line-through;
+}
+
+a.helppier-JustifyLeft,
+a.helppier-JustifyCenter,
+a.helppier-JustifyRight,
+a.helppier-InsertUnorderedList,
+a.helppier-InsertOrderedList,
+a.helppier-image,
+a.helppier-link {
+  margin-top: 9px !important;
+  text-indent: -99999em !important;
+}
+
+a.helppier-JustifyLeft {
+  background-position: 0 -276px !important;
+}
+
+a.helppier-JustifyCenter {
+  background-position: 0 -184px !important;
+}
+
+a.helppier-JustifyRight {
+  background-position: 0 -230px !important;
+}
+
+a.helppier-InsertUnorderedList {
+  background-position: 0 -138px !important;
+}
+
+a.helppier-InsertOrderedList {
+  background-position: 0 -46px !important;
+}
+
+a.helppier-image {
+  background-position: 0 -92px !important;
+}
+
+a.helppier-link {
+  background-position: 0 0 !important;
+}

@@ -1,0 +1,25 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td
+            i.official(class="icon-remove")
+        td {{name}}
+        td {{description}}
+        td.stats
+            div
+                i.icon-eye-open
+                span.stats-open(class='right_margin')  ({{view}})
+            div
+                i.icon-hand-up
+                span.stats-up(class='right_margin')  ({{up}})
+            div
+                i.icon-hand-down
+                span.stats-down(class='right_margin')  ({{down}})
+        td 
+            a.updated_by(href='#') {{updated_by}}
+        td
+            a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", title='Edit', href='#') 
+                i(class="icon-pencil")
+            a.delete(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", title='Delete', href='#') 
+                i(class="icon-trash")
+ 

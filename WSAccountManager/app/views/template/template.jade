@@ -1,0 +1,13 @@
+extends ../layout
+block content
+    div(class="row")
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{title} 

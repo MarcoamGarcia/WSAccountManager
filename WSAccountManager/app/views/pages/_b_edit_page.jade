@@ -1,0 +1,30 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=8)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group
+                        input.name(id='name', name='name', required, type="text", placeholder='Page name', value='{{name}}')
+                    div.control-group
+                        textarea.description(id='description', name='description', placeholder='Page Description') {{description}}
+                    div.control-group(class='read_info hide')
+                        span Site: {{site}}
+                    div.write_info(class='hide')
+                        div.control-group
+                            select.site(id='site', name='site', class="required")
+                                option(value='') -- Select site --
+                                - each site in sites
+                                    option(value='#{site.id}') #{site.name}
+                    hr
+                    div.control-group
+                        input(id='url_regex_selection', type='radio', name='url_regex_selection', value='')
+                        span.left_margin
+                        input.url_regex(id='url_regex', type='text', style='width: 190px !important', name='url_regex', required, value='{{url_regex}}', placeholder="page url")
+                    div.control
+                        input(id='key_selection', type='radio', name='key_selection', value='')
+                        span.left_margin
+                        input.key(id='key', type='text', style='width: 190px !important', name='key', required, value='{{key}}', placeholder="page key")
+                div.top_margin
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

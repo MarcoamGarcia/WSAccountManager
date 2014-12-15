@@ -1,0 +1,62 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/websites'), title='Sites') Sites
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/websites'), title='Sites') Sites
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{site.name} helps
+             div
+                    a(href=url_mount('/profile/#{user.id}/helps'), title='Helps') My Helps
+    div(class="row")         
+          div#helpsets_wrapper(class="span12")
+              br
+              table#helpsets_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Name
+                          th Description
+                          th Page
+                          th(style='width: 100px;') Stats
+                          th(style='width: 150px;')  Flagged?
+                          th Changed by
+                          th(style='width: 200px;') &nbsp;
+                  tbody
+                      - if (helpsets.length == 0)
+                          tr.empty_table
+                              td(colspan='8') (there aren't any helps for this site)
+    
+    include _b_flag_helpset
+    
+    -if (can_edit_site)     
+        div#edit-back-helpset-template(style='display:none')
+            include _b_edit_helpset
+            
+        div#show-back-helpset-template(style='display:none')
+            include _b_site_helpset
+          
+        //- TODO: Fetch company id from the URL.
+        script(type='text/javascript').
+            var company_id = "#{company._id}";
+            var site_id = "#{site._id}";
+            var site_host = "#{site_host}";
+    
+        != js('app/helpsets')
+    
+        //- TODO: Fetch company id from the URL.
+        script(type='text/javascript').
+            var helpsets = !{JSON.stringify(helpsets)};
+            var pages_per_site = !{JSON.stringify(pages_per_site)};
+            var vent = _.extend({}, Backbone.Events);
+            new HelpSetListView({vent: vent, json: helpsets});

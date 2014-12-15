@@ -1,0 +1,25 @@
+extends ../layout
+block content
+    div(class="row")
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span Script 
+    div(class="row")         
+          div#sites_wrapper(class="span12")
+              br
+              table#sites_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Company Name
+                          th Script
+                      tr
+                          th #{company}
+                          th #{script}
+                  tbody

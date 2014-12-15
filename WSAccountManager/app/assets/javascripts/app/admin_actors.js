@@ -1,0 +1,1 @@
+//= require "app/backoffice/b_admin_actors.js"

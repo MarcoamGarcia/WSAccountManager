@@ -1,0 +1,119 @@
+extends ./layout
+block content
+      .row(style='background: #00B7CC;padding-top: 40px;color: white')
+        .col-md-1.vcenter
+        .col-md-10.vcenter
+          h1 WELCOME.
+          h3 Please add the info bellow to finish Helppier installation.
+        .col-md-1.vcenter
+      .row(style='background: #00B7CC;padding-top: 10px;padding-bottom: 40px;color: white')
+            form(role='form', action=url_mount('/'), method='POST')
+                  .col-md-1
+                    p &nbsp;
+                  .col-md-8(style='color: white')
+                    p(style='padding-left: 30px') Server Info
+                              - if(errors["db_host"])
+                                    #name.form-group.error
+                                          input.form-control.signup_input.register_input(type='text', name='host', value=installer_params["host"], placeholder="HOST (add IP address or domain name)")
+                                          span.help-inline(style='color: red') #{errors["host"]}
+                              - else 
+                                    #name.form-group(class='top_margin')
+                                      input.form-control.signup_input.register_input(type='text', name='host', value=installer_params["host"], placeholder="HOST (add IP address or domain name)")
+                        
+                        
+                    p(style='padding-left: 30px') Mongo DB info
+                        - if(errors["db_host"])
+                              #name.form-group.error
+                                    input.form-control.signup_input.register_input(type='text', name='db_host', value=installer_params["db_host"], placeholder="DB HOST (leave empty to use '#{dev_config.mongo.db.host}')")
+                                    span.help-inline(style='color: red') #{errors["db_host"]}
+                        - else 
+                              #name.form-group(class='top_margin')
+                                input.form-control.signup_input.register_input(type='text', name='db_host', value=installer_params["db_host"], placeholder="DB HOST (leave empty to use '#{dev_config.mongo.db.host}')")
+                        
+                        - if(errors["db_port"])
+                              #name.form-group.error
+                                    input.form-control.signup_input.register_input(type='text', name='db_port', value=installer_params["db_port"], placeholder="DB PORT (leave empty to use '#{dev_config.mongo.db.port}')")
+                                    span.help-inline(style='color: red') #{errors["db_port"]}
+                        - else 
+                              .form-group(class='top_margin')
+                                input.form-control.signup_input.register_input(type='text', name='db_port', value=installer_params["db_port"], placeholder="DB PORT (leave empty to use '#{dev_config.mongo.db.port}')")
+                        - if(errors["db_name"])
+                              #name.form-group.error
+                                    input.form-control.signup_input.register_input(type='text', name='db_name', value=installer_params["db_name"], placeholder='DB NAME')
+                                    span.help-inline(style='color: red') #{errors["db_name"]}
+                        - else 
+                              #name.form-group(class='top_margin')
+                                input.form-control.signup_input.register_input(type='text', name='db_name', value=installer_params["db_name"], placeholder='DB NAME')
+                        
+                        - if(errors["db_user"])
+                              #name.form-group.error
+                                    input.form-control.signup_input.register_input(type='text', name='db_user', value=installer_params["db_user"], placeholder='DB USER')
+                                    span.help-inline(style='color: red') #{errors["db_user"]}
+                        - else 
+                              .form-group(class='top_margin')
+                                input.form-control.signup_input.register_input(type='text', name='db_user', value=installer_params["db_user"], placeholder='DB USER')
+                        - if(errors["db_pass"])
+                              #name.form-group.error
+                                    input.form-control.signup_input.register_input(type='text', name='db_pass', value=installer_params["db_pass"], placeholder='DB PASS')
+                                    span.help-inline(style='color: red') #{errors["db_pass"]}
+                        - else 
+                              .form-group(class='top_margin')
+                                input.form-control.signup_input.register_input(type='text', name='db_pass', value=installer_params["db_pass"], placeholder='DB PASS')
+                        
+                    p(style='padding-left: 30px') Company Info
+                              - if(errors["company_name"])
+                                    #name.form-group.error
+                                          input.form-control.signup_input.register_input(type='text', name='company_name', value=installer_params["company_name"], placeholder='COMPANY NAME')
+                                          span.help-inline(style='color: red') #{errors["company_name"]}
+                              - else 
+                                    #name.form-group(class='top_margin')
+                                      input.form-control.signup_input.register_input(type='text', name='company_name', value=installer_params["company_name"], placeholder='COMPANY NAME')
+                              - if(errors["user_email"])
+                                    #name.form-group.error
+                                          input.form-control.signup_input.register_input(type='text', name='user_email', value=installer_params["user_email"], placeholder='USER EMAIL')
+                                          span.help-inline(style='color: red') #{errors["user_email"]}
+                              - else 
+                                    #name.form-group(class='top_margin')
+                                      input.form-control.signup_input.register_input(type='text', name='user_email', value=installer_params["user_email"], placeholder='USER EMAIL')
+                              - if(errors["user_pass"])
+                                    #name.form-group.error
+                                          input.form-control.signup_input.register_input(type='text', name='user_pass', value=installer_params["user_pass"], placeholder='USER PASS')
+                                          span.help-inline(style='color: red') #{errors["user_pass"]}
+                              - else 
+                                    #name.form-group(class='top_margin')
+                                      input.form-control.signup_input.register_input(type='text', name='user_pass', value=installer_params["user_pass"], placeholder='USER PASS')
+
+                    p(style='padding-left: 30px') Transport Info
+                                - if(errors["email_user"])
+                                      #name.form-group.error
+                                            input.form-control.signup_input.register_input(type='text', name='email_user', value=installer_params["email_user"], placeholder='EMAIL USER')
+                                            span.help-inline(style='color: red') #{errors["email_user"]}
+                                - else 
+                                      #name.form-group(class='top_margin')
+                                        input.form-control.signup_input.register_input(type='text', name='email_user', value=installer_params["email_user"], placeholder='EMAIL USER')
+                                - if(errors["email_pass"])
+                                      #name.form-group.error
+                                            input.form-control.signup_input.register_input(type='text', name='email_pass', value=installer_params["email_pass"], placeholder='EMAIL PASS')
+                                            span.help-inline(style='color: red') #{errors["email_pass"]}
+                                - else 
+                                      #name.form-group(class='top_margin')
+                                        input.form-control.signup_input.register_input(type='text', name='email_pass', value=installer_params["email_pass"], placeholder='EMAIL PASS')
+                                - if(errors["email_service"])
+                                      #name.form-group.error
+                                            input.form-control.signup_input.register_input(type='text', name='email_service', value=installer_params["email_service"], placeholder='EMAIL SERVICE')
+                                            span.help-inline(style='color: red') #{errors["email_service"]}
+                                - else 
+                                      #name.form-group(class='top_margin')
+                                        input.form-control.signup_input.register_input(type='text', name='email_service', value=installer_params["email_service"], placeholder='EMAIL SERVICE')
+                                - if(errors["sender_email"])
+                                      #name.form-group.error
+                                            input.form-control.signup_input.register_input(type='text', name='sender_email', value=installer_params["sender_email"], placeholder='SENDER EMAIL')
+                                            span.help-inline(style='color: red') #{errors["sender_email"]}
+                                - else 
+                                      #name.form-group(class='top_margin')
+                                        input.form-control.signup_input.register_input(type='text', name='sender_email', value=installer_params["sender_email"], placeholder='SENDER EMAIL')
+
+
+                        button.signup_button.register_input(type='submit') SEND
+      .row
+        .col-md-12

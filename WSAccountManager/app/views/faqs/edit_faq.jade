@@ -1,0 +1,157 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li
+                    a(href=url_mount('/company/#{company._id}/faqs'), title='Home') FAQs
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{title} 
+    div(class="row")         
+          div(class="span12")
+                form.faq(class='form-inline', method='POST', action=url_mount('/#{company.id}/faqs'))
+                      - if(errors["name"])
+                          #name(class='top_margin control-group error')
+                              .controls
+                                  input.name(type='text', name='name', value=faq.name, placeholder='Name', required)
+                                  span.help-inline #{errors["name"]}
+                      - else 
+                          #name(class='top_margin control-group')
+                              .controls
+                                  input.name(type='text', name='name', value=faq.name, placeholder='Name', required)
+                      #description(class='top_margin control-group')
+                            .controls
+                                textarea.description(name='description', placeholder='Description') #{faq.description}
+                      -if(faq.isNew)
+                            div.control-group
+                                select.site(id='site', name='site', class="required")
+                                    option(value='') -- Select site --
+                                    - sites.forEach(function(site){
+                                        option(value=site.id) #{site.name}
+                                    - })
+                      - else
+                            div.control-group
+                                span Site: #{faq.site.name}
+                      hr
+                      h3 Entries
+                      - entries = faq.entries
+                      include _faq_entry_list
+                        
+                      div
+                        button.save_faq(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                        a.cancel(class="left_margin btn btn-inverse", href=url_mount('/company/#{company.id}/faqs'), data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel
+                        
+    div#edit-faqentry-template(style='display:none')
+        include _b_edit_faq_entry
+    
+    div#show-faqentry-template(style='display:none')
+        include _b_faq_entry
+    
+    != js('app/faqs')
+              
+    script(type='text/javascript').
+        var company_id = "#{company._id}";
+        var faq_entries = !{JSON.stringify(faq.entries)};
+        var vent = _.extend({}, Backbone.Events);
+        var faqEntriesView = new FAQEntriesListView({vent: vent, json: faq_entries});
+        var _csrf = $("meta[name='_csrf']").attr('content');
+    -if(faq.isNew)
+        script(type='text/javascript').
+            var save_url = "/company/#{company._id}/faqs";
+            $("form.faq").live("submit", function(e) {
+                if(is_form_valid()) {
+                    var name_val = $("input.name").val();
+                    var description_val = $("textarea.description").val();
+                    var site_val = $("select.site").val();
+                    
+                    var faqEntries = faqEntriesView.collection;
+                    $.ajax({url: save_url, type: "POST",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({name: name_val
+                            , description: description_val
+                            , entries: faqEntries, site: {id: site_val}
+                            , _csrf: _csrf
+                        }),
+                        error: function(data) {
+                            show_error($("form.faq"), data.responseText);
+                        },
+                        success: function(data) {
+                            after_save(data);
+                        }
+                    });
+                } 
+                e.preventDefault();
+             });
+    -else 
+        script(type='text/javascript').
+            $("form.faq").live("submit", function(e) {
+                if(is_form_valid()) {
+                    var name_val = $("input.name").val();
+                    var description_val = $("textarea.description").val();
+                    var page_bck_val = $("input.page_bck").val();
+                    var name_for_val = $("input.name_for").val();
+                    var entry_name_for_val = $("input.entry_name_for").val();
+                    var entry_desc_for_val = $("input.entry_desc_for").val();
+                    var faqEntries = faqEntriesView.collection;
+                    var save_url = "/company/#{company._id}/faq/#{faq.id}";
+                    $.ajax({url: save_url, type: "put",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({name: name_val
+                            , description: description_val
+                            , page_bck: page_bck_val
+                            , name_for: name_for_val
+                            , entry_name_for: entry_name_for_val
+                            , entry_desc_for: entry_desc_for_val
+                            , entries: faqEntries
+                            , _csrf: _csrf
+                        }),
+                        error: function(data) {
+                            show_error($("form.faq"), data.responseText);
+                        },
+                        success: function(data) {
+                            after_save(data);
+                        }
+                    });
+                } 
+                e.preventDefault();
+             });
+        
+    script(type='text/javascript').        
+        function is_form_valid() {
+            
+            var form_elem = $("form.faq");
+            form_elem.validate({
+                errorClass:'help-inline',
+                errorElement:'span',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents(".control-group").addClass('error').removeClass('success');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents(".error").removeClass('error').addClass('success');
+                }
+            });
+            
+            return form_elem.valid();
+        }
+        
+        function after_save(data) {
+            if(_.isObject(data)) {
+                var errors = data.errors;
+                if(_.isObject(errors)) {
+                    show_error($("form"), data);
+                } else {
+                    var save_button = $(self.el).find('.save_faq');
+                    save_button.state('complete');
+                    // redirect to faqs list.
+                    window.location = '/company/#{company._id}/faqs';
+                }
+            } else {
+                show_error("form.faq", data);
+            }
+        }

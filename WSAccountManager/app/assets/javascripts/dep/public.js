@@ -1,0 +1,7 @@
+//= require "jquery/jquery-1.7.2.min.js"
+//= require "underscore/underscore-min.js"
+//= require "backbone/backbone-min.js"
+//= require "jquery/ui/jquery-ui-1.8.20.custom.min.js"
+//= require "jquery/validate/dist/jquery.validate.min.js"
+//= require "bootstrap3/js/bootstrap.min.js"
+//= require "verimail/src/verimail.min.js"

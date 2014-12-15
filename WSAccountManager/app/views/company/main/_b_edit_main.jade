@@ -1,0 +1,14 @@
+form(class='form-inline', method='POST', action='#')
+    input(type='hidden', name='_csrf', value="#{csrf_token}")
+    div
+        div.control-group
+            input.name(id='name', name='name', class="required", type="text", placeholder='Name', value='{{name}}')
+        div.control-group
+            input.email(id='email', name='email', type="text", placeholder='Email', value='{{email}}')
+        div.control-group
+            input.url(id='url', name='url', type="text", placeholder='Site', value='{{url}}')
+        div.control-group
+            textarea.address(id='address', name='address', placeholder='Address') {{address}}
+    div
+        button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+        a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

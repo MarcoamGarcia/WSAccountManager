@@ -1,0 +1,39 @@
+extends layout
+block content
+    div(style='margin-top: 32px')
+    div#messages(class="span9")
+        h2 All Projects
+        ul
+          li(style='margin-top: 10px') 
+             span(style='font-style: italic') Porto Apparel 
+             span  was changed to "closed" state.
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Expected Earnings: 1100 $
+                 div Total Earnings: 1000 $
+                 div Total Duration: 10 days.
+                 hr
+          li(style='margin-top: 10px') 
+             span(style='font-style: italic') Billboard Colors 
+             span  was assigned to you.
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Expected Earnings: 1100 $
+                 div Deadline: To be delivered in one week.
+                 hr
+          li(style='margin-top: 10px') 
+             span(style='font-style: italic') Waterski
+             span  deadline in 2 days.
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Expected Earnings: 3000 $
+                 div Total Earnings so far: 1300 $
+                 hr
+    script
+      $(".show_hide").click(function (e) {
+          $(this).next().toggle("");
+          e.preventDefault();
+      });

@@ -1,0 +1,57 @@
+div 
+form.help_login(action='#{site_host}' + url_mount('/sessions/session'), method='POST')
+  input(type='hidden', name="_csrf", value='#{csrf_token}')
+  input(type='hidden', name='widget', value='true')
+  input(type='hidden', name='widget_url', value='#{req.site.url}')
+  input(type='hidden', name='company_id', value='#{req.company.id}')
+  div#email(class='control-group input help_top_margin')
+        div &nbsp;
+         - if ('undefined' !== typeof email)
+           input(type='text', name='email', value=email, placeholder='Email')
+         - else 
+             input(type='text', name='email', placeholder='Email')
+        div.clear
+  div#password(class='control-group input help_top_margin')
+        div &nbsp;
+            input(type='password', name='password', placeholder='Password')
+        div.clear
+    div(class='help_login_fail', style='display:none !important')
+      label Email or password that you entered is incorrect.
+      br
+    div(class='help_login_nopermissions', style='display:none !important')
+      label Email or password that you entered is incorrect for this company.
+      br
+  div(class='control-group tahoma_black_10pt')
+    input(id='keep_login', name='keep_login', type='checkbox', checked='checked', style='position:relative; top: 0px')
+    label(for='keep_login') Keep me logged in
+    input(id='remote', name='remote', class='tiny_right_margin', type='hidden', value='true', style='position: relative; top: 0px')
+  div#submit(class='control-group input submit')
+        div
+        div
+            input.right_margin(type='submit', class="btn btn-primary btn-large", value='Login')
+            a(class='left_margin', href='#{site_host}' + url_mount('/forgot_pass')) Forgot password?
+
+
+div
+- if ('undefined' !== typeof errors && errors.length)
+        ul#errors(class='tahoma_red_8pt hor')
+          - each error in errors
+            li.error= error
+            
+    div(class='tahoma_black_10pt')
+        
+    div.clear
+//div &nbsp; 
+//div.help_top_margin
+//.page-header
+//    h1 Or use your social network account:
+//div
+//    span#fb-login
+//      a#help_auth_facebook(href='#{site_host}' + url_mount('/auth/facebook'), target='namehere', style='border: 0px', )
+//        img(style='border: 0px', src='#{site_host}' + url_mount('/img/facebook_32.png'))
+//    span#twitter-login(style='margin-left: 5px')
+//      a(href='#{site_host}' + url_mount('/auth/twitter'), target='namehere', style='border: 0px')
+//        img(style='border: 0px', src='#{site_host}' + url_mount('/img/twitter_32.png'))
+    //-span#google-login(style='margin-left: 5px')
+    //-  a(href='#{site_host}' + url_mount('/auth/google'), target='namehere', style='border: 0px')
+    //-    img(style='border: 0px', src='#{site_host}' + url_mount('/img/google_32.png'))

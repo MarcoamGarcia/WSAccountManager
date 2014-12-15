@@ -1,0 +1,33 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{company.name} help #{helpset.name} stats
+    div(class="row")         
+          div#helpsets_wrapper(class="span12")
+              br
+              table#helpsets_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Date
+                  tbody
+                        - if (stats.length == 0)
+                          tr.empty_table
+                              td(colspan='8') (there aren't any stats for this help)
+                        - else
+                            - stats.forEach(function(stat) {
+                                tr
+                                    td #{stat.t}
+                                    - _.each(stat.d, function(value, key, list) {
+                                        td #{value}
+                                    - });
+                            - });
+    

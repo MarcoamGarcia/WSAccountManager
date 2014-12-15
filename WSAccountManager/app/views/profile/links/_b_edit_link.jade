@@ -1,0 +1,25 @@
+form.link(class='top_margin area', method='POST', action='#') 
+    div.tahoma_black_10pt
+      select.image(id='name', class="validate[required]", name="name", title='Link Type', style="width:150px;")
+          option(value="") -- Select Type --
+          option(value="Work") Work
+          option(value="Personal") Personal
+          option(value="Facebook", title="/images/links/twitter.png") Facebook
+          option(value="Google", title="/images/links/twitter.png") Google+
+          option(value="Twitter", title="/images/links/twitter.png") Twitter
+          option(value="LinkedIn", title="/images/links/twitter.png") LinkedIn
+          option(value="Other") Other        
+      a.cancel(class='tahoma_red_8pt hide', style='margin-left: 5px;', href='#')
+          img(title='Cancel changes', src=url_mount("/images/cancel.png"), width="13", height="13")
+    div(class='tahoma_black_10pt tiny_top_margin')
+      input.input_medium(id='value', type='text', class="validate[required]", name='value', value='{{value}}', placeholder="Link Value")
+      a.cancel(class='tahoma_red_8pt hide', style='margin-left: 5px;', href='#')
+          img(title='Cancel changes', src=url_mount("/images/cancel.png"), width="13", height="13")
+    div.top_margin  
+        div.buttons
+            div.left
+                button.save(class='btn', value='Save') Save
+                a.delete(style='margin-left: 5px;', href='#') 
+                    img(title='Delete', src=url_mount("/images/delete.png"), width="13", height="13")
+        div.clear
+hr

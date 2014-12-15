@@ -1,0 +1,17 @@
+!!! 5
+html
+  head
+   //- TODO: divide layout in several files so
+  //- only the needed scripts are loaded.
+  // Use a remote script loader??
+  disable = { disableGlobal: true }
+  !{renderStyleTags('public', disable)}
+  !{renderScriptTags('public', disable)}
+
+  if(typeof title == undefined)
+      title Home
+  else
+      title WSAM - #{title}
+  body
+      .container_16(id='main')
+         != body

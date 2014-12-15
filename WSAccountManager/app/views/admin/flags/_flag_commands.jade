@@ -1,0 +1,11 @@
+span.tahoma_black_10pt(id='flag_com' + object._id)
+    //- check if object was solved.
+    - if(object.is_flagged)
+        span#shouts_type(class='ui-icon ui-icon-arrow-1-e left', style='display: inline-block; opacity: 0.5')
+    //- link to confirm flag.
+    a(class='left', href=url_mount('/admin/flags/' + object._id + "/update/" + type + "/1"), data-method='post', data-type="json", confirm='Are you sure you want to confirm flag(s)?') Confirm 
+    span.left(class='tiny_left_margin') /
+    //- link to reject flag.
+    a.left(class='left tiny_left_margin', href=url_mount('/admin/flags/' + object._id + "/update/" + type + "/0"), data-method='post', data-type="json", confirm='Are you sure you want to reject flag(s)?') Reject
+    a(class='left left_margin delete', href=url_mount('/admin/flags/' + object._id + "/remove/" + type), data-method='delete', data-type="json", confirm='Are you sure you want to delete this flag(s)?') Delete
+    

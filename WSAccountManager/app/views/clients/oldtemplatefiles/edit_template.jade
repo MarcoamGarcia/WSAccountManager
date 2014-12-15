@@ -1,0 +1,139 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    a(href='url_mount(/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li
+                    a(href=url_mount('/company/#{company._id}/templates'), title='Home') Templates
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{title} 
+    div(class="row")         
+          div(class="span12")
+                form.template(class='form-inline', method='POST', action=url_mount('/#{company.id}/templates'))
+                    - if(errors["name"])
+                          #name(class='top_margin control-group error')
+                              .controls
+                                  input.name(type='text', name='name', value=template.name, placeholder='Name', required)
+                                  span.help-inline #{errors["name"]}
+                      - else 
+                          #name(class='top_margin control-group')
+                              .controls
+                                  input.name(type='text', name='name', value=template.name, placeholder='Name', required)
+                    #description(class='top_margin control-group')
+                            .controls
+                                textarea.description(name='description', placeholder='Description') #{template.description}
+                    
+                      h3 Entries
+                      - entries = template.entries
+                      include _template_entry_list
+                        
+                      div
+                        button.save_template(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                        a.cancel(class="left_margin btn btn-inverse", href=url_mount('/company/#{company.id}/templates'), TemplateEntriesListViewdata-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel
+
+    div#edit-templateentry-template(style='display:none')
+        include _b_edit_template_entry
+    
+    div#show-templateentry-template(style='display:none')
+        include _b_template_entry
+    
+    != js('app/templates')
+              
+    script(type='text/javascript').
+        var company_id = "#{company._id}";
+        var template_entries = !{JSON.stringify(template.entries)};
+        var vent = _.extend({}, Backbone.Events);
+        var templateEntriesView = new TemplateEntriesListView({vent: vent, json: template_entries});
+        var _csrf = $("meta[name='_csrf']").attr('content');
+    -if(template.isNew)
+        script(type='text/javascript').
+            var save_url = "/company/#{company._id}/templates";
+            $("form.template").live("submit", function(e) {
+                if(is_form_valid()) {
+                    var name_val = $("input.name").val();
+                    var description_val = $("textarea.description").val();
+                    
+                    var templateEntries = templateEntriesView.collection;
+                    $.ajax({url: save_url, type: "POST",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({name: name_val
+                            , description: description_val
+                            , entries: templateEntries
+                            , _csrf: _csrf
+                        }),
+                        error: function(data) {
+                            show_error($("form.template"), data.responseText);
+                        },
+                        success: function(data) {
+                            after_save(data);
+                        }
+                    });
+                } 
+                e.preventDefault();
+             });
+    -else 
+        script(type='text/javascript').
+            $("form.template").live("submit", function(e) {
+                if(is_form_valid()) {
+                    var name_val = $("input.name").val();
+                    var description_val = $("textarea.description").val();
+
+                    var templateEntries = templateEntriesView.collection;
+                    var save_url = "/company/#{company._id}/template/#{template.id}";
+                    $.ajax({url: save_url, type: "put",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({name: name_val
+                            , description: description_val
+                            , entries: faqEntries
+                            , _csrf: _csrf
+                        }),
+                        error: function(data) {
+                            show_error($("form.template"), data.responseText);
+                        },
+                        success: function(data) {
+                            after_save(data);
+                        }
+                    });
+                } 
+                e.preventDefault();
+             });
+        
+    script(type='text/javascript').        
+        function is_form_valid() {
+            
+            var form_elem = $("form.template");
+            form_elem.validate({
+                errorClass:'help-inline',
+                errorElement:'span',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents(".control-group").addClass('error').removeClass('success');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents(".error").removeClass('error').addClass('success');
+                }
+            });
+            
+            return form_elem.valid();
+        }
+        
+        function after_save(data) {
+            if(_.isObject(data)) {
+                var errors = data.errors;
+                if(_.isObject(errors)) {
+                    show_error($("form"), data);
+                } else {
+                    var save_button = $(self.el).find('.save_template');
+                    save_button.state('complete');
+                    // redirect to templates list.
+                    window.location = '/company/#{company._id}/template';
+                }
+            } else {
+                show_error("form.template", data);
+            }
+        }

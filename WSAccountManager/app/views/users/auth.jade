@@ -1,0 +1,26 @@
+extends ../layouts/default
+
+block main
+  center
+    h1= title
+
+block content
+  center
+    a(href=url_mount("/auth/facebook"))
+      img(src=url_mount("/img/facebook.png"))
+    a(href=url_mount("/auth/github"))
+      img(src=url_mount("/img/github.png"))
+    a(href=url_mount("/auth/twitter"))
+      img(src=url_mount"/img/twitter.png"))
+    a(href=url_mount("/auth/google"))
+      img(src=url_mount("/img/google.png"))
+    a(href=url_mount("/auth/linkedin"))
+      img(src=url_mount("/img/linkedin.png"))
+
+  center
+    br
+    h2 OR
+    br
+
+  .login
+    block auth

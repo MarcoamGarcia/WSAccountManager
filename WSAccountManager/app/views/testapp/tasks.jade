@@ -1,0 +1,33 @@
+extends layout
+block content
+    div(style='margin-top: 32px')
+    div#messages(class="span9")
+        h2 All Tasks
+        ul
+          li(style='margin-top: 10px') Google web
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Create Google AdWords campaign
+                 div Budget: 1000 $
+                 div Duration: 5 days.
+                 hr
+          li(style='margin-top: 10px') Texas billboard
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Contact billboard company to address current issues.
+                 div Deadline: Until next week.
+                 hr
+          li(style='margin-top: 10px') London eye flash mob
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Send quote for flash mob at London eye.
+                 div Deadline: Until end of the month.
+                 hr
+    script
+      $(".show_hide").click(function (e) {
+          $(this).next().toggle("");
+          e.preventDefault();
+      });

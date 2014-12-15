@@ -1,0 +1,37 @@
+extends ../layout
+block content
+    - if(preview)
+        div(class="row")    
+            div(class="span12")
+                ul(class="breadcrumb")
+                    li
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                        span(class="divider") &nbsp;/&nbsp;
+                    li
+                        a(href=url_mount('/company/#{company._id}/faqs'), title='Home') FAQs
+                        span(class="divider") &nbsp;/&nbsp;
+                    li.active
+                        span #{title}
+                        
+    iframe(href=url_mount('/company/#{company._id}/'), width="100%")
+    div.helppier_faq
+        div.faq_title(class="row")
+            div(class="span12")
+                div #{faq.name}
+        div(class="row")
+            div(class="span12")
+                div #{faq.description}
+        div(class="row")         
+            div(class="span12")
+              - faq.entries.forEach(function(entry) {
+                div.entry_name
+                    a.show_entry(href='#')
+                        h5 #{entry.name}
+                div.entry_desc #{entry.description}
+              - })
+        script.
+            $(".entry_desc").hide();
+            $(".show_entry").click(function(e) {
+                $(this).parents(".entry_name").next(".entry_desc").fadeToggle();
+            });
+    

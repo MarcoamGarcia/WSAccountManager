@@ -1,0 +1,56 @@
+extends layout
+block content
+    div(style='margin-top: 32px')
+    div#messages(class="span9")
+        h2 All Messages
+        ul
+          li(style='margin-top: 10px') Anne Higgins: "Don't forget the plan. We need it until 10pm!"
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div This is an urgent matter and the deadline is close.
+                 div Do you need help creating this plan?
+                 div Best regards,
+                 div Anne Higgins
+                 hr
+          li(style='margin-top: 10px') Rachel Simon: "Hi, did you manage to get in touch with the customer?"
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div The customer is very upset with this situation.
+                 div You need to contact him as soon as possible.
+                 div 
+                 div Rachel Doe
+                 hr
+          li(style='margin-top: 10px') Mark Doe: "Can we do a skype meeting to further discuss Porto Apparel project?"
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div Skype is the best way right now to discuss this project.
+                 div When are you available?
+                 div Kind regards,
+                 div Mark Doe
+                 hr
+          li(style='margin-top: 10px') John Manning: "Waiting for project approval..."
+             a.show_hide(href='#')  »
+             div(style='display: none')
+                 br
+                 div I'm still waiting for the project approval.
+                 div Will contact you as soon as possible.
+                 div
+                 div John
+                 hr
+          li(style='margin-top: 10px') Alice Chain: "Need quote for London eye flash mob"
+              a.show_hide(href='#')  »
+              div(style='display: none')
+                  br
+                  div Please send us ASAP a quote for London eye flash mob.
+                  div Best regards,
+                  div Alice Chain
+                  hr
+                
+    script
+      $(".show_hide").click(function (e) {
+          $(this).next().toggle("");
+          e.preventDefault();
+      });

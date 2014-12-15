@@ -1,0 +1,32 @@
+div.help_top_margin(class='help_top_margin', style='padding-left: 5px !important; padding-right: 5px; !important')
+    div(style='width: 220px !important')
+        div.help_number(class='help_left')
+            i.helppier-icon-resize-vertical
+            span.help_left_margin {{name}}
+        div.tiny_left_margin(class='help_right')
+            a.help_show_hide
+                i.helppier-icon-circle-arrow-down
+        div.tiny_left_margin(class='help_right')
+            a.delete_point
+                i.helppier-icon-remove-sign
+        div.help_clear
+    div.help_content(style='display:none !important')
+        div.help_top_margin(class='help_left_margin')
+            //label.sel_type
+                //-input(type='checkbox', name='sel_type', checked='checked')
+                //-span Auto Selector 
+            span - Override Selector 
+            span(style='text-decoration: underline !important') (Coming Soon)
+        div.help_path(style='display:none !important')
+        div.help_top_margin(class='help_left_margin')
+            //-label(for='location') Location
+            span - Set Location 
+            span(style='text-decoration: underline !important') (Coming Soon)
+            //-select(id='location', class="validate[required]", name="location", title='location', style= "width: 150px !important")
+                //-option(value="n", selected='selected') North
+                //-option(value="s") South
+                //-option(value="e") East
+                //-option(value="w") West
+        
+        
+                        

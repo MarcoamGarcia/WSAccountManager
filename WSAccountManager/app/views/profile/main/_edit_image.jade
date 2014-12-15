@@ -1,0 +1,18 @@
+div(class='left_margin')
+    div#fileupload(class='left_margin', style="padding-top: 40px;")
+        form(action=url_mount('/account/' + actor._id + '/image/change/'), multipart=true, enctype="multipart/form-data", method='post')
+            div
+                div.left
+                    input.right_margin(id="file_change", name="file_change", type='checkbox', checked='checked')
+                div.left
+                    label.cabinet
+                        input.file(id="file_upload", name="images", type="file")
+                div.clear
+                input.security(id="security", name="security", type='hidden', value='#{actor.photo_security}')
+            div(class='top_margin')
+                div.buttons
+                    div.left
+                        button.save(class='tahoma_black_10pt', value='Save') Save
+                    
+
+        

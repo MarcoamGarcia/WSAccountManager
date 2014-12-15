@@ -1,0 +1,109 @@
+extends layout
+block content
+      div(style='margin-top: 32px')
+      div(class="hero-unit")
+            h3 Welcome!
+            select.help_form_select_id(multiple='multiple')
+              option(value='volvo' selected='volvo') Volvo
+              option(value='saab') Saab
+              option(value='mercedes' selected='mercedes') Mercedes
+              option(value='audi') Audi
+            p We built this simple application page to show off our 
+              a(href=url_mount('/')) Wsam
+              span  service. 
+            p This service injects the button "Help!" (that you can see above) in site pages where the user can click and find existent help tours and even create new ones (after login in). 
+            hr
+            ul
+              li To start using it just click the "Help" button above.
+              li You will be able to see which Help Tours are present in this page and also to create new ones without leaving it.
+      //-div(class="row")
+      //-    img(src='http://twitter.github.com/bootstrap/assets/img/bs-docs-responsive-illustrations.png')
+      
+      div#bottom_info(class="row")
+            div#recent_projects(class="span4")
+                h2 Recent Projects
+                ul
+                  li(style='margin-top: 10px') 
+                    span(style='font-style: italic') Porto Apparel 
+                    span  was changed to "closed" state.
+                    a.show_hide(href='#')  »
+                    div(style='display: none')
+                        br
+                        div Expected Earnings: 1100 $
+                        div Total Earnings: 1000 $
+                        div Total Duration: 10 days.
+                        hr
+                  li(style='margin-top: 10px') 
+                    span(style='font-style: italic') Billboard Coloring 
+                    span  was assigned to you.
+                    a.show_hide(href='#')  »
+                    div(style='display: none')
+                        br
+                        div Expected Earnings: 1100 $
+                        div Deadline: To be delivered in one week.
+                        hr
+                div(style='margin-left: 25px')
+                    a(href=url_mount('/demo/projects')) Show all »
+            div(class="span4")
+                h2 Open Tasks 
+                ul#open_tasks_list
+                    li(style='margin-top: 10px') Google web
+                        a.show_hide(href='#')  »
+                        div(style='display: none')
+                            br
+                            div Create Google AdWords campaign
+                            div Budget: 1000 $
+                            div Duration: 5 days.
+                            hr
+                    li(style='margin-top: 10px') Texas billboard
+                        a.show_hide(href='#')  »
+                        div(style='display: none')
+                            br
+                            div Contact billboard company to address current issues.
+                            div Deadline: Until next week.
+                            hr
+                div(style='margin-left: 25px')
+                  a(href=url_mount('/demo/tasks')) Show all »
+            div#recent_messages(class="span4")
+                h2 Recent Messages
+                ul
+                  li(style='margin-top: 10px') Anne Higgins: "Don't forget the plan. We need it until 10pm!"
+                    a.show_hide(href='#')  »
+                    div(style='display: none')
+                        br
+                        div This is an urgent matter and the deadline is close.
+                        div Do you need help creating this plan?
+                        div Best regards,
+                        div Anne Higgins
+                        hr
+                  li(style='margin-top: 10px') Rachel Simon: "Hi, did you manage to get in touch with the customer?"
+                    a.show_hide(href='#')  »
+                    div(style='display: none')
+                        br
+                        div The customer is very upset with this situation.
+                        div You need to contact him as soon as possible.
+                        div 
+                        div Rachel Doe
+                        hr
+                div(style='margin-left: 25px')
+                    a(href=url_mount('/demo/messages')) Show all »
+       
+                  //-form#form_test
+                  //-    div(style='margin-top: 10px')
+                  //-        input#name
+                  //-    div(style='margin-top: 10px')
+                  //-        input#email
+                  //-    div(style='margin-top: 10px')
+                  //-        button(type='submit') Send!
+                     
+      script.
+          $(".show_hide").click(function (e) {
+              $(this).next().toggle("");
+              e.preventDefault();
+          });          
+      
+          //-$("#form_test").submit(function (e) {
+          //-    $.get('/demo/ajax' + $('#form_test').serialize());
+          //-    e.preventDefault();
+          //-    return false;
+          //- });

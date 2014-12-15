@@ -1,0 +1,27 @@
+div(class='help_tooltip help_area help_content')
+    a.close(class='end_button') ×
+    div.help_content
+        div.help_title(class='top_margin')
+            div.help_inner_title {{name}}
+        div.help_description
+            div.help_inner_description {{description}}
+            div.help_buttons
+                div.help_left
+                    a.previous_button(href="#") &laquo; Prev
+                div.help_right
+                    a.next_button(href="#") Next &raquo;
+                div.help_clear
+            hr(style='margin: 0px !important; padding: 0px !important')
+            div.help_feedback(class='help_top_margin help_bottom_margin help_bottom')
+                div.help_page_number(class='help_left')
+                        span.help_big_left_margin ({{number}} of {{total}})
+                div.help_feedback_toggle(class='help_hide help_big_right_margin') feedback
+                div.help_feedback_info(class='help_hide')
+                    div.help_right(class='help_hide help_left_margin help_right_margin')
+                        span Was this help useful? 
+                        a.help_feedback_yes(href="#", class='help_left_margin help_right_margin') Yes
+                        a.help_feedback_no(href="#", class='help_left_margin help_right_margin') No 
+                        span(style='border-left: 1px solid #BBBBBB !important') &nbsp;
+                        a.help_flag(href="#", class='help_left_margin help_right_margin') Flag...
+                div.help_clear
+        

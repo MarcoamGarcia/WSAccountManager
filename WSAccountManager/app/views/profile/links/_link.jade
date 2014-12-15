@@ -1,0 +1,12 @@
+span.tip(title='#{link.name}')
+    a.tahoma_black_10pt(href='#{link.value}', target="_blank")
+        -if(link.name == "LinkedIn")
+            img.tiny_left_margin(src=url_mount("/images/in.png"), width="13", height="13")
+        -else if(link.name == "Facebook")
+            img.tiny_left_margin(src=url_mount("/images/fac.png"), width="13", height="13")
+        -else if(link.name == "Google")
+            img.tiny_left_margin(src=url_mount("/images/goo.png"), width="13", height="13")
+        -else if(link.name == "Twitter")
+            img.tiny_left_margin(src=url_mount("/images/twi.png"), width="13", height="13")
+        -else
+            img.tiny_left_margin(src=url_mount("/images/web.png"), width="13", height="13")

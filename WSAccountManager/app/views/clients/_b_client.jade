@@ -1,0 +1,13 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td {{company_name}}
+        td {{first_name}}
+        td {{last_name}}
+        td {{first_contact}}
+        td {{second_contact}}
+        td
+            a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
+                i(class="icon-pencil")
+            a(class='btn btn-danger delete tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
+                i(class="icon-trash")

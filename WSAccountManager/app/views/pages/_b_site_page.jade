@@ -1,0 +1,17 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td {{name}}
+        td {{description}}
+        td {{url_regex}}
+        td {{key}}
+        td 
+            a.updated_by(href='#') {{updated_by}}
+        td
+            a.helpsets(href='#') Helps
+        td
+            a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", title='Edit', href='#') 
+                i(class="icon-pencil")
+            a.delete(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", title='Delete', href='#') 
+                i(class="icon-trash")
+ 

@@ -1,0 +1,34 @@
+extends ../public_layout
+block content
+      .row(style='background: #00B7CC;padding-top: 40px;color: white')
+          .col-md-1
+          .col-md-6
+            - if(actor.name !=  "")
+                h2 Hi #{actor.name},
+            - else
+                h2 Hi!
+  
+            h2 You have been invited to join Wsam.com.
+          .col-md-3
+      .row(style='background: #00B7CC;padding-top: 10px;padding-bottom: 40px;color: white')
+            .col-md-1
+              p &nbsp;
+            .col-md-4(style='color: white')
+              form(method='POST')
+                input(type='hidden', name="_csrf", value='#{csrf_token}')
+                div.form-group
+                    input.form-control.form-control-blue.signup_input.register_input(name='account[name]', value=actor.name, placeholder='Name')
+                - if(errors["name"]) 
+                    div.tahoma_red_10pt #{errors["name"]}
+                div.form-group
+                  input.form-control.form-control-blue.signup_input.register_input(type='password', id='account_pass', name='account[pass]', placeholder='Password')
+                  - if(errors["pass"]) 
+                      div.tahoma_red_10pt  #{errors["pass"]}
+                div.form-group
+                  input.form-control.form-control-blue.signup_input.register_input(type='password', name='account[pass_confirm]', placeholder='Re-enter password')
+                  - if(errors["pass_confirm"]) 
+                      div.tahoma_red_10pt  #{errors["pass_confirm"]}
+                button.button_blue.register_input(type='submit') Register
+            .col-md-1
+              p &nbsp;
+            .col-md-4(style='color: white')

@@ -1,0 +1,23 @@
+form(class='form-inline', method='POST', action='#')
+    div
+        div.control-group
+            div.input-append
+                div.input(class="pull-left")
+                    input.name(id='name', name='name', class="required", type="text", placeholder='Name', value='{{name}}')
+                div.security_chooser(class="pull-left name_security")
+                    //- include _b_edit_security
+        div.control-group
+            div.input-append
+                div.input(class="pull-left")
+                    input.email(id='email', name='email', class="pull-left required", type="text", placeholder='Email', value='{{email}}')
+                div.security_chooser(class="pull-left email_security")
+                    //- include _b_edit_security
+        div.control-group
+            div.input-append
+                div.input(class="pull-left")
+                    textarea.description(id='about_me', name='about_me', class="pull-left required", placeholder='Bio') {{about_me}}
+                div.security_chooser(class="pull-left about_me_security")
+                    //- include _b_edit_security
+    div
+        button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+        a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

@@ -1,0 +1,87 @@
+/*@import url('https://fonts.googleapis.com/css?family=Lobster');*/
+
+.logo {
+	font-family: "Lobster";
+	font-size: 20px; 
+	color: white;
+}
+
+.logo_exc {
+	font-family: "Lobster";
+	font-size: 20px; 
+	color: #000;
+	font-weight:bold;
+}
+
+body {
+	padding-top: 40px;
+}
+
+html, body {
+  height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -50px;
+}
+
+#footer {
+    height: 40px;
+    padding-left: 40px;
+    text-align: center;
+}
+
+#site_footer {
+    height: 40px;
+    padding-left: 40px;
+    text-align: center;
+}
+
+/* general */
+
+.tiny_top_margin {
+	margin-top: 5px;
+}
+
+.top_margin {
+	margin-top: 10px;
+}
+
+.tiny_left_margin {
+	margin-left: 5px;
+}
+
+.left_margin {
+	margin-left: 10px;
+}
+
+.right_margin {
+	margin-right: 10px;
+}
+
+.tiny_right_margin {
+	margin-right: 5px;
+}
+
+.bottom_margin {
+	margin-bottom: 10px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.hide {
+	display:none;
+}

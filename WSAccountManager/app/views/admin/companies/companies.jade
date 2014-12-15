@@ -1,0 +1,35 @@
+extends ../../layout
+block content
+    .page-header
+        h1 Companies
+    div(class="row")         
+          div#companies_wrapper(class="span12")
+              br
+              table#companies_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Name
+                          th State
+                          th Created by 
+                          th Updated by 
+                          th(style='width: 220px;') &nbsp;
+                  tbody
+                      - if (companies.length == 0)
+                          tr.empty_table
+                              td(colspan='8') (no companies)
+    
+    div#edit-company-template(style='display:none')
+        include _b_edit_company
+        
+    div#show-company-template(style='display:none')
+        include _b_company
+          
+    script(type='text/javascript').
+        var site_host = "#{site_host}";
+    
+    != js('app/admin_companies')
+    
+    script(type='text/javascript').
+        var companies = !{JSON.stringify(companies)};
+        var vent = _.extend({}, Backbone.Events);
+        new CompaniesListView({vent: vent, json: companies});

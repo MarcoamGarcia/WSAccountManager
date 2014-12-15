@@ -1,0 +1,18 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td {{name}}
+        td {{state}}
+        td 
+            a.created_by(href='#') 
+        td 
+            a.updated_by(href='#') 
+        td
+            a.enable(class='hide btn btn-primary tiny_left_margin', data-active="Enable", data-loading="Enabling...", data-complete="Enabled!", href='#') Enable
+            a.disable(class='hide btn tiny_left_margin', data-active="Disable", data-loading="Disabling...", data-complete="Disabled!", href='#') Disable
+            a.approve(class='hide btn tiny_left_margin', data-active="Approve", data-loading="Approving...", data-complete="Approved!", href='#') Approve
+            a.reject(class='hide btn tiny_left_margin', data-active="Reject", data-loading="Rejecting...", data-complete="Rejected!", href='#') Reject
+        td
+            a(class='btn btn-danger delete tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
+                    i(class="icon-trash")
+ 

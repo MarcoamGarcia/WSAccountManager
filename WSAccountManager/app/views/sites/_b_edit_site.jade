@@ -1,0 +1,17 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=7)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group
+                        input.name(id='name', name='name', class="required", type="text", placeholder='Name', value='{{name}}')
+                    div.control-group(class='read_info')
+                        span {{url}}
+                    div.write_info
+                        div.control-group
+                            input.complete_url(id='url', name='url', class="required", type="text", placeholder='Site url', value='{{url}}')
+                    div.help-block(style='font-size: 80%') The domain name of your website, where you want to deploy the help. This can be www.yoursite.com or yoursite.com:8008 if your site isn't deployed on port 80.
+                div
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

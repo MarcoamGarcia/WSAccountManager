@@ -1,0 +1,17 @@
+div#entries_wrapper
+  div
+    a#new_entry(href="#", class='btn')
+        i(class="icon-plus")
+        span Entry 
+    table#entries_list(class='top_margin table table-striped table-bordered')
+          thead
+              tr
+                  th ForeGround Color
+                  th BackGround Color
+                  th Color
+                  th Border
+                  th Widget Location
+          tbody
+              - if (template.entries == null || template.entries.length == 0)
+                  tr.empty_table
+                      td(colspan='5') (there aren't any entries)

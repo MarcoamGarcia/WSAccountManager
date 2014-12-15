@@ -1,0 +1,16 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=7)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group
+                        input.name(id='name', name='name', class="required", type="text", placeholder='Help name', value='{{name}}')
+                    div.control-group
+                        textarea.description(id='description', name='description', class="required", placeholder='Help Description') {{description}}
+                    div.control-group
+                        select.page(id='page', name='page', class="required", )
+                            option(value='') -- Select page --
+                div
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

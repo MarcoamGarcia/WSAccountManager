@@ -1,0 +1,28 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=4)
+            form(class='form-inline', method='POST', action='#')
+                    div.control-group
+                        input.backgroundcolor(id='backgroundcolor', name='backgroundcolor', class="required", type="text", placeholder='Background Color', value='{{backgroundcolor}}')
+                    div.control-group
+                        input.foregroundcolor(id='foregroundcolor', name='foregroundcolor', class="required", type="text", placeholder='Foreground Color', value='{{foregroundcolor}}')
+                    div.control-group
+                        input.color(id='color', name='color', class="required", type="text", placeholder='Color', value='{{color}}')
+                    div.control-group
+                        input.border(id='border', name='border', class="required", type="text", placeholder='Border', value='{{border}}')
+                    div.control-group
+                        select.site(id='site', name='site', class="required")
+                            option(value='') -- Select Widget Location --
+                                option(value='north') North
+                                option(value='south') South
+                                option(value='West') West
+                                option(value='East') East
+                                option(value='northeast') NorthEast
+                                option(value='southeast') SouthEast
+                                option(value='northwest') NorthWest
+                                option(value='southwest') SouthWest 
+                    div(class='top_margin')
+                        button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                        a.delete(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", title='Delete', href='#') 
+                            i(class="icon-trash")

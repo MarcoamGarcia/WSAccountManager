@@ -1,0 +1,88 @@
+extends ./public_layout
+block content
+        .row(style='background: #00B7CC;padding-top: 40px;color: white')
+                .col-md-1
+                .col-md-6
+                  h1  LOGIN TO YOUR ACCOUNT
+                .col-md-3
+        .row(style='background: #00B7CC;padding-top: 10px;padding-bottom: 40px;color: white')
+                .col-md-1
+                  p &nbsp;
+                .col-md-4(style='color: white')
+                  form#form-login(role='form', action=url_mount('/sessions/session'), method='POST')
+                    input(type='hidden', name="_csrf", value='#{csrf_token}')
+                    .form-group
+                        - if ('undefined' !== typeof email)
+                                input.form-control.form-control-blue.signup_input.register_input(name='email', value=email, placeholder='EMAIL')
+                        - else 
+                                input.form-control.form-control-blue.signup_input.register_input(name='email', placeholder='EMAIL')
+                    .form-group
+                      input.form-control.form-control-blue.signup_input.register_input(type='password', name='password', placeholder='PASSWORD')
+                      div(style='color: red')
+                        - if(message != null)
+                            h4 #{message}
+                    .checkbox
+                        label
+                          input(type='checkbox', id='keep_login', name='keep_login', checked="checked")
+                          |  Keep me logged in
+                    .form-group
+                        button.button_blue.register_input(type='submit') LOGIN
+                        a.forgot-pass(style='color: white; font-size: 16px; padding-left: 20px', class='left_margin', href=url_mount('/forgot_pass')) Forgot password?
+                    .form-group
+                        - if('undefined' !== typeof errors && errors["login"]) 
+                                div.tahoma_red_10pt #{errors["login"]}
+                .col-md-1
+                  p &nbsp;
+                .col-md-4(style='color: white')
+        //.row
+                //.page-header
+                    //-h2 Or use your social network account:
+                    //div
+                    //span#fb-login
+                    //  a#help_auth_facebook(href=url_mount('/auth/facebook'), target='namehere', style='border: 0px', )
+                    //    img(style='border: 0px', src='#{site_host}' + url_mount('/images/facebook_32.png'))
+                    //span#twitter-login(style='margin-left: 5px')
+                    //-a(href=url_mount('/auth/twitter'), style='border: 0px')
+                    //-  img(style='border: 0px', src='#{site_host}' + url_mount('/images/twitter_32.png'))
+                    //span#google-login(style='margin-left: 5px')
+                    //-a(href=url_mount('/auth/google'), target='namehere', style='border: 0px')
+                    //-  img(style='border: 0px', src='#{site_host}' + url_mount('/images/google_32.png'))
+                    //span#github-login(style='margin-left: 5px')
+                    //  a(href=url_mount('/auth/github'), target='namehere', style='border: 0px')
+                    //    img(style='border: 0px', src='#{site_host}' + url_mount('/images/github_32.png'))
+                        
+        script.
+            $('#help_auth_facebook a').click(function (e) {
+                var link_url = $(this).attr('href');
+                signinWin = window.open(link_url, "SignIn", "width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=0,top=0");
+                setTimeout(CheckLoginStatus, 2000);
+                signinWin.focus();
+                return false;
+            });
+            
+            $('#github-login a').click(function (e) {
+                var link_url = $(this).attr('href');
+                alert(link_url);
+                signinWin = window.open(link_url, "SignIn", "width=780,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=0,top=0");
+                setTimeout(CheckLoginStatus, 2000);
+                signinWin.focus();
+                return false;
+            });
+            
+            
+            function CheckLoginStatus() {
+                
+                if (signinWin.closed) {
+                    try {
+                        console.log("closed login window!");
+                    }catch(err) {}
+                                        
+                    alert(window.SocialloggedIn);    
+                    if(typeof window.opener.SocialloggedIn !== "undefined" && window.opener.SocialloggedIn ) {
+                        window.location = "/login_success";
+                    } else {
+                        show_error("Oops. Something went wrong and your login failed. Please try again.");
+                    }
+                }
+                else setTimeout(CheckLoginStatus, 1000);
+            }

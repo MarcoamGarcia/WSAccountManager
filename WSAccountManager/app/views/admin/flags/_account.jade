@@ -1,0 +1,26 @@
+div.clear
+div(id='flag_' + account._id)
+    - if(!account["closed"])
+        div Resolve conflict!
+    div.tahoma_black_10pt(class='left_margin top_margin')
+    - account["flags"].forEach(function(flag){
+        div Flagged by: #{actor_properties[flag.actor_id].short_name}
+        div Reason: #{flag.reason}
+    - })
+    div(class='top_margin')
+        != partial('admin/flags/_flag_commands', {locals: { object: account, type: "account"} }) 
+    //- flags in notifications.
+    div.clear
+    a(href=url_mount('/account/' + account.id))
+        .stats_avatar
+                - if(account.photo)
+                    img(src=url_mount("/logo/"+ account.id + "/thumb"))
+                - else 
+                    !=partial('partials/_default_image_thumb.jade', { locals: { type: account.type, sub_type: account.sub_type  } })
+        .stats_name
+            div(class='tahoma_black_12pt') #{account.short_name}
+    div.large_dashed_break
+    div.clear
+    div(style='border-bottom: 1px solid red')
+    div.clear
+    

@@ -1,0 +1,71 @@
+include _b_alert_multipage
+div.help_widget(class='help_fixed help_widget_#{position} help_area', style='display:none !important')
+    div.help_widget_inner(class='cleanslate')
+        input#help_csrf(type='hidden', name="help_csrf", value='#{csrf_token}')
+        div.help_handle &nbsp;
+        div.help_page_info
+        div.help_widget_list
+        div.page_widget_list
+        //-div.help_bottom_margin(class='help_top_margin')
+        hr
+        //- check if login area should be showed.
+        -if(show_login)
+            div.help_user_area(class='help_top_margin')
+                div.help_user_login_link(style='display:none !important')
+                    a.help_show_login 
+                        span.help_right_margin Login
+                        i.helppier-icon-arrow-down
+                div.help_user_login_area(style='display:none !important')
+                    - if(!isLoggedIn)
+                        include _login
+                div
+                    span.help_user_link
+                        - if(isLoggedIn)
+                            span Welcome! 
+                                    a.help_user_name(href="#{site_host}" + url_mount("/profile/#{user.id}"), target= '_blank') #{user.name}
+                    span.help_user_logout_link(style='display:none !important') &nbsp;
+                        a.logout(href='#{site_host}' + url_mount('/logout')) (Logout)
+                    div(class='help_right')
+                        div.switch_help_pages(class='help_big_left_margin', style='display:none !important')
+                            span &nbsp;&nbsp;&nbsp;
+                            a.switch_bet_help_and_page
+                                span.help_right_margin Site Pages
+                                i.helppier-icon-arrow-right
+                -if (analytics)
+                    hr
+                    div.powered_by
+                        span.help_user_logout_link(style='display:none !important') &nbsp;
+                            label Powered by 
+                            a.logout(href='http://www.helppier.com', target='_blank') Wsam
+                div.clear
+//- helpset templates.
+div#helpsets-template(style='display:none !important')
+   include _b_helpsets_list    
+div#show-helpset-template(style='display:none !important')
+    include _b_helpset   
+div#edit-helpset-template(style='display:none !important')
+    include _b_edit_helpset
+//- helppoint templates.
+div#show-helppoint-template(style='display:none !important')
+    include _b_helppoint     
+div#edit-helppoint-template(style='display:none !important')
+    include _b_edit_helppoint
+//- help templates.
+div#show-help-template(style='display:none !important')
+    include _b_help   
+div#edit-help-icon-template(style='display:none !important')
+    include _b_edit_icon_help   
+div#edit-help-content-template(style='display:none !important')
+    include _b_edit_content_help
+    
+div#flag-help-content-template(style='display:none !important')
+    include _b_flag_helpset
+    
+include _pages
+    
+//- help error
+div#help-error(class='help_area help_fixed cleanslate', style='display:none !important')
+    include_help_error
+    
+script.
+    var url_mount = "#{mount}";

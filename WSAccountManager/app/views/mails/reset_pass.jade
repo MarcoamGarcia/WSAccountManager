@@ -1,0 +1,13 @@
+p Hi #{actor.name},
+
+p There was recently a request to change the password on your account.
+
+p If you requested this password change, please set a new password by following the link below:
+p 
+    a(href= server + url_mount('/reset_pass/' + values.crypt)) Change my password
+
+p If you didn't request this, please ignore this email.
+p Your password won't change until you access the link above and create a new one.
+
+p Thanks,
+p Wsam.com team

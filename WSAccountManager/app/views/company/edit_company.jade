@@ -1,0 +1,25 @@
+extends ../layout
+block content
+    div(class="row")    
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{company.name} profile
+    div#general_info
+    
+    //- account props info templates
+    div#show-main-template(style='display:none')
+        include main/_b_main
+        
+    div#edit-main-template(style='display:none')
+        include main/_b_edit_main  
+        
+    //- TODO: Fetch account id from the URL.
+    script(type='text/javascript').
+        var company_id = "#{company._id}";
+        var company_name = "#{company.name}";
+        var company_main_info = !{JSON.stringify(main)};
+    != js('app/company')

@@ -1,0 +1,35 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=7)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group(class='read_info')
+                        span {{name}} ({{email}})
+                    div.write_info
+                        div.control-group
+                            input.name(id='name', name='name', class="required", type="text", placeholder='Name', value='{{name}}')
+                        div.control-group
+                            input.email(id='email', name='email', class="required", type="text", placeholder='Email', value='{{email}}')
+                    div.control-group
+                       div
+                            span
+                                <label class='checkbox'><input class='company_admin' type='checkbox' id='company_admin' name='company_admin'> Is admin?</label>
+                    div.control-group
+                        div
+                            span Has access to:
+                        div
+                            span
+                                <label class='checkbox'><input class='sites_selection' type='checkbox' id='#{company.id}' name='#{company.id}'> All Sites</label>
+                        -each site in sites
+                            div
+                                span
+                                    <label class='checkbox'><input class='sites_selection' type='checkbox' id='#{site.id}' name='#{site.id}'> #{site.url} </label>
+
+                        
+                    //-div.control-group
+                    //-    span
+                    //-        <label class='checkbox'><input class='active' type='checkbox' id='active'> Active? </label>
+                div
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

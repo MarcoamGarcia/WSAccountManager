@@ -1,0 +1,24 @@
+.grid_3(id='left_col')
+    
+    !=partial('admin/_left_menu')
+    
+.grid_13(id='medium_center_col')
+    div(class='left_margin tahoma_black_16pt') #{title}
+    div(class='left_margin large_line_break')
+    .clear
+    div(class='left_margin tahoma_black_10pt')
+          p Show: 
+              a.tiny_right_margin(href=url_mount('/admin/flags/account')) Accounts
+              span  / 
+              a.tiny_right_margin(href=url_mount('/admin/flags/noti')) Notifications
+              span  / 
+              a.tiny_right_margin(href=url_mount('/admin/flags/time')) Shouts
+    div(class='left_margin top_margin') 
+        div#flags_list
+            - if (type == 'noti')
+                != partial('admin/flags/_notification', { collection: notifications, locals: { actor_properties: actor_properties, all_info: false} })
+            - if (type == 'time')
+                != partial('admin/flags/_activity', { collection: activities, locals: { actor_properties: actor_properties, all_info: false} })
+            - if (type == 'account')
+                != partial('admin/flags/_account', { collection: accounts, locals: { actor_properties: actor_properties, all_info: false} })
+

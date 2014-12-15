@@ -1,0 +1,16 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=5)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group
+                        input.name(id='name', name='name', class="required", type="text", placeholder='Name', value='{{name}}')
+                    div.control-group
+                        input.email(id='email', name='email', class="required", type="text", placeholder='Email', value='{{email}}')
+                    //-div.control-group
+                    //-    span
+                    //-        <label class='checkbox'><input class='active' type='checkbox' id='active'> Active? </label>
+                div
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

@@ -1,0 +1,127 @@
+doctype html
+html(lang='en')
+  head
+  
+    link(rel="shortcut icon", href=url_mount("/images/favicon.ico"), type="image/x-icon")
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content='')
+    meta(name="author", content='')
+
+    != js('public')
+    != css('public')
+    
+    //- http://stackoverflow.com/questions/20547819/vertical-align-with-bootstrap-3
+    style.
+      .vcenter {
+          display: inline-block;
+          vertical-align: middle;
+          float: none;
+      }
+      
+      .header_link {
+        border: 1px solid #FF9FA2;
+        padding: 10px 30px 10px 30px;
+        color: #FF9FA2;
+      }
+      
+      .signup_input {
+        border: 1px solid #FF5B61;
+        color: #FF9FA2;
+        background: white;
+        border-radius: 0px;
+        height: 50px;
+        text-align: center;
+      }
+      
+      .input_blue {
+        border: 0px;
+        color: #FF9FA2;
+        background: white;
+        border-radius: 0px;
+        height: 50px;
+        text-align: center;
+      }
+      
+      .signup_button {
+        border: 0px;
+        background-color: #FF5B61;
+        color: white;
+      }
+      
+      .button_blue {
+        border: 0px;
+        background-color: #00B7CC;
+        color: white;
+      }
+      
+      .register_input {
+        text-align: left;
+      }
+      
+      .register_input {
+        border: 1px solid white;
+        height: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      
+      .form-control::-webkit-input-placeholder {
+          color: #FF9FA2;
+       }
+       
+       .form-control:-moz-placeholder { /* Firefox 18- */
+          color: #FF9FA2;  
+       }
+       
+       .form-control::-moz-placeholder {  /* Firefox 19+ */
+          color: #FF9FA2;  
+       }
+       
+       .form-control:-ms-input-placeholder {  
+          color: #00B7CC;  
+       }
+       
+       .form-control-blue::-webkit-input-placeholder {
+          color: #00B7CC;
+       }
+       
+       .form-control-blue:-moz-placeholder { /* Firefox 18- */
+          color: #00B7CC;  
+       }
+       
+       .form-control-blue::-moz-placeholder {  /* Firefox 19+ */
+          color: #00B7CC;  
+       }
+       
+       .form-control-blue:-ms-input-placeholder {  
+          color: #00B7CC;  
+       }
+
+    title Wsam - #{title}
+     
+    script(type="text/javascript").
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-35434995-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+  body
+      .container-fluid
+        .row(style='background: #fff; padding-top: 30px')
+          .col-md-1.vcenter
+          .col-md-5.vcenter
+            a(class="brand", href=url_mount("/")) 
+              img(src=url_mount('/img/helppier_logo.png'))
+          .col-md-2.vcenter
+          .col-md-4.vcenter
+            a.header_link(href=url_mount("/login"), style='margin-right: 20px') > LOGIN
+        block content
+        .row(style='background: #fff; padding-top: 30px')
+          .col-md-12.vcenter(style='text-align: center')
+            p &copy; Wsam 2014
+  

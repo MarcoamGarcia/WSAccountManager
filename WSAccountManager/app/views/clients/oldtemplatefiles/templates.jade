@@ -1,0 +1,86 @@
+extends ../layout
+block content
+    div(class="row")
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{title} 
+    div(class="row")
+          div#templates_wrapper(class="span12")
+                div
+                  a#new_template(href=url_mount('/company/#{session.active_company_id}/templates/new'), class='btn')
+                      i(class="icon-plus")
+                      span Template
+                br
+                br
+                table#templates_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Site
+                          th Description
+                          th Changed by
+                          th 
+                          th(style='width: 100px;') &nbsp;
+                  tbody
+                      - if (templates.length == 0)
+                          tr.empty_table
+                              td(colspan='8') (there aren't any templates)
+                      - templates.forEach(function(template_info){
+                          tr
+                              td
+                                  - if (template_info.site != null)
+                                      #{template_info.site.name}
+                              td   #{template_info.description}
+                              td
+                                  - if (faq_info.updated_by != null)
+                                      #{faq_info.updated_by.name}
+                              td
+                                    a.preview(href=url_mount('/company/#{company.id}/template/#{template_info.id}/preview')) Preview
+                              td
+                                  a.edit_lnk(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", href=url_mount('/company/#{company.id}/template/#{template_info.id}'), data-complete="Edited!") 
+                                      i(class="icon-pencil")
+                                  a.delete_lnk(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", href=url_mount('/company/#{company.id}/template/#{template_info.id}'), data-complete="Deleted!") 
+                                      i(class="icon-trash")
+                      - })
+
+
+     script.
+          $(".delete_lnk").click(function(e) {
+              var self = $(this);
+              var href = self.attr("href");
+              bootbox.confirm("Are you sure?", function(confirmed) {
+                  if(confirmed) {
+                      $.ajax({url: href, type: "DELETE",
+                            data: {_csrf: $("meta[name='_csrf']").attr('content')},
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            error: function(data) {
+                                show_error($("form"), data.responseText);
+                            },
+                            success: function(data) {
+                                after_save(self, data);
+                            }
+                      });
+                  }
+              });
+              e.preventDefault();
+          });
+                              
+          function after_save(elem, data) {
+              if(_.isObject(data)) {
+                  var errors = data.errors;
+                  if(_.isObject(errors)) {
+                      show_error($("form.templates_list"), data);
+                  } else {
+                      elem.parents("tr").fadeOut('slow');
+                  }
+              } else {
+                  show_error("form.templates_list", data);
+              }
+          }

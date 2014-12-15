@@ -1,0 +1,27 @@
+form.contact(class='top_margin area', method='POST', action='#')    
+    div.control-group
+        select.tahoma_black_10pt(id='name', class="hide required", name="name", title='Contact Name', style= "width: 150px")
+              option(value="") -- Select Type --
+              option(value="add") Address
+              option(value="pho") Phone
+              option(value="ema") E-mail
+              option(value="oth") Other
+        a.cancel(class='tahoma_red_8pt hide', style='margin-left: 5px;', href='#')
+            img(title='cancel', src=url_mount("/images/cancel.png"), width="13", height="13")
+    div(class='control-group tiny_top_margin')
+        input.input_medium(id='value', type='text', class="required", name='value', value='{{value}}', placeholder="Contact Value")
+        
+            
+    div.top_margin
+        div.buttons
+                button.save(class='btn', value='Save') 
+                    i(class="icon-ok")
+                    span.tiny_left_margin Save
+                a(class='btn btn-danger delete hide tiny_left_margin', href='#') 
+                    i(class="icon-trash")
+                a(class='set hide tiny_left_margin', style='margin-left: 5px;', href='#') 
+                    img(title='Set as main e-mail', src=url_mount("/images/set_as_main.png"), width="13", height="13")
+        div.clear
+    
+        span.buttons
+hr

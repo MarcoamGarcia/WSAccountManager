@@ -1,0 +1,36 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=7)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group
+                        input.name(id='name', name='name', class="required", type="text", placeholder='FAQ name', value='{{name}}')
+                    div.control-group
+                        textarea.description(id='description', name='description', class="required", placeholder='FAQ Description') {{description}}
+                    div.control-group(class='read_info hide')
+                        span Site: {{site}}
+                    div.control-group
+                        input.page_bck(id='page_bck', name='page_bck', class="required", type="text", placeholder='FAQ page background color', value='{{page_bck}}')
+                    div.control-group
+                        input.name_for(id='name_for', name='name_for', class="required", type="text", placeholder='FAQ name color', value='{{name_for}}')
+                    div.control-group
+                        input.entry_name_for(id='entry_name_for', entry_name_for='name', class="required", type="text", placeholder='FAQ entry name color', value='{{entry_name_for}}')
+                    div.control-group
+                        input.entry_desc_for(id='entry_desc_for', name='entry_desc_for', class="required", type="text", placeholder='FAQ entry description color', value='{{name}}')
+                    div.write_info(class='hide')
+                        div.control-group
+                            select.site(id='site', name='site', class="required")
+                                option(value='') -- Select site --
+                    hr
+                    div
+                        h4 Entries
+                        a.add_entry(class="btn", data-active="Add", data-loading="Adding...", data-complete="Added!") 
+                            i(class="icon-plus")
+                            span Entry
+                        div.entries
+                    br
+                hr
+                div(class="top_margin')
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

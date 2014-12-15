@@ -1,0 +1,53 @@
+include _b_confirm
+div.help_main
+    div.help_form
+        form(class='top_margin area', method='POST', action='#')
+            div.help_big_bottom_margin
+                input.input_medium(id='name', type='text', class="validate[required]", name='name', required, placeholder="help title")
+            div.help_big_bottom_margin
+                textarea.description(id='description', class="input_medium validate[required]", required, name='detail', placeholder="help description")
+                    {{description}}
+            div
+                label
+                    input.state(type='checkbox')
+                    span &nbsp;
+                    | Published
+            div
+                label
+                    input.subtype(type='checkbox')
+                    span &nbsp;
+                    | Context Help?
+            //-select.tahoma_black_10pt(id='type', class="hide validate[required]", name="name", title='type', style= "width: 150px !important")
+            //-    option(value="") -- Select Type --
+            //-    option(value="0") Context
+            //-    option(value="1") Tutorial
+            hr
+            div
+                a.save(class='btn btn-small btn-primary', title='Save')
+                    i
+                    span Save
+                span &nbsp;
+                a.show(class='btn btn-small btn-inverse help_left_margin', title='Cancel Changes')
+                    i
+                    span Cancel
+                //-a.set_default(class='btn btn-info help_left_margin', title='Show at page load')
+                //-    i.helppier-icon-home
+                div.help_right
+                    a.delete(class='btn btn-small btn-danger', title='Delete')
+                        i.helppier-icon-trash
+                div.clear
+    hr
+    div
+        div
+            button.play(class='btn btn-small')
+                i.helppier-icon-play  
+                span.help_left_margin Play
+            span &nbsp;
+            button.rec(class='btn btn-small help_left_margin')
+                i.helppier-icon-facetime-video
+                span.help_left_margin Rec
+        br
+        div(class='help_left_margin')
+            h5 Help Items:
+            br
+        div.help_list(class='help_top_margin')

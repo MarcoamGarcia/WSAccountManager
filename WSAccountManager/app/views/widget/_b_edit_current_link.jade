@@ -1,0 +1,12 @@
+div.help_edit_link(class='help_top_margin')
+    form(method='POST', action='#')
+        div(class='help_left')
+            div.control-group
+                span.help_left_margin
+                input.name(id='name', style='width: 100px !important', type='text', name='name', required, value='{{name}}', placeholder="page name")
+                span.help_left_margin
+        div(class='help_left')
+            div.control-group
+                input.url_regex(id='url_regex', style='width: 100px !important', type='text', name='url_regex', required, value='{{url}}', placeholder="page url")
+                span.help_left_margin
+        button.save(class='btn btn-primary', value='Add') Add

@@ -1,0 +1,75 @@
+doctype html
+html(lang='en')
+  head
+  
+    link(rel="shortcut icon", href=url_mount("/images/favicon.ico"), type="image/x-icon")
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content='')
+    meta(name="author", content='')
+    meta(name="_csrf", content='#{csrf_token}')
+    
+    != js('global')
+    != css('global')
+    
+    script.
+      var url_mount = "#{mount}";
+
+    title Wsam - #{title}
+
+  body
+      div(class="navbar navbar-fixed-top")
+          div(class="navbar-inner")
+              div(class="container")
+                  a(class="btn btn-navbar", data-toggle="collapse", data-target=".nav-collapse")
+                      span(class="icon-bar")
+                      span(class="icon-bar")
+                      span(class="icon-bar")
+                  -if(session.active_company_id != null)
+                      a(class="brand", href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home')
+                          span.logo Wsam
+                          span.logo_exc !
+                  -else
+                      a(class="brand", href=url_mount("/profile/"))
+                          span.logo Wsam
+                          span.logo_exc !
+                  div(class="nav-collapse")
+                      ul.nav
+                        li.client_link
+                            a(href=url_mount('/company/#{session.active_company_id}/clients'), title='Clients') Clients
+                              
+                          
+
+                  div(class="btn-group pull-right")
+                      a(class="btn dropdown-toggle",data-toggle="dropdown",href="#")
+                        i(class="icon-user") 
+                        span #{user.name}
+                        span.caret
+                      ul(class="dropdown-menu")
+                         li
+                             a(href=url_mount("/profile/#{user.id}")) My Profile
+                         li.divider
+                         -if(authorized('view', 'admin', ''))
+                            li
+                                a(href=url_mount('/admin'), title='Admin') Admin
+                            li.divider
+                         li
+                            a(href=url_mount("/logout")) Sign Out
+      div.container
+          div#top-alert(class="row hide", style='position:fixed;top: 40px')         
+              div(class="span3") &nbsp;
+              div.center(class="span6") 
+                  div(class='alert alert-error')
+                    button(class="close", data-dismiss="alert") &times;
+                    strong
+              div(class="span3") &nbsp;
+          br
+          block content
+          footer
+              p &copy; Wsam 2014
+  
+      script.
+          var active_area = '#{active_area}';
+          if(active_area != "") {
+              $(".#{active_area}_link").eq(0).addClass("active");
+          }

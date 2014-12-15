@@ -1,0 +1,495 @@
+.dot {
+	position: fixed;
+	width: 30px;
+	height: 30px;
+
+	border-radius: 30px;
+	background-color: #4bc2f1;
+}
+
+#dot_container {
+	perspective: 50px;
+	-webkit-perspective: 50px;
+	-moz-perspective: 50px;
+	-ms-perspective: 50px;
+
+	transform-origin: 50% 100%;
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+
+	pointer-events: none;
+
+	opacity: 0.55;
+}
+	
+.help_fixed {
+	position: fixed !important;
+    font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", Helvetica, Arial, Lucida, sans-serif !important;
+}
+
+.help_button {
+	padding: 10px 15px !important;
+	background-color: #F5F5F5 !important;
+	border-left: 1px solid #EEEEEE !important;
+	border-right: 1px solid #EEEEEE !important;
+    border-bottom: 1px solid #EEEEEE !important;
+    border-radius: 0px 0px 6px 6px !important;
+    line-height: 1 !important;
+	font-size: 12px !important;
+}
+
+div.help_error_info {
+	background-color: #F2DEDE !important;
+	color: #B94A48 !important;
+	border-left: 1px solid #EED3D7 !important;
+	border-right: 1px solid #EED3D7 !important;
+    border-bottom: 1px solid #EED3D7 !important;
+    border-radius: 0px 0px 6px 6px !important;
+    font-weight: normal !important;
+    font-size: 12px !important;
+    padding: 6px !important;
+}
+
+.help_button {
+	left:10px !important;
+	top: 0% !important;
+}
+
+.help_button a, .help_widget a {
+	color: #0088CC !important;
+}
+
+.help_button a:hover, .help_widget a:hover {
+	color: #2DA0D7 !important;
+}
+
+div.help_widget {
+	border: 1px solid #EEEEEE !important;
+	border-radius: 6px 6px 6px 6px !important;
+    /*box-shadow: 0 3px 7px #F5F5F5 !important;*/
+    padding: 15px !important;
+	font-size: 11px !important;
+	background: #F5F5F5 !important;
+	min-width: 150px;
+}
+
+div.help_widget {
+	top: 42px !important;
+  	left: 10px !important;
+}
+
+div.help_widget * {
+	font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", Helvetica, Arial, Lucida, sans-serif !important;
+	font-size: 11px !important;
+}
+
+div.help_widget:after {
+	  content: "" !important;
+      position: absolute !important;
+      width: 0 !important;
+      height: 0 !important;
+      border-width: 8px !important;
+      border-style: solid !important;
+      left: 20px !important;
+      border-color: transparent transparent #F5F5F5 transparent !important;
+      top: -16px !important;
+}
+
+div.help_widget_inner {
+	background: #F5F5F5 !important;
+}
+
+div.help_widget_list, div.pages_widget_list {
+	overflow: hidden !important;
+	min-width: 250px !important; 
+	/*border-bottom: 1px solid #EEEEEE !important;*/
+}
+
+div.helpset_list, div.pages_list {
+	min-height: 150px !important; 
+	width: 100% !important; 
+	overflow: auto !important;
+}
+
+.help_handle {
+	width: 100% !important;
+	height: 10px !important; 
+	border-bottom: 1px solid #EEEEEE !important;
+}
+
+a.question_mark {
+	color: #FFF !important;
+}
+
+.help_opacity {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  opacity: 0% !important;
+}
+
+#help_base {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  opacity: 0% !important;
+}
+
+.help_absolute {
+  position:absolute !important;
+  top: 30px !important;
+  left: 10px !important;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", Helvetica, Arial, Lucida, sans-serif !important;
+}
+
+.help_path_child_elem {
+	-moz-border-radius: 3px !important;
+	border-radius: 3px !important;
+	background: gray !important;
+	padding: 2px !important;
+	font-size: 80% !important;
+}
+
+.help_inner_path_elem {
+	-moz-border-radius: 3px !important;
+	border-radius: 3px !important;
+	border: 1px solid black !important;
+	padding: 2px !important;
+	font-size: 80% !important;
+}
+
+label.error, div.error {
+  	color: red !important;
+  	font-size: 90% !important;
+  	margin-bottom: 9px !important;
+  	display: block !important;
+  	text-align: left !important;
+}
+
+div.help_content {
+	max-width: 380px !important;
+	min-width: 200px !important;
+}
+
+div.large_help_content {
+	max-width: 380px !important;
+	min-width: 380px !important;
+}
+
+div.help_title {
+    background-color: #0088CC !important;
+    color: #FBFFFF !important;
+    border-bottom: 1px solid #EEEEEE !important;
+    border-radius: 3px 3px 0 0 !important;
+    line-height: 1 !important;
+}
+
+div.help_feedback {
+	font-size: 10px !important;
+	min-width: 200px !important;
+	max-width: 300px !important;
+}
+
+div.help_page_number {
+	color: gray !important;
+	opacity: 0.5 !important;
+}
+
+div.help_feedback_toggle {
+	padding-left: 11px !important;
+	color: gray !important;
+	text-align: right !important;
+	opacity: 0.5 !important;
+	text-decoration: underline !important;
+}
+
+div.help_inner_title, div.help_inner_description  {
+    padding: 9px 30px !important;
+}
+
+div.help_inner_description {
+	text-align: left !important;
+}
+
+
+div.help_inner_description > b {
+	font-weight: bold !important;
+}
+
+div.help_inner_description > i {
+	font-style:italic !important;
+}
+
+div.help_inner_description > strike {
+	text-decoration:line-through !important;
+}
+
+div.help_buttons {
+	padding: 0px 15px !important;
+	padding-bottom: 9px !important;
+}
+
+div.help_description {
+    background-color: #F5F5F5 !important;
+	background-clip: padding-box !important;
+	font-size: 90% !important;
+    border-radius: 0 0 3px 3px !important;
+}
+
+.help_buttons a {
+	color: #000 !important;
+	margin-left: 3px !important;
+	font-size: 70% !important;
+}
+
+span.help_create {
+	color: #0088CC !important;
+	cursor: pointer !important;
+}
+
+span.help_create:hover {
+	text-decoration: underline !important;
+}
+
+
+
+div.help_top_margin, span.help_top_margin, a.help_top_margin, button.help_top_margin {
+	padding-top: 3px !important; 
+}
+
+div.help_big_top_margin, span.help_big_top_margin, a.help_big_top_margin, button.help_big_top_margin {
+	padding-top: 10px !important; 
+}
+
+div.help_bottom_margin, span.help_bottom_margin, a.help_bottom_margin, button.help_bottom_margin {
+	padding-bottom: 3px !important; 
+}
+
+div.help_big_bottom_margin, span.help_big_bottom_margin, a.help_big_bottom_margin, button.help_big_bottom_margin {
+	padding-bottom: 12px !important; 
+}
+
+div.help_left_margin, span.help_left_margin, a.help_left_margin, button.help_left_margin {
+	padding-left: 3px !important;
+}
+
+div.help_big_left_margin, span.help_big_left_margin, a.help_big_left_margin, button.help_big_left_margin {
+	padding-left: 3px !important;
+}
+
+div.help_right_margin, span.help_right_margin, a.help_right_margin, button.help_right_margin {
+	padding-right: 3px !important;
+}
+
+div.help_big_right_margin, span.help_big_right_margin, a.help_big_right_margin, button.help_big_right_margin {
+	padding-right: 6px !important;
+}
+
+div.help_round_icon {
+	height: 12px !important; 
+	width: 12px !important; 
+	background: #000 !important; 
+	-moz-border-radius: 6px !important; 
+	border-radius: 6px !important; 
+	font-size: 10px !important;
+	text-align: center !important;
+}
+
+/**
+dom element alignment 
+**/
+div.help_left, p.help_left {
+	float: left !important;
+}
+
+div.help_right, p.help_right {
+	float: right !important;
+}
+
+div.help_clear, p.help_clear {
+	clear: both !important;
+}
+
+/** 
+Tooltip
+http://csstooltip.com/
+**/
+div.help_tooltip_border {
+	border: 1px solid #CCCCCC !important;
+}
+
+div.help_tooltip {
+	  background: none repeat scroll 0 0 #EEEEEE !important;
+      border-radius: 6px 6px 6px 6px !important;
+      /*box-shadow: 0 3px 7px #EEEEEE !important;*/
+      overflow: hidden !important;
+      padding: 0px !important;
+      text-align: center !important;
+      z-index: 10 !important;
+      font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", Helvetica, Arial, Lucida, sans-serif !important;
+      font-weight: normal !important;
+  
+}
+
+div.help_tooltip .close {
+      position: absolute !important;
+      font-size: 20px !important;
+      top: 2px !important;
+      right: 2px !important;
+      font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", Helvetica, Arial, Lucida, sans-serif !important;
+      color: #2DA0D7 !important;
+}     
+
+div.help_tooltip .close:hover {
+	color: #FFF !important;
+	text-decoration: none !important;
+}
+
+div.help_tooltip a {
+	color: #0088CC !important;
+}
+
+div.help_tooltip a:hover {
+	color: #2DA0D7 !important;
+}
+
+div.help_tooltip_north:after, div.help_tooltip_south:after, div.help_tooltip_east:after, div.help_tooltip_west:after {
+	  content: "" !important;
+      position: absolute !important;
+      width: 0 !important;
+      height: 0 !important;
+      border-width: 8px !important;
+      border-style: solid !important;
+      left: 10px !important;
+      border-color: transparent transparent #EEEEEE transparent !important;
+      top: -16px !important;
+}
+
+div.help_tooltip_north:after {
+      border-color: #F5F5F5 transparent transparent transparent !important;
+      top: 100% !important;
+      left: 10px !important;
+}
+
+div.help_tooltip_south:after {
+      border-color: transparent transparent #0088CC transparent !important;
+      top: -16px !important;
+      left: 10px !important;
+}
+
+div.help_tooltip_west:after {
+      border-color: transparent #0088CC transparent transparent !important;
+      top: 10px !important;
+      left: -16px !important;
+}
+
+div.help_tooltip_east:after {
+      border-color: transparent transparent transparent #0088CC !important;
+      top: 10px !important;
+      left: 100% !important;
+}
+
+div.current_help {
+	padding-left: 6px !important; 
+	color: #000 !important;
+}
+
+/*
+ * Round number in helppoint edit.
+ */
+.help_number {
+	height: 20px !important;
+	width: 20px !important;
+	-moz-border-radius: 10px !important;
+	border-radius: 10px !important;
+}
+
+.help_sort_placeholder { 
+	height: 1.5em !important; 
+	line-height: 1.2em !important; 
+	background: #FFF !important; 
+	-moz-border-radius: 3px !important;
+	border-radius: 3px !important;
+	margin: 1px !important;
+	background-color: #F9980F !important;
+	color: white !important;
+}
+
+div.help_confirm {
+	text-align: center !important;
+}
+
+span.help_confirm {
+	font-size: 25px !important;
+	font-weight: bold !important;
+}
+
+div.help_form_select {
+	height: 100% !important;
+}
+
+div.help_current_links {
+	max-height: 450px !important;
+	overflow: auto !important;
+}
+
+div.help_current_links {
+	width: 397px !important;
+}
+
+a.help_alert {
+	padding-right: 3px !important;
+	float: right !important;
+}
+
+a.help_link {
+	cursor:pointer !important;
+}
+
+div.help_login_fail {
+	color: #ff0000 !important;
+}
+
+div.help_login_nopermissions {
+	color: #ff0000 !important;
+}
+
+div.help_page_list {
+	min-width: 182px !important;
+	max-height: 300px !important;
+	overflow: auto !important;
+}
+
+a.next_alert {
+	cursor: pointer !important;
+}
+
+div.powered_by {
+	text-align: center !important;
+}
+
+/*!
+ * jQuery UI Resizable @VERSION
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Resizable#theming
+ */
+.ui-resizable { position: relative !important;}
+.ui-resizable-handle { position: absolute !important;font-size: 0.1px !important; display: block !important; }
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none !important; }
+.ui-resizable-n { cursor: n-resize !important; height: 7px !important; width: 100% !important; top: -5px !important; left: 0 !important; }
+.ui-resizable-s { cursor: s-resize !important; height: 7px !important; width: 100% !important; bottom: -5px !important; left: 0 !important; }
+.ui-resizable-e { cursor: e-resize !important; width: 7px !important; right: -5px !important; top: 0 !important; height: 100% !important; }
+.ui-resizable-w { cursor: w-resize !important; width: 7px !important; left: -5px !important; top: 0 !important; height: 100% !important; }
+.ui-resizable-se { cursor: se-resize !important; width: 12px !important; height: 12px !important; right: 1px !important; bottom: 1px !important; }
+.ui-resizable-sw { cursor: sw-resize !important; width: 9px !important; height: 9px !important; left: -5px !important; bottom: -5px !important; }
+.ui-resizable-nw { cursor: nw-resize !important; width: 9px !important; height: 9px !important; left: -5px !important; top: -5px !important; }
+.ui-resizable-ne { cursor: ne-resize !important; width: 9px !important; height: 9px !important; right: -5px !important; top: -5px !important;}

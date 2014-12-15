@@ -1,0 +1,20 @@
+include _b_confirm
+div.help_main(class='help_tooltip tooltip_border help_area_help help_area help_content')
+    div.help_description
+        div.help_inner_description
+        div.help_form
+            form(class='top_margin area', method='POST', action='#')
+                div.help_big_bottom_margin
+                    input.input_medium(id='name', type='text', required, name='name', value='{{name}}', placeholder="help title")
+                div.help_big_bottom_margin
+                        textarea.description(id='description', required, name='detail', placeholder="help description")
+                            {{description}}
+                div.help_form_select.help_big_bottom_margin
+                div.help_big_bottom_margin
+                    input.input_medium(id='third_party_value', name='third_party_value', value='{{third_party_value}}', placeholder="Text", style='display:none !important')
+                div.help_right.help_top_margin
+                    button.save(class='btn btn-primary', value='Save') Save
+                    span &nbsp;
+                    a.delete(class='btn btn-small btn-danger', title='Delete')
+                        i.helppier-icon-trash
+                div.clear

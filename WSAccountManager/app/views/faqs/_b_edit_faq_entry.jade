@@ -1,0 +1,13 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=4)
+            form(class='form-inline', method='POST', action='#')
+                    div.control-group
+                        input.name(id='name', name='name', class="required", type="text", placeholder='Title', value='{{name}}')
+                    div.control-group
+                        textarea.description(id='description', name='description', class="required", placeholder='Description') {{description}}
+                    div(class='top_margin')
+                        button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                        a.delete(class='btn btn-danger tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", title='Delete', href='#') 
+                            i(class="icon-trash")

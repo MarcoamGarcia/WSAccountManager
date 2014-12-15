@@ -1,0 +1,36 @@
+include _b_confirm_page_helps
+include _b_alert_page_helps
+div
+    div.help_form
+        form(class='top_margin area', method='POST', action='#')
+            div.help_big_bottom_margin
+                input.name(class='input_medium', id='name', type='text', name='name', required, value='{{name}}', placeholder="page title")
+            div.help_big_bottom_margin
+                textarea.description(id='description', class="input_medium", name='detail', placeholder="page description")
+                    {{description}}
+            hr
+            div.help_big_bottom_margin 
+                //-h5 Type
+            div
+                input(id='url_regex_selection', type='radio', name='url_regex_selection', value='')
+                span.help_left_margin
+                input.url_regex(id='url_regex', type='text', style='width: 190px !important', class="help_left_margin", name='url_regex', required, value='{{url_regex}}', placeholder="page url")
+            div.help_big_bottom_margin
+                input(id='key_selection', type='radio', name='key_selection', value='')
+                span.help_left_margin
+                input.key(id='key', type='text', style='width: 190px !important', name='key', required, value='{{key}}', placeholder="page key")
+            hr
+            div
+                div
+                    a.save(class='btn btn-small btn-primary', title='Save')
+                        i
+                        span Save
+                    span &nbsp;
+                    a.show(class='btn btn-small btn-inverse help_left_margin', title='Cancel Changes')
+                        i
+                        span Cancel
+                    div.help_right
+                        a.delete(class='btn btn-small btn-danger', title='Delete')
+                            i.helppier-icon-trash
+                div.clear
+                        

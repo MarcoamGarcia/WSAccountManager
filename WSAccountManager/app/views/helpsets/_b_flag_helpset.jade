@@ -1,0 +1,20 @@
+.flag_dialog(class='modal hide fade')
+    .modal-header
+         button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
+         h3 Flag 
+             span.name
+    .modal-body
+        form(action='#')
+            div.control-group
+                select.type(id='type', name='type', class="required")
+                    option(value='') -- Select flag type --
+                    option(value='0') Contains offensive language
+                    option(value='1') Outdated
+                    option(value='2') Wrong information 
+                span.help-inline
+            div.control-group
+                textarea(class="reason", id="reason", name="reason", required, placeholder='Reason to report this')
+                span.help-inline
+    .modal-footer
+        a.close_button(href="#", class="btn") Close
+        a.flag_button(href="#", class="btn btn-primary") Flag

@@ -1,0 +1,56 @@
+extends ../layout
+block content
+    div(class="row")
+        div(class="span12")
+            ul(class="breadcrumb")
+                li
+                    -if(session.active_company_id != null)
+                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                    -else
+                        a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
+                    span(class="divider") &nbsp;/&nbsp;
+                li.active
+                    span #{title} 
+    div(class="row")         
+          div#clients_wrapper(class="span12")
+              -if(company != "")
+                  div
+                    a#new_client(href="#", class='btn')
+                        i(class="icon-plus")
+                        span Client
+              br
+              table#clients_list(class='table table-striped table-bordered')
+                  thead
+                      tr
+                          th Company
+                          th First Name
+                          th Last Name
+                          th First Contact
+                          th Second Contact
+                          th(style='width: 100px;') &nbsp;
+                  tbody
+                      - if (clients.length == 0)
+                          tr.empty_table
+                              td(colspan='5') (no clients to display)
+       
+    div#edit-client-template(style='display:none')
+        include _b_edit_client
+        
+    div#show-client-template(style='display:none')
+        include _b_client
+    
+    -if(typeof company != "undefined" && company != "")
+        //- TODO: Fetch company id from the URL.
+        script(type='text/javascript').
+            var company_id = "#{company.id}";
+    -else
+        script(type='text/javascript').
+            var company_id = "";
+    
+    != js('app/clients')
+    
+    //- TODO: Fetch company id from the URL.
+    script(type='text/javascript').
+        var clients = !{JSON.stringify(clients)};
+        var vent = _.extend({}, Backbone.Events);
+        new ClientListView({vent: vent, json: clients});

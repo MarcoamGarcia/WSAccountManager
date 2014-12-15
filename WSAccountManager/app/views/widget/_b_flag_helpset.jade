@@ -1,0 +1,25 @@
+div(class='tooltip tooltip_border help_area help_content')
+    div.help_description
+        div.help_inner_description
+            form(class='top_margin area', method='POST', action='#')
+                input(type='hidden', name="_csrf", value='#{csrf_token}')
+                div.help_big_bottom_margin
+                    input(type='text', class="email", id="email", name="email", required, placeholder='Your email', style='display:none !important')
+                    span.help-inline
+                 div.help_big_bottom_margin
+                     select.type(id='type', name='type', class="required")
+                         option(value='') -- Select flag type --
+                         option(value='0') Contains offensive language
+                         option(value='1') Outdated
+                         option(value='2') Wrong information 
+                     span.help-inline
+                 div.help_big_bottom_margin
+                     textarea(class="reason", id="reason", name="reason", required, placeholder='Reason to report this')
+                     span.help-inline
+                div.help_big_bottom_margin
+                .help_top_margin
+                    div(style='float: right !important')
+                        div
+                            a.close_button(href="#", class="btn") Close
+                            a.flag_button(href="#", class="btn btn-warning help_left_margin") Flag
+                    div(style='clear: both !important')

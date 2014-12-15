@@ -1,0 +1,14 @@
+div#entries_wrapper
+  div
+    a#new_entry(href="#", class='btn')
+        i(class="icon-plus")
+        span Entry 
+    table#entries_list(class='top_margin table table-striped table-bordered')
+          thead
+              tr
+                  th Name
+                  th Description
+          tbody
+              - if (faq.entries == null || faq.entries.length == 0)
+                  tr.empty_table
+                      td(colspan='2') (there aren't any entries)

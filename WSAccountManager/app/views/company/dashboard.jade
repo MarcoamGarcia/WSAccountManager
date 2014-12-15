@@ -1,0 +1,19 @@
+extends ../layout
+block content
+    .page-header
+        h1 #{company.name} Dashboard
+    .div
+        h3 Overview
+        div.top_margin
+            span(class="badge badge-info") #{number_of_sites}
+            span &nbsp;
+            a(href=url_mount('/company/#{company.id}/websites')) Sites
+        div.top_margin
+            span(class="badge badge-info") #{number_of_helpsets}
+            span &nbsp;
+            a(href=url_mount('/company/#{company.id}/helps')) Helps
+        div.top_margin
+            span(class="badge badge-info") #{number_of_actors}
+            span &nbsp;
+            a(href=url_mount('/company/#{company.id}/users')) Users
+    hr

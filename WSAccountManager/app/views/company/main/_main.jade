@@ -1,0 +1,22 @@
+//- show flag link only if the user is logged in.
+-if(everyauth.loggedIn)
+        div(class='tahoma_gray_10pt left_margin right tiny_top_margin') 
+            != partial('flag/_flag_link', { locals: { text: "Flag profile", href: url_mount('/account/' + actor.id + "/flag")} })
+p(class='name left left_margin') 
+    div.tahoma_black_16pt(class='left_margin') #{actor.short_name}
+    -if(actor.short_name != actor.name)
+        div.tahoma_gray_8pt(class='left_margin') #{actor.name} 
+
+div.clear
+br
+//- check security
+-if((actor.about_me_security == 1 || actor.about_me_security == 2) && !public || actor.about_me_security == 2 && public)
+    div(class='condense tahoma_black_10pt left_margin') 
+        - var splitted_about_me = split(actor.about_me);
+        - splitted_about_me.forEach(function(about_me_line){
+            div.about_me_line= about_me_line
+        - })
+  
+script
+    embebbed(".about_me_line");
+

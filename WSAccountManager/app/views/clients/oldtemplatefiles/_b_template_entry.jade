@@ -1,0 +1,11 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td {{foregroundcolor}}
+        td {{backgroundcolor}}
+        td {{color}}
+        td {{border}}
+        td {{widgetlocation}}
+        td
+            a(class='btn btn-danger delete tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
+                i(class="icon-trash")
