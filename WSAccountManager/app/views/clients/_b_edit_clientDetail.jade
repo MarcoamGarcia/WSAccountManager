@@ -1,0 +1,19 @@
+//- need to add table otherwise jade does not add tr and td.
+table
+    tr
+        td(colspan=5)
+            form(class='form-inline', method='POST', action='#')
+                div
+                    div.control-group
+                        input.company_name(id='company_name', name='company_name', class="required", type="text", placeholder='Company Name', value='{{company_name}}')
+                    div.control-group
+                        input.first_name(id='first_name', name='first_name', class="required", type="text", placeholder='First Name', value='{{first_name}}')
+                    div.control-group
+                        input.last_name(id='last_name', name='last_name', class="required", type="text", placeholder='Last Name', value='{{last_name}}')
+                    div.control-group
+                        input.first_contact(id='first_contact', name='first_contact', class="required", type="text", placeholder='First Contact', value='{{first_contact}}')
+                    div.control-group
+                        input.second_contact(id='second_contact', name='second_contact', type="text", placeholder='Second Contact', value='{{second_contact}}')
+                div
+                    button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
+                    a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

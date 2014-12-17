@@ -1,0 +1,1 @@
+//= require "app/backoffice/b_company_client_detail.js"

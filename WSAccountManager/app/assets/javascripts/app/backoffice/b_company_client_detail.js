@@ -3,42 +3,41 @@ Backbone.Model.prototype.idAttribute = "_id";
 //
 // Models
 //
-var Client = Backbone.Model.extend({
+var ClientDetail = Backbone.Model.extend({
     defaults: {
-      company_name: '',
-      first_contact: '',
-      first_name: '',
+      title: '',
+      description: '',
+      alert: false,
       last_name: '',
       second_contact: ''
     },
     url: function() {
       if (this.isNew()) {
-          return '/company/' + company_id + '/clients/';
+          return '/company/' + company_id + '/clientDetails/';
       }
-      return '/company/' + company_id + '/client/' + this.id;
+      return '/company/' + company_id + '/clientDetail/' + this.id;
     }
 });  
 
 //
-//Clients
+//ClientDetails
 //
-var Clients = Backbone.Collection.extend({
- model: Client,
+var ClientDetails = Backbone.Collection.extend({
+ model: ClientDetail,
  url: ''
 });
 
-//
-//Views
-//
 
-//
-//Client View
-//
-var ClientView = BaseView.extend({
+
+  //-----------------------//
+ //  Client Details Views //
+//-----------------------//
+
+var ClientDetailView = BaseView.extend({
  tagName: 'tr',
  
- show_client: _.template($('#show-client-template').find("tr").html()),
- edit_client: _.template($('#edit-client-template').find("tr").html()),
+ show_clientDetail: _.template($('#show-clientDetail-template').find("tr").html()),
+ edit_clientDetail: _.template($('#edit-clientDetail-template').find("tr").html()),
  
  events: function() {
      return _.extend( {
@@ -55,7 +54,7 @@ var ClientView = BaseView.extend({
    options.vent.bind("show", self.show);
  },
  delete_message: function(e) {
-     return "Are you sure you want to delete this client?";
+     return "Are you sure you want to delete this clientDetail?";
  },
  render_show: function(e) {
      var self = this;
@@ -67,7 +66,7 @@ var ClientView = BaseView.extend({
      var first_contact = self.model.get('first_contact');
      var second_contact = self.model.get('second_contact');
 
-     self_el.html(self.show_client({
+     self_el.html(self.show_clientDetail({
          id: self.model.id,
          company_name: company_name,
          first_name: first_name,
@@ -87,7 +86,7 @@ var ClientView = BaseView.extend({
     var second_contact = self.model.get('second_contact');
 
     var self_el = $(self.el);
-    self_el.html(self.edit_client({
+    self_el.html(self.edit_clientDetail({
         id: self.model.id,
         company_name: company_name,
         first_name: first_name,
@@ -151,25 +150,25 @@ var ClientView = BaseView.extend({
  }
 });
 
-var ClientListView = Backbone.View.extend({   
+var ClientDetailListView = Backbone.View.extend({   
  
- el: $('#clients_wrapper'),
+ el: $('#clientDetails_wrapper'),
  events: {
-     'click a#new_client':  'addItem'
+     'click a#new_clientDetail':  'addItem'
  },
  initialize: function(options) {
      var self = this;
      self.vent = options.vent;
      self.actor_type = options.type;
      _.bindAll(self, 'render', 'addItem', 'appendItem', 'refresh', 'removedItem');
-     self.collection = new Clients();
-     var clients = self.collection;
+     self.collection = new ClientDetails();
+     var clientDetails = self.collection;
      options.vent.bind("show", self.show);
-     clients.bind("refresh", function() {self.render();});
-     clients.bind("reset", function() {self.render();});
-     clients.bind("add", self.appendItem);
-     clients.bind("remove", self.removedItem);
-     clients.reset(options.json);
+     clientDetails.bind("refresh", function() {self.render();});
+     clientDetails.bind("reset", function() {self.render();});
+     clientDetails.bind("add", self.appendItem);
+     clientDetails.bind("remove", self.removedItem);
+     clientDetails.reset(options.json);
  },
  removedItem: function() {
      var self = this;
@@ -177,28 +176,28 @@ var ClientListView = Backbone.View.extend({
  },
  render: function() {
      var self = this;
-     $('#clients', this.el).html("");
-     $('#clients', this.el).append("<div class='client_list top_margin'></div>");
-     $('#clients', this.el).append("<div class='buttons'></div>");
+     $('#clientDetails', this.el).html("");
+     $('#clientDetails', this.el).append("<div class='clientDetail_list top_margin'></div>");
+     $('#clientDetails', this.el).append("<div class='buttons'></div>");
      this.refresh(this.collection, {});
      return this;
  },
  refresh: function(collection, options){
      var self = this;
      this.collection = collection;
-     _(this.collection.models).each(function(client){
-         self.appendItem(client);
+     _(this.collection.models).each(function(clientDetail){
+         self.appendItem(clientDetail);
       }, this); 
      return self;
  },
  addItem: function(){
      this.counter++;
-     var client = new Client();
-     this.collection.add(client);
+     var clientDetail = new ClientDetail();
+     this.collection.add(clientDetail);
  },
  appendItem: function(item){
      var self = this;
-     var itemView = new ClientView({
+     var itemView = new ClientDetailView({
          model: item,
          vent: self.vent
      });

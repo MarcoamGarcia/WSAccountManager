@@ -25,6 +25,7 @@ var main = require('../controllers/main')
   , api = require('../controllers/api') // api for widget
   , faq = require('../controllers/company.faq') // company faqs
   , client = require('../controllers/company.client') // company clients
+  , client_details = require('../controllers/company.client.detail') // client details
   , auth = require('../middlewares/authorization')
   , utils = require('../lib/utils');
 
@@ -345,7 +346,7 @@ module.exports = function (app, passport) {
   // update client
   router.put('/company/:c_id/client/:client_id', client_auth, client.update);
   // show client details
-  router.get('/company/:c_id/client/:client_id/details', company_auth, utils.set_active_area("clients"), client.show_details);
+  router.get('/company/:c_id/client/:client_id/details', company_auth, utils.set_active_area("clients"), client_details.show_details);
 
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
         // set routes.

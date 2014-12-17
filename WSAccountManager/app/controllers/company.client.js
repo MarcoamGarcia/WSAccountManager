@@ -31,33 +31,6 @@ exports.show = function(req, res, next) {
     });
 }
 
-exports.show_details = function(req, res, next) {
-    var logged_user = req.user;
-    var company = req.company;
-    // need to transform string to ObjectId before querying.
-    var company_id = mongoose.Types.ObjectId(company.id);
-
-    Client.find({company_id: company_id}, {}, function(err, clients) {
-        if (err) {next(err);}
-
-        var clients_hash = [];
-        // create page hash with owner information.
-        clients.forEach(function(client) {
-            var client_info = {_id: client.id, company_name: client.company_name , first_name: client.first_name
-            , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact };
-            clients_hash.push(client_info);
-        });
-
-        res.render('clients/clients', {
-            actor: logged_user,
-            company: company,
-            title: company.name + ' clients',
-            clients: clients_hash
-        });
-
-    });
-}
-
 exports.add = function(req, res, next) {
     var logged_user = req.user;
     var actor = req.actor;
