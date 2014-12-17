@@ -7,7 +7,9 @@ table
         td {{first_contact}}
         td {{second_contact}}
         td
-            a.edit(class='btn btn-primary tiny_left_margin', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
+            a.details(class='btn btn-info tiny_left_margin', title='Client details', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href=url_mount('/company/#{session.active_company_id}/client/{{id}}/details')) 
+                i(class="icon-info-sign")
+            a.edit(class='btn btn-primary tiny_left_margin', title='Edit client', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
                 i(class="icon-pencil")
-            a(class='btn btn-danger delete tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
+            a(class='btn btn-danger delete tiny_left_margin', title='Delete client', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
                 i(class="icon-trash")

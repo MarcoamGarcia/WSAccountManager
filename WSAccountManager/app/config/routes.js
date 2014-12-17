@@ -344,6 +344,8 @@ module.exports = function (app, passport) {
   router.delete('/company/:c_id/client/:client_id', client_auth, client.remove);
   // update client
   router.put('/company/:c_id/client/:client_id', client_auth, client.update);
+  // show client details
+  router.get('/company/:c_id/client/:client_id/details', company_auth, utils.set_active_area("clients"), client.show_details);
 
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
         // set routes.

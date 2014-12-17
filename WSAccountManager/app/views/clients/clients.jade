@@ -15,7 +15,7 @@ block content
           div#clients_wrapper(class="span12")
               -if(company != "")
                   div
-                    a#new_client(href="#", class='btn')
+                    a#new_client(href="#", class='btn', title='Create new client')
                         i(class="icon-plus")
                         span Client
               br
@@ -27,7 +27,7 @@ block content
                           th Last Name
                           th First Contact
                           th Second Contact
-                          th(style='width: 100px;') &nbsp;
+                          th(style='width: 150px;') &nbsp;
                   tbody
                       - if (clients.length == 0)
                           tr.empty_table
