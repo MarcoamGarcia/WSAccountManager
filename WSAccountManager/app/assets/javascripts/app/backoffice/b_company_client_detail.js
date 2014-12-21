@@ -8,8 +8,7 @@ var ClientDetail = Backbone.Model.extend({
       title: '',
       description: '',
       alert: false,
-      last_name: '',
-      second_contact: ''
+      end_date: ''
     },
     url: function() {
       if (this.isNew()) {
@@ -79,37 +78,32 @@ var ClientDetailView = BaseView.extend({
      
     var self = this;
      
-    var company_name = self.model.get('company_name');
-    var first_name = self.model.get('first_name');
-    var last_name = self.model.get('last_name');
-    var first_contact = self.model.get('first_contact');
-    var second_contact = self.model.get('second_contact');
+    var title = self.model.get('title');
+    var description = self.model.get('description');
+    var end_date = self.model.get('end_date');
+    var alert = self.model.get('alert');
 
     var self_el = $(self.el);
     self_el.html(self.edit_clientDetail({
         id: self.model.id,
-        company_name: company_name,
-        first_name: first_name,
-        last_name: last_name,
-        first_contact: first_contact,
-        second_contact: second_contact
+        title: title,
+        description: description,
+        end_date: end_date,
+        alert: alert
     }));
 
     // remove value attribute when its empty otherwise in IE8 the type='text' is showed as the value.
-    if(company_name.length == 0) {
-      self_el.find("input#company_name").removeAttr("value");
+    if(title.length == 0) {
+      self_el.find("input#title").removeAttr("value");
     }
-    if(first_name.length == 0) {
-      self_el.find("input#first_name").removeAttr("value");
+    if(description.length == 0) {
+      self_el.find("input#description").removeAttr("value");
     }
-    if(last_name.length == 0) {
-      self_el.find("input#last_name").removeAttr("value");
+    if(end_date.length == 0) {
+      self_el.find("input#end_date").removeAttr("value");
     }
-    if(first_contact.length == 0) {
-      self_el.find("input#first_contact").removeAttr("value");
-    }
-    if(second_contact.length == 0) {
-      self_el.find("input#second_contact").removeAttr("value");
+    if(alert.length == 0) {
+      self_el.find("input#alert").removeAttr("value");
     }
         
     self_el.find(".cancel").click(function(e) {
@@ -131,15 +125,13 @@ var ClientDetailView = BaseView.extend({
  send_data: function() {
      var self = this;
      var self_el = $(self.el);
-     var company_name = self_el.find('#company_name').val();
-     var first_name = self_el.find('#first_name').val();
-     var last_name = self_el.find('#last_name').val();
-     var first_contact = self_el.find('#first_contact').val();
-     var second_contact = self_el.find('#second_contact').val();
+     var title = self_el.find('#title').val();
+     var description = self_el.find('#description').val();
+     var end_date = self_el.find('#end_date').val();
+     var alert = self_el.find('#alert').val();
 
      self.model.save(
-         { company_name: company_name, first_name: first_name, last_name: last_name, first_contact: first_contact
-         , second_contact: second_contact },
+         { title: title, description: description, end_date: end_date, alert: alert },
          {
             wait: true,
             success: self.saved_success,

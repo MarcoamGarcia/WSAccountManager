@@ -5,15 +5,13 @@ table
             form(class='form-inline', method='POST', action='#')
                 div
                     div.control-group
-                        input.company_name(id='company_name', name='company_name', class="required", type="text", placeholder='Company Name', value='{{company_name}}')
+                        input.title(id='title', name='title', class="required", type="text", placeholder='Title', value='{{title}}')
                     div.control-group
-                        input.first_name(id='first_name', name='first_name', class="required", type="text", placeholder='First Name', value='{{first_name}}')
+                        input.description(id='description', name='description', class="required", type="text", placeholder='Description', value='{{description}}')
                     div.control-group
-                        input.last_name(id='last_name', name='last_name', class="required", type="text", placeholder='Last Name', value='{{last_name}}')
+                        input.end_date(id='end_date', name='end_date', class="required", type="text", placeholder='End ate', value='{{end_date}}')
                     div.control-group
-                        input.first_contact(id='first_contact', name='first_contact', class="required", type="text", placeholder='First Contact', value='{{first_contact}}')
-                    div.control-group
-                        input.second_contact(id='second_contact', name='second_contact', type="text", placeholder='Second Contact', value='{{second_contact}}')
+                        input.alert(id='alert', name='alert', class="required", type="text", placeholder='Alert', value='{{alert}}')
                 div
                     button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
                     a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

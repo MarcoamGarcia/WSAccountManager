@@ -22,11 +22,11 @@ block content
               table#clientDetails_list(class='table table-striped table-bordered')
                   thead
                       tr
-                          th Company
-                          th First Name
-                          th Last Name
-                          th First Contact
-                          th Second Contact
+                          th Title
+                          th Description
+                          th Created
+                          th End Date
+                          th Alert
                           th(style='width: 150px;') &nbsp;
                   tbody
                       - if (clientDetails.length == 0)
@@ -51,6 +51,6 @@ block content
     
     //- TODO: Fetch company id from the URL.
     script(type='text/javascript').
-        var client_details = !{JSON.stringify(client_details)};
+        var clientDetails = !{JSON.stringify(clientDetails)};
         var vent = _.extend({}, Backbone.Events);
-        new ClientDetailListView({vent: vent, json: client_details});
+        new ClientDetailListView({vent: vent, json: clientDetails});
