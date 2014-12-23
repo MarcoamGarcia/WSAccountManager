@@ -12,9 +12,9 @@ var ClientDetail = Backbone.Model.extend({
     },
     url: function() {
       if (this.isNew()) {
-          return '/company/' + company_id + '/clientDetails/';
+          return '/company/' + company_id + '/client/' + client_id + '/details/';
       }
-      return '/company/' + company_id + '/clientDetail/' + this.id;
+      return '/company/' + company_id + '/client/' + client_id + '/details/' + this.id;
     }
 });  
 
@@ -59,19 +59,19 @@ var ClientDetailView = BaseView.extend({
      var self = this;
      var self_el = $(self.el);
 
-     var company_name = self.model.get("company_name");
-     var first_name = self.model.get('first_name');
-     var last_name = self.model.get('last_name');
-     var first_contact = self.model.get('first_contact');
-     var second_contact = self.model.get('second_contact');
+     var title = self.model.get("title");
+     var description = self.model.get('description');
+     var end_date = self.model.get('end_date');
+     var alert = self.model.get('alert');
+     var created = self.model.get('created');
 
      self_el.html(self.show_clientDetail({
          id: self.model.id,
-         company_name: company_name,
-         first_name: first_name,
-         last_name: last_name,
-         first_contact: first_contact,
-         second_contact: second_contact
+         title: title,
+         description: description,
+         end_date: end_date,
+         alert: alert,
+         created: created
      }));
  },
  render_edit: function() {

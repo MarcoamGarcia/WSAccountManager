@@ -11,7 +11,7 @@ var ClientDetailSchema = new Schema({
 	title: String
   , description: String
   , created: { type: Date, default: Date.now }
-  , end_date: { type: Date, default: 0 }
+  , end_date: String
   , alert: Boolean
   , company_id : ObjectId
   , client_id : ObjectId

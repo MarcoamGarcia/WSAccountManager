@@ -334,8 +334,8 @@ module.exports = function (app, passport) {
   router.get('/site/:site_id/faqs/:page?', edit_site_auth, utils.set_active_area("faqs"), faq.show_site_faqs);
   router.param('faq_id', faq.load_with_site_and_company);
 
-  // ******************** //
-  //    Company Clients   //
+    // ******************** //
+   //    Company Clients   //
   // ******************** //
   // show clients
   router.get('/company/:c_id/clients/:page?', company_auth, utils.set_active_area("clients"), client.show);
@@ -345,8 +345,18 @@ module.exports = function (app, passport) {
   router.delete('/company/:c_id/client/:client_id', client_auth, client.remove);
   // update client
   router.put('/company/:c_id/client/:client_id', client_auth, client.update);
+
+    // ******************** //
+   //    Client Details    //
+  // ******************** //
   // show client details
   router.get('/company/:c_id/client/:client_id/details', company_auth, utils.set_active_area("clients"), client_details.show_details);
+  // add new client detail
+  router.post('/company/:c_id/client/:client_id/details', edit_site_auth, client_details.add);
+  // remove client detail
+  router.delete('/company/:c_id/client/:client_id/details/:details_id', client_auth, client_details.remove);
+  // update client detail
+  router.put('/company/:c_id/client/:client_id/details/:details_id', client_auth, client_details.update);
 
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
         // set routes.

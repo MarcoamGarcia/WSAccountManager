@@ -27,7 +27,7 @@ block content
                           th Created
                           th End Date
                           th Alert
-                          th(style='width: 150px;') &nbsp;
+                          th(style='width: 100px;') &nbsp;
                   tbody
                       - if (clientDetails.length == 0)
                           tr.empty_table
@@ -46,6 +46,14 @@ block content
     -else
         script(type='text/javascript').
             var company_id = "";
+            
+    -if(typeof client != "undefined" && client != "")
+        //- TODO: Fetch client id from the URL.
+        script(type='text/javascript').
+            var client_id = "#{client}";
+    -else
+        script(type='text/javascript').
+            var client_id = "";
     
     != js('app/client_details')
     
