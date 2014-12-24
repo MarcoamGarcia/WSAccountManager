@@ -80,13 +80,6 @@ app.post('/', function(req, res) {
     var email_service = req.body.email_service;
     var sender_email = req.body.sender_email;
     var analytics = false;
-
-    fs.readFile('./flavour.min.js', function (err, data) {
-      if (err) throw err;
-      if (data == "saas") {
-        analytics = true;
-      };
-    }); 
     
     // company info.
     var company_name = req.body.company_name;

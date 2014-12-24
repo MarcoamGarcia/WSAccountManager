@@ -7,21 +7,21 @@ module.exports = {
         db: {
             host: 'localhost',
             port: 27017,
-            db: 'help_app',
-            username: 'help_app_user',
-            password: 'help_app_hwe3py'
+            db: 'wsam_app',
+            username: 'wsam_app_user',
+            password: 'wsam_app_dvkdn'
         },
         secret: 'qwedcvfr'
     },
     analytics: true,
     transport: {
-      service: 'SendGrid',
+      service: '',
       auth: {
-        user: 'admin@helppier.com',
-        pass: 'Help34pieradm'
+        user: '',
+        pass: ''
       }
     },
-    sender_email: 'Helppier <admin@helppier.com>'
+    sender_email: ''
   },
   test: {
   },
