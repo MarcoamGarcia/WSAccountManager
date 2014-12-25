@@ -186,6 +186,13 @@ var ClientDetailListView = Backbone.View.extend({
      this.counter++;
      var clientDetail = new ClientDetail();
      this.collection.add(clientDetail);
+     // add the datepicker
+     $( "#end_date" ).datepicker({
+        beforeShow: function(input, inst)
+        {
+            inst.dpDiv.css({marginTop: -input.offsetHeight + 'px', marginLeft: input.offsetWidth + 'px'});
+        }
+    });
  },
  appendItem: function(item){
      var self = this;
