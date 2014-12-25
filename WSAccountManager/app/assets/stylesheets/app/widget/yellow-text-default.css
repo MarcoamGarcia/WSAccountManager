@@ -10,7 +10,7 @@
 *was changed to be used only by Helppier!!!
 *
 */
-div.helppier-js-editor-container {
+div.wsam-js-editor-container {
   margin-top: 0.5em !important;
   border: 1px solid #c9c8c8 !important;
   border-radius: 3px !important;
@@ -25,7 +25,7 @@ div.helppier-js-editor-container {
 *	button bar, that holds all the buttons.
 *
 */
-div.helppier-js-editor-buttons {
+div.wsam-js-editor-buttons {
   border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #d2d1d1)) !important;
   background-image: -webkit-linear-gradient(#e8e8e8, #d2d1d1) !important;
@@ -34,7 +34,7 @@ div.helppier-js-editor-buttons {
   background-image: linear-gradient(#e8e8e8, #d2d1d1) !important;
 }
 
-div.helppier-js-editor-buttons > a {
+div.wsam-js-editor-buttons > a {
   display: block !important;
   float: left !important;
   width: 15px !important;
@@ -47,57 +47,57 @@ div.helppier-js-editor-buttons > a {
   cursor: pointer !important;
 }
 
-.helppier-bold {
+.wsam-bold {
   font-weight: bold;
 }
 
-.helppier-underline {
+.wsam-underline {
   text-decoration: underline;
 }
 
-.helppier-italic {
+.wsam-italic {
   font-style: italic;
 }
 
-.helppier-strikethrough {
+.wsam-strikethrough {
   text-decoration: line-through;
 }
 
-a.helppier-JustifyLeft,
-a.helppier-JustifyCenter,
-a.helppier-JustifyRight,
-a.helppier-InsertUnorderedList,
-a.helppier-InsertOrderedList,
-a.helppier-image,
-a.helppier-link {
+a.wsam-JustifyLeft,
+a.wsam-JustifyCenter,
+a.wsam-JustifyRight,
+a.wsam-InsertUnorderedList,
+a.wsam-InsertOrderedList,
+a.wsam-image,
+a.wsam-link {
   margin-top: 9px !important;
   text-indent: -99999em !important;
 }
 
-a.helppier-JustifyLeft {
+a.wsam-JustifyLeft {
   background-position: 0 -276px !important;
 }
 
-a.helppier-JustifyCenter {
+a.wsam-JustifyCenter {
   background-position: 0 -184px !important;
 }
 
-a.helppier-JustifyRight {
+a.wsam-JustifyRight {
   background-position: 0 -230px !important;
 }
 
-a.helppier-InsertUnorderedList {
+a.wsam-InsertUnorderedList {
   background-position: 0 -138px !important;
 }
 
-a.helppier-InsertOrderedList {
+a.wsam-InsertOrderedList {
   background-position: 0 -46px !important;
 }
 
-a.helppier-image {
+a.wsam-image {
   background-position: 0 -92px !important;
 }
 
-a.helppier-link {
+a.wsam-link {
   background-position: 0 0 !important;
 }

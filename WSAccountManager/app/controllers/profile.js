@@ -782,7 +782,7 @@ exports.forgot_password = function(req, res, next) {
          } else if(actor == null) {
              failed = true;
              logger.debug("cannot find user with email " + email);
-             errors["email"] = "Sorry, cannot find user with this email. Please contact the site administrator: help@helppier.com";
+             errors["email"] = "Sorry, cannot find user with this email. Please contact the site administrator: help@wsam.com";
              return null;
          } else {
              

@@ -20,7 +20,7 @@ var env = process.env.NODE_ENV || 'development'
   , express = require('express')
   , passport = require('passport');
    
-var default_mount_url = '/helppier';
+var default_mount_url = '/wsam';
 
        
 var assets_dir = __dirname + '../public/assets';  

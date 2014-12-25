@@ -66,7 +66,7 @@ module.exports = function (app, passport) {
   app.enable('trust proxy');
 
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
-     app.use(forward(/\/blog\/(.*)/i, 'http://helppier.info/'));
+     app.use(forward(/\/blog\/(.*)/i, 'http://wsam.info/'));
  }
 
   // should be placed before express.static

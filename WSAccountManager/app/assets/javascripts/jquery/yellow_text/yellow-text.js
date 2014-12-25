@@ -38,8 +38,8 @@
         defaults = {
           width            : "360px",
           height           : "90px",
-          containerClass   : "helppier-js-editor-container",
-          buttonsClass     : "helppier-js-editor-buttons",
+          containerClass   : "wsam-js-editor-container",
+          buttonsClass     : "wsam-js-editor-buttons",
           iFrameClass      : "js-editor-iframe",
           cleanOnSubmit    : true,
           defaultFont      : "Helvetica Neue, Helvetica, arial, sans-serief",
@@ -176,37 +176,37 @@
           // Get the right value
           switch( this.options.defaultActions[i] ) {
             case "bold" :
-              button = { content : "b", command : "helppier-bold" };
+              button = { content : "b", command : "wsam-bold" };
             break;
             case "underline" :
-              button = { content : "u", command : "helppier-underline" };
+              button = { content : "u", command : "wsam-underline" };
             break;
             case "italic" :
-              button = { content : "i", command : "helppier-italic" };
+              button = { content : "i", command : "wsam-italic" };
             break;
             case "strikethrough" :
-              button = { content : "s", command : "helppier-strikethrough" };
+              button = { content : "s", command : "wsam-strikethrough" };
             break;
             case "align-left" :
-              button = { content : "left", command : "helppier-JustifyLeft" };
+              button = { content : "left", command : "wsam-JustifyLeft" };
             break;
             case "align-center" :
-              button = { content : "center", command : "helppier-JustifyCenter" };
+              button = { content : "center", command : "wsam-JustifyCenter" };
             break;
             case "align-right" :
-              button = { content : "right", command : "helppier-JustifyRight" };
+              button = { content : "right", command : "wsam-JustifyRight" };
             break;
             case "unordered-list" :
-              button = { content : "ul", command : "helppier-InsertUnorderedList" };
+              button = { content : "ul", command : "wsam-InsertUnorderedList" };
             break;
             case "ordered-list" :
-              button = { content : "ol", command : "helppier-InsertOrderedList" };
+              button = { content : "ol", command : "wsam-InsertOrderedList" };
             break;
             case "image" :
-              button = { content : "img", command : "helppier-image" };
+              button = { content : "img", command : "wsam-image" };
             break;
             case "link" :
-              button = { content : "link", command : "helppier-link" };
+              button = { content : "link", command : "wsam-link" };
             break;
             default :
               button = { content : "", command : "" };
@@ -299,13 +299,13 @@
           // Handle the action
           switch( key ) {
             case 66:
-              this.runCMD("helppier-bold");
+              this.runCMD("wsam-bold");
             break;
             case 73:
-              this.runCMD("helppier-italic");
+              this.runCMD("wsam-italic");
             break;
             case 85:
-              this.runCMD("helppier-underline");
+              this.runCMD("wsam-underline");
             break;
           }
 
@@ -319,7 +319,7 @@
       */
       runCMD: function( cmd ) {
 
-        cmd = cmd.replace("helppier-", "");
+        cmd = cmd.replace("wsam-", "");
 
         // Check command for special actions and run it
         if( cmd === "image" ) {

@@ -1,4 +1,4 @@
-/** help form, hr & helppier-icons - bootstrap  **/
+/** help form, hr & wsam-icons - bootstrap  **/
 
 div.help_area .form-search label,
 div.help_area .form-inline label,
@@ -597,7 +597,7 @@ div.help_area .btn-large {
     line-height: normal !important;
     padding: 9px 14px !important;
 }
-div.help_area .btn-large [class^="helppier-icon-"] {
+div.help_area .btn-large [class^="wsam-icon-"] {
     margin-top: 1px !important;
 }
 div.help_area .btn-small {
@@ -605,7 +605,7 @@ div.help_area .btn-small {
     line-height: 16px !important;
     padding: 5px 9px !important;
 }
-div.help_area .btn-small [class^="helppier-icon-"] {
+div.help_area .btn-small [class^="wsam-icon-"] {
     margin-top: -1px !important;
 }
 div.help_area .btn-mini {
@@ -714,7 +714,7 @@ div.help_area hr {
   margin: 18px 0 !important;
 }
 
-div.help_area [class^="helppier-icon-"], div.help_area [class*=" helppier-icon-"] {
+div.help_area [class^="wsam-icon-"], div.help_area [class*=" wsam-icon-"] {
     background-position: 14px 14px !important;
     background-repeat: no-repeat !important;
     display: inline-block !important;
@@ -723,7 +723,7 @@ div.help_area [class^="helppier-icon-"], div.help_area [class*=" helppier-icon-"
     vertical-align: text-top !import  ant;
     width: 14px !important;
 }
-div.help_area [class^="helppier-icon-"]:last-child, div.help_area [class*=" helppier-icon-"]:last-child {
+div.help_area [class^="wsam-icon-"]:last-child, div.help_area [class*=" wsam-icon-"]:last-child {
 }
 
 div.help_area_help input, div.help_area_help textarea, div.help_area_help select, div.help_are_helpa .uneditable-input {
@@ -743,423 +743,423 @@ div.help_area_help input, div.help_area_help textarea, div.help_area_help select
     text-align: left !important;
 }
 
-div.help_area .helppier-icon-glass {
+div.help_area .wsam-icon-glass {
     background-position: 0 0 !important;
 }
-div.help_area .helppier-icon-music {
+div.help_area .wsam-icon-music {
     background-position: -24px 0 !important;
 }
-div.help_area .helppier-icon-search {
+div.help_area .wsam-icon-search {
     background-position: -48px 0 !important;
 }
-div.help_area .helppier-icon-envelope {
+div.help_area .wsam-icon-envelope {
     background-position: -72px 0 !important;
 }
-div.help_area .helppier-icon-heart {
+div.help_area .wsam-icon-heart {
     background-position: -96px 0 !important;
 }
-div.help_area .helppier-icon-star {
+div.help_area .wsam-icon-star {
     background-position: -120px 0 !important;
 }
-div.help_area .helppier-icon-star-empty {
+div.help_area .wsam-icon-star-empty {
     background-position: -144px 0 !important;
 }
-div.help_area .helppier-icon-user {
+div.help_area .wsam-icon-user {
     background-position: -168px 0 !important;
 }
-div.help_area .helppier-icon-film {
+div.help_area .wsam-icon-film {
     background-position: -192px 0 !important;
 }
-div.help_area .helppier-icon-th-large {
+div.help_area .wsam-icon-th-large {
     background-position: -216px 0 !important;
 }
-div.help_area .helppier-icon-th {
+div.help_area .wsam-icon-th {
     background-position: -240px 0 !important;
 }
-div.help_area .helppier-icon-th-list {
+div.help_area .wsam-icon-th-list {
     background-position: -264px 0 !important;
 }
-div.help_area .helppier-icon-ok {
+div.help_area .wsam-icon-ok {
     background-position: -288px 0 !important;
 }
-div.help_area .helppier-icon-remove {
+div.help_area .wsam-icon-remove {
     background-position: -312px 0 !important;
 }
-div.help_area .helppier-icon-zoom-in {
+div.help_area .wsam-icon-zoom-in {
     background-position: -336px 0 !important;
 }
-div.help_area .helppier-icon-zoom-out {
+div.help_area .wsam-icon-zoom-out {
     background-position: -360px 0 !important;
 }
-div.help_area .helppier-icon-off {
+div.help_area .wsam-icon-off {
     background-position: -384px 0 !important;
 }
-div.help_area .helppier-icon-signal {
+div.help_area .wsam-icon-signal {
     background-position: -408px 0 !important;
 }
-div.help_area .helppier-icon-cog {
+div.help_area .wsam-icon-cog {
     background-position: -432px 0 !important;
 }
-div.help_area .helppier-icon-trash {
+div.help_area .wsam-icon-trash {
     background-position: -456px 0 !important;
 }
-div.help_area .helppier-icon-home {
+div.help_area .wsam-icon-home {
     background-position: 0 -24px !important;
 }
-div.help_area .helppier-icon-file {
+div.help_area .wsam-icon-file {
     background-position: -24px -24px !important;
 }
-div.help_area .helppier-icon-time {
+div.help_area .wsam-icon-time {
     background-position: -48px -24px !important;
 }
-div.help_area .helppier-icon-road {
+div.help_area .wsam-icon-road {
     background-position: -72px -24px !important;
 }
-div.help_area .helppier-icon-download-alt {
+div.help_area .wsam-icon-download-alt {
     background-position: -96px -24px !important;
 }
-div.help_area .helppier-icon-download {
+div.help_area .wsam-icon-download {
     background-position: -120px -24px !important;
 }
-div.help_area .helppier-icon-upload {
+div.help_area .wsam-icon-upload {
     background-position: -144px -24px !important;
 }
-div.help_area .helppier-icon-inbox {
+div.help_area .wsam-icon-inbox {
     background-position: -168px -24px !important;
 }
-div.help_area .helppier-icon-play-circle {
+div.help_area .wsam-icon-play-circle {
     background-position: -192px -24px !important;
 }
-div.help_area .helppier-icon-repeat {
+div.help_area .wsam-icon-repeat {
     background-position: -216px -24px !important;
 }
-div.help_area .helppier-icon-refresh {
+div.help_area .wsam-icon-refresh {
     background-position: -240px -24px !important;
 }
-div.help_area .helppier-icon-list-alt {
+div.help_area .wsam-icon-list-alt {
     background-position: -264px -24px !important;
 }
-div.help_area .helppier-icon-lock {
+div.help_area .wsam-icon-lock {
     background-position: -287px -24px !important;
 }
-div.help_area .helppier-icon-flag {
+div.help_area .wsam-icon-flag {
     background-position: -312px -24px !important;
 }
-div.help_area .helppier-icon-headphones {
+div.help_area .wsam-icon-headphones {
     background-position: -336px -24px !important;
 }
-div.help_area .helppier-icon-volume-off {
+div.help_area .wsam-icon-volume-off {
     background-position: -360px -24px !important;
 }
-div.help_area .helppier-icon-volume-down {
+div.help_area .wsam-icon-volume-down {
     background-position: -384px -24px !important;
 }
-div.help_area .helppier-icon-volume-up {
+div.help_area .wsam-icon-volume-up {
     background-position: -408px -24px !important;
 }
-div.help_area .helppier-icon-qrcode {
+div.help_area .wsam-icon-qrcode {
     background-position: -432px -24px !important;
 }
-div.help_area .helppier-icon-barcode {
+div.help_area .wsam-icon-barcode {
     background-position: -456px -24px !important;
 }
-div.help_area .helppier-icon-tag {
+div.help_area .wsam-icon-tag {
     background-position: 0 -48px !important;
 }
-div.help_area .helppier-icon-tags {
+div.help_area .wsam-icon-tags {
     background-position: -25px -48px !important;
 }
-div.help_area .helppier-icon-book {
+div.help_area .wsam-icon-book {
     background-position: -48px -48px !important;
 }
-div.help_area .helppier-icon-bookmark {
+div.help_area .wsam-icon-bookmark {
     background-position: -72px -48px !important;
 }
-div.help_area .helppier-icon-print {
+div.help_area .wsam-icon-print {
     background-position: -96px -48px !important;
 }
-div.help_area .helppier-icon-camera {
+div.help_area .wsam-icon-camera {
     background-position: -120px -48px !important;
 }
-div.help_area .helppier-icon-font {
+div.help_area .wsam-icon-font {
     background-position: -144px -48px !important;
 }
-div.help_area .helppier-icon-bold {
+div.help_area .wsam-icon-bold {
     background-position: -167px -48px !important;
 }
-div.help_area .helppier-icon-italic {
+div.help_area .wsam-icon-italic {
     background-position: -192px -48px !important;
 }
-div.help_area .helppier-icon-text-height {
+div.help_area .wsam-icon-text-height {
     background-position: -216px -48px !important;
 }
-div.help_area .helppier-icon-text-width {
+div.help_area .wsam-icon-text-width {
     background-position: -240px -48px !important;
 }
-div.help_area .helppier-icon-align-left {
+div.help_area .wsam-icon-align-left {
     background-position: -264px -48px !important;
 }
-div.help_area .helppier-icon-align-center {
+div.help_area .wsam-icon-align-center {
     background-position: -288px -48px !important;
 }
-div.help_area .helppier-icon-align-right {
+div.help_area .wsam-icon-align-right {
     background-position: -312px -48px !important;
 }
-div.help_area .helppier-icon-align-justify {
+div.help_area .wsam-icon-align-justify {
     background-position: -336px -48px !important;
 }
-div.help_area .helppier-icon-list {
+div.help_area .wsam-icon-list {
     background-position: -360px -48px !important;
 }
-div.help_area .helppier-icon-indent-left {
+div.help_area .wsam-icon-indent-left {
     background-position: -384px -48px !important;
 }
-div.help_area .helppier-icon-indent-right {
+div.help_area .wsam-icon-indent-right {
     background-position: -408px -48px !important;
 }
-div.help_area .helppier-icon-facetime-video {
+div.help_area .wsam-icon-facetime-video {
     background-position: -432px -48px !important;
 }
-div.help_area .helppier-icon-picture {
+div.help_area .wsam-icon-picture {
     background-position: -456px -48px !important;
 }
-div.help_area .helppier-icon-pencil {
+div.help_area .wsam-icon-pencil {
     background-position: 0 -72px !important;
 }
-div.help_area .helppier-icon-map-marker {
+div.help_area .wsam-icon-map-marker {
     background-position: -24px -72px !important;
 }
-div.help_area .helppier-icon-adjust {
+div.help_area .wsam-icon-adjust {
     background-position: -48px -72px !important;
 }
-div.help_area .helppier-icon-tint {
+div.help_area .wsam-icon-tint {
     background-position: -72px -72px !important;
 }
-div.help_area .helppier-icon-edit {
+div.help_area .wsam-icon-edit {
     background-position: -96px -72px !important;
 }
-div.help_area .helppier-icon-share {
+div.help_area .wsam-icon-share {
     background-position: -120px -72px !important;
 }
-div.help_area .helppier-icon-check {
+div.help_area .wsam-icon-check {
     background-position: -144px -72px !important;
 }
-div.help_area .helppier-icon-move {
+div.help_area .wsam-icon-move {
     background-position: -168px -72px !important;
 }
-div.help_area .helppier-icon-step-backward {
+div.help_area .wsam-icon-step-backward {
     background-position: -192px -72px !important;
 }
-div.help_area .helppier-icon-fast-backward {
+div.help_area .wsam-icon-fast-backward {
     background-position: -216px -72px !important;
 }
-div.help_area .helppier-icon-backward {
+div.help_area .wsam-icon-backward {
     background-position: -240px -72px !important;
 }
-div.help_area .helppier-icon-play {
+div.help_area .wsam-icon-play {
     background-position: -264px -72px !important;
 }
-div.help_area .helppier-icon-pause {
+div.help_area .wsam-icon-pause {
     background-position: -288px -72px !important;
 }
-div.help_area .helppier-icon-stop {
+div.help_area .wsam-icon-stop {
     background-position: -312px -72px !important;
 }
-div.help_area .helppier-icon-forward {
+div.help_area .wsam-icon-forward {
     background-position: -336px -72px !important;
 }
-div.help_area .helppier-icon-fast-forward {
+div.help_area .wsam-icon-fast-forward {
     background-position: -360px -72px !important;
 }
-div.help_area .helppier-icon-step-forward {
+div.help_area .wsam-icon-step-forward {
     background-position: -384px -72px !important;
 }
-div.help_area .helppier-icon-eject {
+div.help_area .wsam-icon-eject {
     background-position: -408px -72px !important;
 }
-div.help_area .helppier-icon-chevron-left {
+div.help_area .wsam-icon-chevron-left {
     background-position: -432px -72px !important;
 }
-div.help_area .helppier-icon-chevron-right {
+div.help_area .wsam-icon-chevron-right {
     background-position: -456px -72px !important;
 }
-div.help_area .helppier-icon-plus-sign {
+div.help_area .wsam-icon-plus-sign {
     background-position: 0 -96px !important;
 }
-div.help_area .helppier-icon-minus-sign {
+div.help_area .wsam-icon-minus-sign {
     background-position: -24px -96px !important;
 }
-div.help_area .helppier-icon-remove-sign {
+div.help_area .wsam-icon-remove-sign {
     background-position: -48px -96px !important;
 }
-div.help_area .helppier-icon-ok-sign {
+div.help_area .wsam-icon-ok-sign {
     background-position: -72px -96px !important;
 }
-div.help_area .helppier-icon-question-sign {
+div.help_area .wsam-icon-question-sign {
     background-position: -96px -96px !important;
 }
-div.help_area .helppier-icon-info-sign {
+div.help_area .wsam-icon-info-sign {
     background-position: -120px -96px !important;
 }
-div.help_area .helppier-icon-screenshot {
+div.help_area .wsam-icon-screenshot {
     background-position: -144px -96px !important;
 }
-div.help_area .helppier-icon-remove-circle {
+div.help_area .wsam-icon-remove-circle {
     background-position: -168px -96px !important;
 }
-div.help_area .helppier-icon-ok-circle {
+div.help_area .wsam-icon-ok-circle {
     background-position: -192px -96px !important;
 }
-div.help_area .helppier-icon-ban-circle {
+div.help_area .wsam-icon-ban-circle {
     background-position: -216px -96px !important;
 }
-div.help_area .helppier-icon-arrow-left {
+div.help_area .wsam-icon-arrow-left {
     background-position: -240px -96px !important;
 }
-div.help_area .helppier-icon-arrow-right {
+div.help_area .wsam-icon-arrow-right {
     background-position: -264px -96px !important;
 }
-div.help_area .helppier-icon-arrow-up {
+div.help_area .wsam-icon-arrow-up {
     background-position: -289px -96px !important;
 }
-div.help_area .helppier-icon-arrow-down {
+div.help_area .wsam-icon-arrow-down {
     background-position: -312px -96px !important;
 }
-div.help_area .helppier-icon-share-alt {
+div.help_area .wsam-icon-share-alt {
     background-position: -336px -96px !important;
 }
-div.help_area .helppier-icon-resize-full {
+div.help_area .wsam-icon-resize-full {
     background-position: -360px -96px !important;
 }
-div.help_area .helppier-icon-resize-small {
+div.help_area .wsam-icon-resize-small {
     background-position: -384px -96px !important;
 }
-div.help_area .helppier-icon-plus {
+div.help_area .wsam-icon-plus {
     background-position: -408px -96px !important;
 }
-div.help_area .helppier-icon-minus {
+div.help_area .wsam-icon-minus {
     background-position: -433px -96px !important;
 }
-div.help_area .helppier-icon-asterisk {
+div.help_area .wsam-icon-asterisk {
     background-position: -456px -96px !important;
 }
-div.help_area .helppier-icon-exclamation-sign {
+div.help_area .wsam-icon-exclamation-sign {
     background-position: 0 -120px !important;
 }
-div.help_area .helppier-icon-gift {
+div.help_area .wsam-icon-gift {
     background-position: -24px -120px !important;
 }
-div.help_area .helppier-icon-leaf {
+div.help_area .wsam-icon-leaf {
     background-position: -48px -120px !important;
 }
-div.help_area .helppier-icon-fire {
+div.help_area .wsam-icon-fire {
     background-position: -72px -120px !important;
 }
-div.help_area .helppier-icon-eye-open {
+div.help_area .wsam-icon-eye-open {
     background-position: -96px -120px !important;
 }
-div.help_area .helppier-icon-eye-close {
+div.help_area .wsam-icon-eye-close {
     background-position: -120px -120px !important;
 }
-div.help_area .helppier-icon-warning-sign {
+div.help_area .wsam-icon-warning-sign {
     background-position: -144px -120px !important;
 }
-div.help_area .helppier-icon-plane {
+div.help_area .wsam-icon-plane {
     background-position: -168px -120px !important;
 }
-div.help_area .helppier-icon-calendar {
+div.help_area .wsam-icon-calendar {
     background-position: -192px -120px !important;
 }
-div.help_area .helppier-icon-random {
+div.help_area .wsam-icon-random {
     background-position: -216px -120px !important;
 }
-div.help_area .helppier-icon-comment {
+div.help_area .wsam-icon-comment {
     background-position: -240px -120px !important;
 }
-div.help_area .helppier-icon-magnet {
+div.help_area .wsam-icon-magnet {
     background-position: -264px -120px !important;
 }
-div.help_area .helppier-icon-chevron-up {
+div.help_area .wsam-icon-chevron-up {
     background-position: -288px -120px !important;
 }
-div.help_area .helppier-icon-chevron-down {
+div.help_area .wsam-icon-chevron-down {
     background-position: -313px -119px !important;
 }
-div.help_area .helppier-icon-retweet {
+div.help_area .wsam-icon-retweet {
     background-position: -336px -120px !important;
 }
-div.help_area .helppier-icon-shopping-cart {
+div.help_area .wsam-icon-shopping-cart {
     background-position: -360px -120px !important;
 }
-div.help_area .helppier-icon-folder-close {
+div.help_area .wsam-icon-folder-close {
     background-position: -384px -120px !important;
 }
-div.help_area .helppier-icon-folder-open {
+div.help_area .wsam-icon-folder-open {
     background-position: -408px -120px !important;
 }
-div.help_area .helppier-icon-resize-vertical {
+div.help_area .wsam-icon-resize-vertical {
     background-position: -432px -119px !important;
 }
-div.help_area .helppier-icon-resize-horizontal {
+div.help_area .wsam-icon-resize-horizontal {
     background-position: -456px -118px !important;
 }
-div.help_area .helppier-icon-hdd {
+div.help_area .wsam-icon-hdd {
     background-position: 0 -144px !important;
 }
-div.help_area .helppier-icon-bullhorn {
+div.help_area .wsam-icon-bullhorn {
     background-position: -24px -144px !important;
 }
-div.help_area .helppier-icon-bell {
+div.help_area .wsam-icon-bell {
     background-position: -48px -144px !important;
 }
-div.help_area .helppier-icon-certificate {
+div.help_area .wsam-icon-certificate {
     background-position: -72px -144px !important;
 }
-div.help_area .helppier-icon-thumbs-up {
+div.help_area .wsam-icon-thumbs-up {
     background-position: -96px -144px !important;
 }
-div.help_area .helppier-icon-thumbs-down {
+div.help_area .wsam-icon-thumbs-down {
     background-position: -120px -144px !important;
 }
-div.help_area .helppier-icon-hand-right {
+div.help_area .wsam-icon-hand-right {
     background-position: -144px -144px !important;
 }
-div.help_area .helppier-icon-hand-left {
+div.help_area .wsam-icon-hand-left {
     background-position: -168px -144px !important;
 }
-div.help_area .helppier-icon-hand-up {
+div.help_area .wsam-icon-hand-up {
     background-position: -192px -144px !important;
 }
-div.help_area .helppier-icon-hand-down {
+div.help_area .wsam-icon-hand-down {
     background-position: -216px -144px !important;
 }
-div.help_area .helppier-icon-circle-arrow-right {
+div.help_area .wsam-icon-circle-arrow-right {
     background-position: -240px -144px !important;
 }
-div.help_area .helppier-icon-circle-arrow-left {
+div.help_area .wsam-icon-circle-arrow-left {
     background-position: -264px -144px !important;
 }
-div.help_area .helppier-icon-circle-arrow-up {
+div.help_area .wsam-icon-circle-arrow-up {
     background-position: -288px -144px !important;
 }
-div.help_area .helppier-icon-circle-arrow-down {
+div.help_area .wsam-icon-circle-arrow-down {
     background-position: -312px -144px !important;
 }
-div.help_area .helppier-icon-globe {
+div.help_area .wsam-icon-globe {
     background-position: -336px -144px !important;
 }
-div.help_area .helppier-icon-wrench {
+div.help_area .wsam-icon-wrench {
     background-position: -360px -144px !important;
 }
-div.help_area .helppier-icon-tasks {
+div.help_area .wsam-icon-tasks {
     background-position: -384px -144px !important;
 }
-div.help_area .helppier-icon-filter {
+div.help_area .wsam-icon-filter {
     background-position: -408px -144px !important;
 }
-div.help_area .helppier-icon-briefcase {
+div.help_area .wsam-icon-briefcase {
     background-position: -432px -144px !important;
 }
-div.help_area .helppier-icon-fullscreen {
+div.help_area .wsam-icon-fullscreen {
     background-position: -456px -144px !important;
 }

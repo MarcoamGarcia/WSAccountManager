@@ -38,7 +38,7 @@ var Company = mongoose.model('Company');
 
 var client = monq(mongo_connect_string);
 // connect to mongo db
-var worker = client.worker(['helppier']);
+var worker = client.worker(['wsam']);
 
 worker.register({
   // send e-mail using the defined template.

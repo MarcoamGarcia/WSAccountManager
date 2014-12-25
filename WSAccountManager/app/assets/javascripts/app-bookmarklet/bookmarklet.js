@@ -67,7 +67,7 @@ javascript:(function(){
     function load_help() {
         window.help_site_key="SITE_DEMO_PUBLISHER_API_TOKEN";
         window.help_page_key="SITE_DEMO_PAGE_KEY";
-        window.helplib=helpjs.require("helplib", "http://helppier.com/api/files/start");
+        window.helplib=helpjs.require("helplib", "http://wsam.com/api/files/start");
     }
     
     inst_help_script=document.createElement('SCRIPT');
@@ -78,7 +78,7 @@ javascript:(function(){
         }   
     };
     inst_help_script.onload = load_help;
-    inst_help_script.src='http://helppier.com/javascripts/embed.js';
+    inst_help_script.src='http://wsam.com/javascripts/embed.js';
     document.getElementsByTagName('body')[0].insertBefore(inst_help_script,document.getElementsByTagName('body')[0].firstChild);
     
 })();
@@ -91,7 +91,7 @@ javascript:(function(){
         if (typeof window.helpjs !== "undefined") {
             window.help_site_key="SITE_DEMO_PUBLISHER_API_TOKEN";
             window.help_page_key="SITE_DEMO_PAGE_KEY";
-            window.helplib=helpjs.require("helplib", "//helppier.com/api/files/start");
+            window.helplib=helpjs.require("helplib", "//wsam.com/api/files/start");
         } else {
             setTimeout(function () {
                 onLightningjsAvailable();
@@ -102,7 +102,7 @@ javascript:(function(){
     onLightningjsAvailable();
     inst_help_script=document.createElement('SCRIPT');
     inst_help_script.type='text/javascript';
-    inst_help_script.src='http://helppier.com/javascripts/embed.js';
+    inst_help_script.src='http://wsam.com/javascripts/embed.js';
     document.getElementsByTagName('body')[0].insertBefore(inst_help_script,document.getElementsByTagName('body')[0].firstChild);
     
 })();

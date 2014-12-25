@@ -16,9 +16,9 @@ var path = require('path')
 module.exports = {
     host: "localhost",
     update_host: true,
-    default_mount_url: '/helppier',
+    default_mount_url: '/wsam',
     buildDir: 'public/assets',
-    servePath: "/helppier/assets", // dont set the serve path in the 'default_mount_url' to avoid 405 http errors with post requests.
+    servePath: "/wsam/assets", // dont set the serve path in the 'default_mount_url' to avoid 405 http errors with post requests.
     port: 3000,
     secure_port: 4430,
     app_port: 3000,

@@ -31,13 +31,13 @@ html(lang='en')
           };
           head.appendChild(script);
       }
-      getScript('//localhost:3000/helppier/javascripts/embed.js', function() {
+      getScript('//localhost:3000/wsam/javascripts/embed.js', function() {
           /*** embed.js ***/
           window.help_company_key = '3a9b66dd99ec7e5b416ff2a3a8fa8b2a';
           window.help_vars = {"user": "1"};
           /*window.help_site_key = 'SITE_KEY';*/
           /*window.help_page_key = "SITE_PAGE_KEY";*/
-          window.helplib = helpjs.require("helplib", "//localhost:3000/helppier/api/files/start");
+          window.helplib = helpjs.require("helplib", "//localhost:3000/wsam/api/files/start");
       });
       /*]]>{/literal}*/
     <!-- end embed code -->

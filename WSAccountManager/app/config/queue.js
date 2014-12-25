@@ -32,7 +32,7 @@ exports.get_client = get_client;
 function get_client() {
     connect();
     if (client == null) {
-        client = connection.queue('helppier');
+        client = connection.queue('wsam');
     }
     return client;
 }
@@ -41,7 +41,7 @@ exports.get_worker = get_worker;
 function get_worker() {
     connect();
     if (worker == null) {
-        worker = connection.worker(['helppier']);
+        worker = connection.worker(['wsam']);
     }
     return worker;
 }
