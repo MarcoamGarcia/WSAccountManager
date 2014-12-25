@@ -12,6 +12,7 @@ var Role = mongoose.model('Role');
 var Site = mongoose.model('Site');
 var Company = mongoose.model('Company');
 var HelpSet = mongoose.model('HelpSet');
+var ClientDetail = mongoose.model('ClientDetail');
 
 
 exports.load_using_key = function(req, res, next, company_key) {
@@ -82,6 +83,40 @@ exports.dashboard = function(req, res, next) {
                 }
             }
         );
+    }
+    
+}
+
+exports.new_dashboard = function(req, res, next) {
+    console.log("show_company_dashboard");
+    var logged_user = req.user;
+    var company = req.company;
+    var company_id = company.id;
+    if(req.company == null) {
+        logger.error("cannot find company");
+        res.redirect(res.locals.url_mount("/404"));
+    } else {
+
+      ClientDetail.find({company_id: company_id}, {}, function(err, clientDetails) {
+          if (err) {next(err);}
+
+          var clientDetails_hash = [];
+          
+          clientDetails.forEach(function(each_clientDetail) {
+            // create page hash with owner information.
+            var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
+                , description: each_clientDetail.description, end_date: each_clientDetail.end_date
+                , alert: each_clientDetail.alert, created: each_clientDetail.created };
+            clientDetails_hash.push(clientDetail_info);
+          });
+
+          res.render('company/dashboard', {
+              actor: logged_user,
+              company: company,
+              title: company.name + ' alerts',
+              clientDetails: clientDetails_hash
+          });
+      });
     }
     
 }

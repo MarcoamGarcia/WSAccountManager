@@ -145,7 +145,7 @@ module.exports = function (app, passport) {
   //     Company routes      //
   //*************************//
   // show company dashboard.
-  router.get("/company/:c_id/dashboard", company_auth, utils.set_active_area("company"), company.dashboard); 
+  router.get("/company/:c_id/dashboard", company_auth, utils.set_active_area("company"), company.new_dashboard); 
   // show company information.
   router.get("/company/:c_id", company_auth, utils.set_active_area("company"), company.edit_company_info); 
   // update company information.

@@ -32,11 +32,10 @@ var ClientDetails = Backbone.Collection.extend({
  //  Client Details Views //
 //-----------------------//
 
-var ClientDetailView = BaseView.extend({
+var AlertsView = BaseView.extend({
  tagName: 'tr',
  
  show_clientDetail: _.template($('#show-clientDetail-template').find("tr").html()),
- edit_clientDetail: _.template($('#edit-clientDetail-template').find("tr").html()),
  
  events: function() {
      return _.extend( {
@@ -142,11 +141,10 @@ var ClientDetailView = BaseView.extend({
  }
 });
 
-var ClientDetailListView = Backbone.View.extend({   
+var AlertsListView = Backbone.View.extend({   
  
  el: $('#clientDetails_wrapper'),
  events: {
-     'click a#new_clientDetail':  'addItem'
  },
  initialize: function(options) {
      var self = this;
@@ -196,7 +194,7 @@ var ClientDetailListView = Backbone.View.extend({
  },
  appendItem: function(item){
      var self = this;
-     var itemView = new ClientDetailView({
+     var itemView = new AlertsView({
          model: item,
          vent: self.vent
      });

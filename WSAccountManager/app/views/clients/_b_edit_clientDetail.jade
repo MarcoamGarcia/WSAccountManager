@@ -11,7 +11,10 @@ table
                     div.control-group
                         input.end_date(id='end_date', name='end_date', class="required", type="text", placeholder='End ate', value='{{end_date}}')
                     div.control-group
-                        input.alert(id='alert', name='alert', class="required", type="text", placeholder='Alert', value='{{alert}}')
+                        .checkbox
+                            label
+                                input(id='alert', type='checkbox', value='')
+                                |     Warn this detail.
                 div
                     button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
                     a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel
