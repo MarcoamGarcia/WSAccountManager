@@ -3,6 +3,7 @@ var  mongoose = require('mongoose')
     , logger = require('../config/logger').logger();
 
 var ClientDetail = mongoose.model('ClientDetail');
+var Client = mongoose.model('Client');
 
 
 exports.show_details = function(req, res, next) {
@@ -26,7 +27,8 @@ exports.show_details = function(req, res, next) {
                     // create page hash with owner information.
                     var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
                         , description: each_clientDetail.description, end_date: each_clientDetail.end_date
-                        , alert: each_clientDetail.alert, created: each_clientDetail.created };
+                        , alert: each_clientDetail.alert, created: each_clientDetail.created
+                        , company_name: each_clientDetail.company_name };
                     clientDetails_hash.push(clientDetail_info);
                 };
             };
@@ -78,7 +80,37 @@ exports.add = function(req, res, next) {
                     logger.error(new Error("Client detail " + title + " already exists."));
                     res.send({ errors: {title: "Someone already has claimed that name." } });
                 } else {
+                    var client_id = mongoose.Types.ObjectId(req.params.client_id);
+                    Client.find({ _id: client_id }, function(err, client) {
+                        var clientDetail = new ClientDetail();
+                        clientDetail.company_name = client[0].company_name;
+                        clientDetail.title = title;
+                        clientDetail.description = description;
+                        clientDetail.end_date = end_date;
+                        clientDetail.alert = alert;
+                        clientDetail.company_id = req.company._id;
+                        clientDetail.client_id = req.params.client_id;
+                        clientDetail.save(function(err){
+                            if (err) {
+                                logger.debug(err);
+                                res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
+                            } else {
+                                res.writeHead(200, {'content-type': 'text/json' });
+                                var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
+                                    , description: clientDetail.description , end_date: clientDetail.end_date
+                                    , alert: clientDetail.alert, company_name: clientDetail.company_name };
+
+                                res.write(JSON.stringify(clientDetail_hash));
+                                res.end('\n');
+                            }
+                        });
+                    });
+                }
+            } else {
+                var client_id = mongoose.Types.ObjectId(req.params.client_id);
+                Client.find({ _id: client_id }, function(err, client) {
                     var clientDetail = new ClientDetail();
+                    clientDetail.company_name = client[0].company_name;
                     clientDetail.title = title;
                     clientDetail.description = description;
                     clientDetail.end_date = end_date;
@@ -93,34 +125,12 @@ exports.add = function(req, res, next) {
                             res.writeHead(200, {'content-type': 'text/json' });
                             var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
                                 , description: clientDetail.description , end_date: clientDetail.end_date
-                                , alert: clientDetail.alert };
+                                , alert: clientDetail.alert, company_name: clientDetail.company_name };
 
                             res.write(JSON.stringify(clientDetail_hash));
                             res.end('\n');
                         }
                     });
-                }
-            } else {
-                var clientDetail = new ClientDetail();
-                clientDetail.title = title;
-                clientDetail.description = description;
-                clientDetail.end_date = end_date;
-                clientDetail.alert = alert;
-                clientDetail.company_id = req.company._id;
-                clientDetail.client_id = req.params.client_id;
-                clientDetail.save(function(err){
-                    if (err) {
-                        logger.debug(err);
-                        res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
-                    } else {
-                        res.writeHead(200, {'content-type': 'text/json' });
-                        var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
-                            , description: clientDetail.description , end_date: clientDetail.end_date
-                            , alert: clientDetail.alert };
-
-                        res.write(JSON.stringify(clientDetail_hash));
-                        res.end('\n');
-                    }
                 });
             }
         });

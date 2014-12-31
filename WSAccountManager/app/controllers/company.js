@@ -103,11 +103,14 @@ exports.new_dashboard = function(req, res, next) {
           var clientDetails_hash = [];
           
           clientDetails.forEach(function(each_clientDetail) {
-            // create page hash with owner information.
-            var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
-                , description: each_clientDetail.description, end_date: each_clientDetail.end_date
-                , alert: each_clientDetail.alert, created: each_clientDetail.created };
-            clientDetails_hash.push(clientDetail_info);
+            if (each_clientDetail.alert == true) {
+              // create page hash with owner information.
+              var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
+                  , description: each_clientDetail.description, end_date: each_clientDetail.end_date
+                  , alert: each_clientDetail.alert, created: each_clientDetail.created
+                  , company_name: each_clientDetail.company_name };
+              clientDetails_hash.push(clientDetail_info);
+            };
           });
 
           res.render('company/dashboard', {

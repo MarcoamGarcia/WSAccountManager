@@ -58,6 +58,7 @@ var AlertsView = BaseView.extend({
      var self = this;
      var self_el = $(self.el);
 
+     var company_name = self.model.get("company_name");
      var title = self.model.get("title");
      var description = self.model.get('description');
      var end_date = self.model.get('end_date');
@@ -66,6 +67,7 @@ var AlertsView = BaseView.extend({
 
      self_el.html(self.show_clientDetail({
          id: self.model.id,
+         company_name: company_name,
          title: title,
          description: description,
          end_date: end_date,
