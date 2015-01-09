@@ -14,6 +14,14 @@ table
                         input.first_contact(id='first_contact', name='first_contact', class="required", type="text", placeholder='First Contact', value='{{first_contact}}')
                     div.control-group
                         input.second_contact(id='second_contact', name='second_contact', type="text", placeholder='Second Contact', value='{{second_contact}}')
+
+                    -if(typeof existent_tasks != 'undefined') 
+                        div.control-group.existent_tasks
+                            select.sel_tasks(id='default_tasks', name='default_tasks', class="required")
+                                option(value='') -- Select Default Task --
+                                - _.each(existent_tasks, function(integr, key, list) {
+                                    option(value='#{key}') #{integr.name}
+                                - })
                 div
                     button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
                     a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

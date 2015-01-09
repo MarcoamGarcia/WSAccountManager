@@ -6,6 +6,7 @@ table
         td {{last_name}}
         td {{first_contact}}
         td {{second_contact}}
+        td {{default_task}}
         td
             a.details(class='btn btn-info tiny_left_margin', title='Client details', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href=url_mount('/company/#{session.active_company_id}/client/{{id}}/details')) 
                 i(class="icon-info-sign")

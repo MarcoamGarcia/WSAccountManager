@@ -66,6 +66,13 @@ var ClientView = BaseView.extend({
      var last_name = self.model.get('last_name');
      var first_contact = self.model.get('first_contact');
      var second_contact = self.model.get('second_contact');
+     var default_task = self.model.get("default_task");
+
+     if (default_task == 0) {
+        default_task = "IVA1";
+     } else if(default_task == 1) {
+        default_task = "IVA3";
+     }
 
      self_el.html(self.show_client({
          id: self.model.id,
@@ -73,6 +80,7 @@ var ClientView = BaseView.extend({
          first_name: first_name,
          last_name: last_name,
          first_contact: first_contact,
+         default_task: default_task,
          second_contact: second_contact
      }));
  },
@@ -85,6 +93,7 @@ var ClientView = BaseView.extend({
     var last_name = self.model.get('last_name');
     var first_contact = self.model.get('first_contact');
     var second_contact = self.model.get('second_contact');
+    var default_task = self.model.get("default_task");
 
     var self_el = $(self.el);
     self_el.html(self.edit_client({
@@ -93,6 +102,7 @@ var ClientView = BaseView.extend({
         first_name: first_name,
         last_name: last_name,
         first_contact: first_contact,
+        default_task: default_task,
         second_contact: second_contact
     }));
 
@@ -137,10 +147,11 @@ var ClientView = BaseView.extend({
      var last_name = self_el.find('#last_name').val();
      var first_contact = self_el.find('#first_contact').val();
      var second_contact = self_el.find('#second_contact').val();
+     var sel_tasks = self_el.find('.sel_tasks option:selected').val();
 
      self.model.save(
          { company_name: company_name, first_name: first_name, last_name: last_name, first_contact: first_contact
-         , second_contact: second_contact },
+         , second_contact: second_contact, default_task: sel_tasks },
          {
             wait: true,
             success: self.saved_success,
