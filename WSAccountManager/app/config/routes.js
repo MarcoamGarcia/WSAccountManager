@@ -162,16 +162,16 @@ module.exports = function (app, passport) {
   router.delete('/company/:c_id/user/:actor_id', company_auth, actor.remove);
   
   router.param('actor_id', actor.load);
-
-  //*************************//
+/*
+  //----------------------------//
   //       Script routes       //
-  //*************************//
+  //--------------------------//
   //   company script    //
   router.get('/company/:c_id/script', company_auth, utils.set_active_area("script"), company.get_script);
 
-  //*************************//
+  //--------------------------//
   //       Site routes       //
-  //*************************//
+  //------------------------//
   //   company sites    //
   // don't know why but the following routes does not work if 'websites' is changed to 'sites'
   // maybe it is colliding with another root?
@@ -221,7 +221,7 @@ module.exports = function (app, passport) {
   router.put("/helpsets/:helpset_id/unflag", helpset_auth, helpset.unflag_helpset);
     
   router.param('helpset_id', helpset.load_with_site_company_and_page);
-  
+  */
   
   // ****************** //
   //       Profile      //
@@ -267,7 +267,7 @@ module.exports = function (app, passport) {
   // ****************** //
   //         API        //
   // ****************** //
-
+/*
   router.get("/api/files/:file", function(req, res, next) {
     
     if(path.extname(req.params.file) == '.js') {
@@ -333,14 +333,14 @@ module.exports = function (app, passport) {
   // Site FAQs  //
   router.get('/site/:site_id/faqs/:page?', edit_site_auth, utils.set_active_area("faqs"), faq.show_site_faqs);
   router.param('faq_id', faq.load_with_site_and_company);
-
+*/
     // ******************** //
    //    Company Clients   //
   // ******************** //
   // show clients
   router.get('/company/:c_id/clients/:page?', company_auth, utils.set_active_area("clients"), client.show);
   // add new client
-  router.post('/company/:c_id/clients', edit_site_auth, client.add);
+  router.post('/company/:c_id/clients', edit_site_auth, client.add, client_details.add);
   // remove client
   router.delete('/company/:c_id/client/:client_id', client_auth, client.remove);
   // update client

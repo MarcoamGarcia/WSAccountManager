@@ -49,12 +49,23 @@ exports.show_details = function(req, res, next) {
 }
 
 exports.add = function(req, res, next) {
-    var logged_user = req.user;
-    var actor = req.actor;
-    var title = req.body.title;
-    var description = req.body.description;
-    var end_date = req.body.end_date;
-    var alert = req.body.alert;
+    if (req.client_created) {
+        var clientDetail_client_id = req.client_created._id;
+        var logged_user = req.user;
+        var actor = req.actor;
+        var title = "Automatically created by WSAM: " + req.client_created.company_name + "-" + req.client_default_task;
+        var description = "Automatically created by WSAM";
+        var end_date = "04/10/2015";
+        var alert = true;
+    } else {
+        var clientDetail_client_id = req.params.client_id;
+        var logged_user = req.user;
+        var actor = req.actor;
+        var title = req.body.title;
+        var description = req.body.description;
+        var end_date = req.body.end_date;
+        var alert = req.body.alert;
+    }
     
     if(title === undefined || title === "") {
         res.send({ errors: { title: "This field is required." } });
@@ -80,7 +91,7 @@ exports.add = function(req, res, next) {
                     logger.error(new Error("Client detail " + title + " already exists."));
                     res.send({ errors: {title: "Someone already has claimed that name." } });
                 } else {
-                    var client_id = mongoose.Types.ObjectId(req.params.client_id);
+                    var client_id = mongoose.Types.ObjectId(clientDetail_client_id);
                     Client.find({ _id: client_id }, function(err, client) {
                         var clientDetail = new ClientDetail();
                         clientDetail.company_name = client[0].company_name;
@@ -89,7 +100,7 @@ exports.add = function(req, res, next) {
                         clientDetail.end_date = end_date;
                         clientDetail.alert = alert;
                         clientDetail.company_id = req.company._id;
-                        clientDetail.client_id = req.params.client_id;
+                        clientDetail.client_id = clientDetail_client_id;
                         clientDetail.save(function(err){
                             if (err) {
                                 logger.debug(err);
@@ -107,7 +118,7 @@ exports.add = function(req, res, next) {
                     });
                 }
             } else {
-                var client_id = mongoose.Types.ObjectId(req.params.client_id);
+                var client_id = mongoose.Types.ObjectId(clientDetail_client_id);
                 Client.find({ _id: client_id }, function(err, client) {
                     var clientDetail = new ClientDetail();
                     clientDetail.company_name = client[0].company_name;
@@ -116,7 +127,7 @@ exports.add = function(req, res, next) {
                     clientDetail.end_date = end_date;
                     clientDetail.alert = alert;
                     clientDetail.company_id = req.company._id;
-                    clientDetail.client_id = req.params.client_id;
+                    clientDetail.client_id = clientDetail_client_id;
                     clientDetail.save(function(err){
                         if (err) {
                             logger.debug(err);

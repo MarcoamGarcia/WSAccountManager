@@ -17,7 +17,7 @@ table
 
                     -if(typeof existent_tasks != 'undefined') 
                         div.control-group.existent_tasks
-                            select.sel_tasks(id='default_tasks', name='default_tasks', class="required")
+                            select.sel_tasks(id='default_tasks', name='default_tasks')
                                 option(value='') -- Select Default Task --
                                 - _.each(existent_tasks, function(integr, key, list) {
                                     option(value='#{key}') #{integr.name}

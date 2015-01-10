@@ -1,5 +1,6 @@
 var  mongoose = require('mongoose')
     , _ = require('underscore')
+    , async = require('async')
     , logger = require('../config/logger').logger();
 
 var Client = mongoose.model('Client');
@@ -79,13 +80,16 @@ exports.add = function(req, res, next) {
                             logger.debug(err);
                             res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
                         } else {
-                            res.writeHead(200, {'content-type': 'text/json' });
+                            //res.writeHead(200, {'content-type': 'text/json' });
                             var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                                 , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
                                 , default_task: client.default_task};
 
-                            res.write(JSON.stringify(client_hash));
-                            res.end('\n');
+                            //res.write(JSON.stringify(client_hash));
+                            //res.end('\n');
+                            req.client_created = client;
+                            req.client_default_task = default_task;
+                            next();
                         }
                     });
                 }
@@ -103,13 +107,16 @@ exports.add = function(req, res, next) {
                         logger.debug(err);
                         res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
                     } else {
-                        res.writeHead(200, {'content-type': 'text/json' });
+                        //res.writeHead(200, {'content-type': 'text/json' });
                         var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                             , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
                             , default_task: client.default_task};
 
-                        res.write(JSON.stringify(client_hash));
-                        res.end('\n');
+                        //res.write(JSON.stringify(client_hash));
+                        //res.end('\n');
+                        req.client_created = client;
+                        req.client_default_task = default_task;
+                        next();
                     }
                 });
             }
@@ -151,25 +158,53 @@ exports.update = function(req, res, next) {
 }
 
 exports.remove = function(req, res, next) {
-
     var logged_user = req.user;
     var actor = req.actor;
-    
-    // the client has to be sought by ID because 'client' is a variable used by Websockets
-    Client.findOne({ _id: req.params.client_id }, function(err, client) {
-        if (err) {
-            res.send({ error: "Oops. Something went wrong. Please try again." });
-        } else {
-            // remove client from db.
-            client.remove(function(err) {
+
+    async.series([ 
+        //delete details associated with the client
+        function remove_client_details(callback) {
+            var client_id = mongoose.Types.ObjectId(req.params.client_id);
+            ClientDetail.find({ client_id: client_id }, function(err, clientDetails) {
+                if(err) {
+                    next(err);
+                } else {
+                    if(clientDetails.length > 0) {
+                        async.each(clientDetails, function(clientDetail, callback) {
+                            // remove client from db.
+                            clientDetail.remove(function(err) {
+                                if (err) {
+                                    res.send({ error: "Oops. Something went wrong. Please try again." });
+                                }
+                            });
+                        });
+                    }
+                }
+
+            });
+            callback(null);
+        },
+        //delete the client
+        function removing_client(callback) {
+            // the client has to be sought by ID because 'client' is a variable used by Websockets
+            Client.findOne({ _id: req.params.client_id }, function(err, client) {
                 if (err) {
                     res.send({ error: "Oops. Something went wrong. Please try again." });
                 } else {
-                    res.send({ del: true });
+                    // remove client from db.
+                    client.remove(function(err) {
+                        if (err) {
+                            res.send({ error: "Oops. Something went wrong. Please try again." });
+                        } else {
+                            res.send({ del: true });
+                            callback(null);
+                        }
+                    });
                 }
             });
         }
-    });
+
+    ]);
 }
 
 exports.create_defalt_tasks = function(default_task) {

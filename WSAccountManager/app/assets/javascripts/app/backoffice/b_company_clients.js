@@ -55,7 +55,7 @@ var ClientView = BaseView.extend({
    options.vent.bind("show", self.show);
  },
  delete_message: function(e) {
-     return "Are you sure you want to delete this client?";
+     return "Are you sure you want to delete this client and all its details?";
  },
  render_show: function(e) {
      var self = this;
