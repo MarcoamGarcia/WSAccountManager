@@ -15,15 +15,9 @@ block content
           div#clients_wrapper(class="span12")
               -if(company != "")
                   div
-                    a.show_alerts(href=url_mount('/company/#{session.active_company_id}/client/#{client_id}/details'), class='btn', title='Show Alerts')
-                        i(class="icon-tasks") 
-                        &nbsp
-                        span Show Alerts
-                    &nbsp
-                    a.credencials(href=url_mount('/company/#{session.active_company_id}/client/#{client_id}/credencials'), class='btn', title='credencials')
-                        i(class="icon-briefcase") 
-                        &nbsp
-                        span credencials
+                    a#new_client(href="#", class='btn', title='Create new client')
+                        i(class="icon-plus")
+                        span Client
               br
               table#clients_list(class='table table-striped table-bordered')
                   thead
@@ -31,20 +25,17 @@ block content
                           th Company
                           th First Name
                           th Last Name
-                          th First Contact
-                          th Second Contact
-                          th NIF
-                          th NISS
+                          th(style='width: 150px;') &nbsp;
                   tbody
                       - if (clients.length == 0)
                           tr.empty_table
                               td(colspan='5') (no clients to display)
-        
+       
     div#edit-client-template(style='display:none')
-        include _b_client_more_info.jade
-
+        include _b_edit_client
+        
     div#show-client-template(style='display:none')
-        include _b_client_more_info
+        include _b_client
     
     -if(typeof company != "undefined" && company != "")
         //- TODO: Fetch company id from the URL.

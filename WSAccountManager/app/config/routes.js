@@ -337,6 +337,8 @@ module.exports = function (app, passport) {
     // ******************** //
    //    Company Clients   //
   // ******************** //
+  // load client
+  router.param('client_id', client.load);
   // show more info
   router.get('/company/:c_id/clients/more_info/:page?', company_auth, utils.set_active_area("clients"), client.show_more_info);
   // show clients
@@ -348,7 +350,7 @@ module.exports = function (app, passport) {
   // update client
   router.put('/company/:c_id/client/:client_id', client_auth, client.update);
   // show more info
-  router.get('/company/:c_id/clients/more_info/:page?', company_auth, utils.set_active_area("clients"), client.show_more_info);
+  router.get('/company/:c_id/client/:client_id/more_info/:page?', company_auth, utils.set_active_area("clients"), client.show_more_info);
 
     // ******************** //
    //    Client Details    //

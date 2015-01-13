@@ -27,12 +27,10 @@ html(lang='en')
                       span(class="icon-bar")
                   -if(session.active_company_id != null)
                       a(class="brand", href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home')
-                          span.logo Wsam
-                          span.logo_exc !
+                          span.logo WSAccountManager
                   -else
                       a(class="brand", href=url_mount("/profile/"))
-                          span.logo Wsam
-                          span.logo_exc !
+                          span.logo WSAccountManager
                   div(class="nav-collapse")
                       ul.nav
                         li.client_link
@@ -43,7 +41,9 @@ html(lang='en')
                   div(class="btn-group pull-right")
                       a(class="btn dropdown-toggle",data-toggle="dropdown",href="#")
                         i(class="icon-user") 
-                        span #{user.name}
+                        &nbsp
+                        span #{user.name} 
+                        &nbsp
                         span.caret
                       ul(class="dropdown-menu")
                          li
@@ -68,7 +68,7 @@ html(lang='en')
           br
           block content
           footer
-              p &copy; Wsam 2014
+              p &copy; Wsam 2015
   
       script.
           var active_area = '#{active_area}';
