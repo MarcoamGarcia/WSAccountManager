@@ -11,20 +11,23 @@ table
                             input.name(id='name', name='name', class="required", type="text", placeholder='Name', value='{{name}}')
                         div.control-group
                             input.email(id='email', name='email', class="required", type="text", placeholder='Email', value='{{email}}')
-                    div.control-group
-                       div
-                            span
-                                <label class='checkbox'><input class='company_admin' type='checkbox' id='company_admin' name='company_admin'> Is admin?</label>
-                    div.control-group
-                        div
-                            span Has access to:
-                        div
-                            span
-                                <label class='checkbox'><input class='sites_selection' type='checkbox' id='#{company.id}' name='#{company.id}'> All Sites</label>
-                        -each site in sites
+                        div.control-group
+                            input.password(id='password', name='password', class="required", type="password", placeholder='Password')
+                    -if (false)
+                        div.control-group
+                           div
+                                span
+                                    <label class='checkbox'><input class='company_admin' type='checkbox' id='company_admin' name='company_admin'> Is admin?</label>
+                        div.control-group
+                            div
+                                span Has access to:
                             div
                                 span
-                                    <label class='checkbox'><input class='sites_selection' type='checkbox' id='#{site.id}' name='#{site.id}'> #{site.url} </label>
+                                    <label class='checkbox'><input class='sites_selection' type='checkbox' id='#{company.id}' name='#{company.id}'> All Sites</label>
+                            -each site in sites
+                                div
+                                    span
+                                        <label class='checkbox'><input class='sites_selection' type='checkbox' id='#{site.id}' name='#{site.id}'> #{site.url} </label>
 
                         
                     //-div.control-group

@@ -6,10 +6,13 @@ table
         td {{state}}
         td 
             a.updated_by(href='#') 
-        td.control_buttons
-            a.enable(class='hide btn btn-primary tiny_left_margin', data-active="Enable", data-loading="Enabling...", data-complete="Enabled!", href='#') Enable
-            a.disable(class='hide btn tiny_left_margin', data-active="Disable", data-loading="Disabling...", data-complete="Disabled!", href='#') Disable
-            div.right
-                a(class='btn btn-danger delete tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
-                    i(class="icon-trash")
- 
+
+        -if(authorized('view', 'admin', ''))
+            td.control_buttons
+                a.enable(class='hide btn btn-primary tiny_left_margin', data-active="Enable", data-loading="Enabling...", data-complete="Enabled!", href='#') Enable
+                a.disable(class='hide btn tiny_left_margin', data-active="Disable", data-loading="Disabling...", data-complete="Disabled!", href='#') Disable
+                div.right
+                    a(class='btn btn-danger delete tiny_left_margin', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
+                        i(class="icon-trash")
+        -else
+            td

@@ -220,12 +220,17 @@ var ActorView = BaseView.extend({
      var self_el = $(self.el);
      var name_val = self_el.find('.name').val();
      var email_val = self_el.find('.email').val();
-     var company_admin = self_el.find('.company_admin').is(":checked");
+     var pass = self_el.find('.password').val();
+     // no invited user is admin
+     //var company_admin = self_el.find('.company_admin').is(":checked");
+     var company_admin = false;
      
      var site_ids = [];
      // find company checkbox and if it is selected just add it.
      var company_checkbox = self_el.find("#" + company_id);
-     if(company_checkbox.is(":checked")) {
+     //the user check all sites by defualt
+     //if(company_checkbox.is(":checked")) {
+    if(true) {
          site_ids.push(company_id);
      // otherwise search for all other selected checkboxes and add them.
      } else {
@@ -239,7 +244,7 @@ var ActorView = BaseView.extend({
      var props = null;
      // send all information if its a new user.
      if(self.model.isNew()) {
-         props = { name: name_val, email: email_val, sites: site_ids, company_admin: company_admin };
+         props = { name: name_val, email: email_val, sites: site_ids, company_admin: company_admin, pass: pass };
      } else {
          props = { sites: site_ids, company_admin: company_admin };
      }

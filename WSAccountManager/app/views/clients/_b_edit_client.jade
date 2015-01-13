@@ -14,6 +14,10 @@ table
                         input.first_contact(id='first_contact', name='first_contact', class="required", type="text", placeholder='First Contact', value='{{first_contact}}')
                     div.control-group
                         input.second_contact(id='second_contact', name='second_contact', type="text", placeholder='Second Contact', value='{{second_contact}}')
+                    div.control-group
+                        input.nif(id='nif', name='nif', class="required", type="text", placeholder='NIF', value='{{nif}}')
+                    div.control-group
+                        input.niss(id='niss', name='niss', class="required", type="text", placeholder='NISS', value='{{niss}}')
 
                     -if(typeof existent_tasks != 'undefined') 
                         div.control-group.existent_tasks

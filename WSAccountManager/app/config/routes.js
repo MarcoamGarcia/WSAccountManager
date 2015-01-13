@@ -337,6 +337,8 @@ module.exports = function (app, passport) {
     // ******************** //
    //    Company Clients   //
   // ******************** //
+  // show more info
+  router.get('/company/:c_id/clients/more_info/:page?', company_auth, utils.set_active_area("clients"), client.show_more_info);
   // show clients
   router.get('/company/:c_id/clients/:page?', company_auth, utils.set_active_area("clients"), client.show);
   // add new client
@@ -345,6 +347,8 @@ module.exports = function (app, passport) {
   router.delete('/company/:c_id/client/:client_id', client_auth, client.remove);
   // update client
   router.put('/company/:c_id/client/:client_id', client_auth, client.update);
+  // show more info
+  router.get('/company/:c_id/clients/more_info/:page?', company_auth, utils.set_active_area("clients"), client.show_more_info);
 
     // ******************** //
    //    Client Details    //

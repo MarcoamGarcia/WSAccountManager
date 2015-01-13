@@ -48,6 +48,8 @@ html(lang='en')
                       ul(class="dropdown-menu")
                          li
                              a(href=url_mount("/profile/#{user.id}")) My Profile
+                         li
+                             a(href=url_mount("/company/#{session.active_company_id}/users")) Company Users
                          li.divider
                          -if(authorized('view', 'admin', ''))
                             li

@@ -35,6 +35,35 @@ exports.show = function(req, res, next) {
     });
 }
 
+exports.show_more_info = function(req, res, next) {
+    var logged_user = req.user;
+    var company = req.company;
+    // need to transform string to ObjectId before querying.
+    var company_id = mongoose.Types.ObjectId(company.id);
+
+    Client.find({company_id: company_id}, {}, function(err, clients) {
+        if (err) {next(err);}
+
+        var clients_hash = [];
+        // create page hash with owner information.
+        clients.forEach(function(client) {
+            var client_info = {_id: client.id, company_name: client.company_name , first_name: client.first_name
+            , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
+            , nif: client.nif, niss: client.niss, default_task: client.default_task };
+            clients_hash.push(client_info);
+        });
+
+        res.render('clients_more_info/clients_more_info', {
+            actor: logged_user,
+            company: company,
+            title: company.name + ' clients',
+            existent_tasks: Client.existent_tasks,
+            clients: clients_hash
+        });
+
+    });
+}
+
 exports.add = function(req, res, next) {
     var logged_user = req.user;
     var actor = req.actor;
@@ -44,6 +73,8 @@ exports.add = function(req, res, next) {
     var first_contact = req.body.first_contact;
     var default_task = req.body.default_task;
     var second_contact = req.body.second_contact;
+    var nif = req.body.nif;
+    var niss = req.body.niss;
     
     if(first_name === undefined || first_name === "") {
         res.send({ errors: { first_name: "This field is required." } });
@@ -74,6 +105,8 @@ exports.add = function(req, res, next) {
                     client.first_contact = first_contact;
                     client.default_task = default_task;
                     client.second_contact = second_contact;
+                    client.nif = nif;
+                    client.niss = niss;
                     client.company_id = req.company._id;
                     client.save(function(err){
                         if (err) {
@@ -83,7 +116,7 @@ exports.add = function(req, res, next) {
                             //res.writeHead(200, {'content-type': 'text/json' });
                             var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                                 , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                                , default_task: client.default_task};
+                                , default_task: client.default_task, nif: client.nif, niss: client.niss };
 
                             //res.write(JSON.stringify(client_hash));
                             //res.end('\n');
@@ -101,6 +134,8 @@ exports.add = function(req, res, next) {
                 client.first_contact = first_contact;
                 client.default_task = default_task;
                 client.second_contact = second_contact;
+                client.nif = nif;
+                client.niss = niss;
                 client.company_id = req.company._id;
                 client.save(function(err){
                     if (err) {
@@ -110,7 +145,7 @@ exports.add = function(req, res, next) {
                         //res.writeHead(200, {'content-type': 'text/json' });
                         var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                             , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                            , default_task: client.default_task};
+                            , default_task: client.default_task, nif: client.nif, niss: client.niss };
 
                         //res.write(JSON.stringify(client_hash));
                         //res.end('\n');

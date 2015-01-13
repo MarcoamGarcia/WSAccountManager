@@ -146,6 +146,7 @@ exports.invite = function(req, res, next) {
 
     var name = req.body.name;
     var email = req.body.email;
+    var pass = req.body.pass;
     var selected_permissions = req.body.sites;
     // remove spaces in email string.
     var email = email.replace(/ /g,"");
@@ -264,8 +265,11 @@ exports.invite = function(req, res, next) {
                         actor.tokens.push(new_token);
                         
                         // set user state as invited.
-                        actor.state = Actor.INVITED;
+                        actor.state = Actor.ACTIVE;
                         actor.company_id = company.id;
+
+                        actor.password = pass;
+                        actor.invited_by = actor.created_by_id;
                         
                         actor_middleware.save_actor(actor, function(err, actor) {
                             
@@ -277,25 +281,6 @@ exports.invite = function(req, res, next) {
                                 var values = {};
                                 values.company_name = company.name;
                                 values.crypt = crypt;
-                                // create invitation job.
-                                var client = queue.get_client();
-                                client.enqueue('send_mail', {
-                                    title: 'invite user: ' + actor.email,
-                                    values: values,
-                                    to: actor.email,
-                                    actor_id: actor.id,
-                                    user_id: logged_user.id,
-                                    host: req.headers.host,
-                                    // e-mail subject
-                                    subject: 'You have been invited to Helppier.com!',
-                                    // template used to send e-mail
-                                    template: 'invite_user'
-                                }, function (err, job) {
-                                    if (err) {
-                                        logger.error(err);
-                                    }
-                                    logger.debug('enqueued:', job.data);
-                                });
                                 
                                 var company_admin = false;
                                 var actor_permissions_with_names = [];

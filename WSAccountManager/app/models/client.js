@@ -13,6 +13,8 @@ var ClientSchema = new Schema({
   , last_name: String
   , first_contact: String
   , second_contact: String
+  , nif: String
+  , niss: String
   , default_task: String
   , company_id : ObjectId
 });
