@@ -66,7 +66,7 @@ exports.show_more_info = function(req, res, next) {
         clients.forEach(function(client) {
             var client_info = {_id: client.id, company_name: client.company_name , first_name: client.first_name
             , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-            , nif: client.nif, niss: client.niss, default_task: client.default_task };
+            , nif: client.nif, niss: client.niss, default_task: client.default_task, address: client.address };
             clients_hash.push(client_info);
         });
 
@@ -93,6 +93,7 @@ exports.add = function(req, res, next) {
     var second_contact = req.body.second_contact;
     var nif = req.body.nif;
     var niss = req.body.niss;
+    var address = req.body.address;
     
     if(first_name === undefined || first_name === "") {
         res.send({ errors: { first_name: "This field is required." } });
@@ -125,6 +126,7 @@ exports.add = function(req, res, next) {
                     client.second_contact = second_contact;
                     client.nif = nif;
                     client.niss = niss;
+                    client.address = address;
                     client.company_id = req.company._id;
                     client.save(function(err){
                         if (err) {
@@ -134,7 +136,7 @@ exports.add = function(req, res, next) {
                             //res.writeHead(200, {'content-type': 'text/json' });
                             var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                                 , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                                , default_task: client.default_task, nif: client.nif, niss: client.niss };
+                                , default_task: client.default_task, nif: client.nif, niss: client.niss, address: client.address };
 
                             //res.write(JSON.stringify(client_hash));
                             //res.end('\n');
@@ -154,6 +156,7 @@ exports.add = function(req, res, next) {
                 client.second_contact = second_contact;
                 client.nif = nif;
                 client.niss = niss;
+                client.address = address;
                 client.company_id = req.company._id;
                 client.save(function(err){
                     if (err) {
@@ -163,7 +166,7 @@ exports.add = function(req, res, next) {
                         //res.writeHead(200, {'content-type': 'text/json' });
                         var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                             , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                            , default_task: client.default_task, nif: client.nif, niss: client.niss };
+                            , default_task: client.default_task, nif: client.nif, niss: client.niss, address: client.address };
 
                         //res.write(JSON.stringify(client_hash));
                         //res.end('\n');

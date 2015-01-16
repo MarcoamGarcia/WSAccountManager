@@ -34,7 +34,7 @@ if (cluster.isMaster) {
         });
         console.log('worker %s started.', worker.pid);
     }
-    
+    /*
     if (fs.existsSync(__dirname + "/config/config.json")) {
         var worker = cluster.fork({file: "app/evaluator.js"}).process;
         worker.stdout.on('data', function(chunk) {
@@ -52,7 +52,7 @@ if (cluster.isMaster) {
             winston.error('worker ' + i + ': ' + chunk);
         });
         winston.info('worker %s started.', worker.pid);
-    }
+    }*/
   
     cluster.on('exit', function(worker) {
       winston.error('worker %s died. restart...', worker.process.pid);

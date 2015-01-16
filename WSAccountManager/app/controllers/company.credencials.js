@@ -3,80 +3,34 @@ var  mongoose = require('mongoose')
     , async = require('async')
     , logger = require('../config/logger').logger();
 
-var Client = mongoose.model('Client');
-var ClientDetail = mongoose.model('ClientDetail');
-
-exports.load = function(req, res, next, client_id) {
-    Client.findById(client_id, function (err, client) {
-        if(err) {
-            return next(err);
-        }
-        if(client == null) {
-            return next(new Error("can't find company"));
-        } 
-        req.client_model = client;
-        req.client_id = client_id;
-        // set company object in result.
-        res.locals.client_model = client;
-        next();
-    });
-}
+var Credencial = mongoose.model('Credencial');
 
 exports.show = function(req, res, next) {
     var logged_user = req.user;
     var company = req.company;
+    var client = req.client_model;
     // need to transform string to ObjectId before querying.
-    var company_id = mongoose.Types.ObjectId(company.id);
+    var client_id = mongoose.Types.ObjectId(client.id);
 
-    Client.find({company_id: company_id}, {}, function(err, clients) {
+    Credencial.find({client_id: client_id}, {}, function(err, credencials) {
         if (err) {next(err);}
 
-        var clients_hash = [];
+        var credencials_hash = [];
         // create page hash with owner information.
-        clients.forEach(function(client) {
-            var client_info = {_id: client.id, company_name: client.company_name , first_name: client.first_name
-            , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-            , default_task: client.default_task };
-            clients_hash.push(client_info);
+        credencials.forEach(function(credencial) {
+            var credencial_info = {_id: credencial.id, credencial_name: credencial.credencial_name 
+            , credencial_description: credencial.credencial_description , credencial_username: credencial.credencial_username
+            , credencial_password: credencial.credencial_password };
+            credencials_hash.push(credencial_info);
         });
 
-        res.render('clients/clients', {
+        res.render('credencials/credencials', {
             actor: logged_user,
             company: company,
-            title: company.name + ' clients',
-            existent_tasks: Client.existent_tasks,
-            clients: clients_hash
-        });
-
-    });
-}
-
-exports.show_more_info = function(req, res, next) {
-    var logged_user = req.user;
-    var company = req.company;
-    var client_model = req.client_model;
-    // need to transform string to ObjectId before querying.
-    var client_id = mongoose.Types.ObjectId(client_model.id);
-
-    Client.find({_id: client_id}, {}, function(err, clients) {
-        if (err) {next(err);}
-
-        var clients_hash = [];
-        // create page hash with owner information.
-        clients.forEach(function(client) {
-            var client_info = {_id: client.id, company_name: client.company_name , first_name: client.first_name
-            , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-            , nif: client.nif, niss: client.niss, default_task: client.default_task };
-            clients_hash.push(client_info);
-        });
-
-        res.render('clients_more_info/clients_more_info', {
-            actor: logged_user,
-            company: company,
-            client_id: client_id,
-            title: company.name + ' clients',
-            existent_tasks: Client.existent_tasks,
-            clients: clients_hash
+            client_model: client,
+            title: client.name + ' credencials',
+            existent_tasks: Credencial.existent_tasks,
+            credencials: credencials_hash
         });
 
     });
@@ -85,91 +39,50 @@ exports.show_more_info = function(req, res, next) {
 exports.add = function(req, res, next) {
     var logged_user = req.user;
     var actor = req.actor;
-    var company_name = req.body.company_name;
-    var first_name = req.body.first_name;
-    var last_name = req.body.last_name;
-    var first_contact = req.body.first_contact;
-    var default_task = req.body.default_task;
-    var second_contact = req.body.second_contact;
-    var nif = req.body.nif;
-    var niss = req.body.niss;
+    var credencial_name = req.body.credencial_name;
+    var credencial_description = req.body.credencial_description;
+    var credencial_username = req.body.credencial_username;
+    var credencial_password = req.body.credencial_password;
     
-    if(first_name === undefined || first_name === "") {
-        res.send({ errors: { first_name: "This field is required." } });
-    }else if(company_name === undefined || company_name === ""){
-        res.send({ errors: { company_name: "This field is required." } });
+    if(credencial_name === undefined || credencial_name === "") {
+        res.send({ errors: { credencial_name: "This field is required." } });
+    }else if(credencial_description === undefined || credencial_description === ""){
+        res.send({ errors: { credencial_description: "This field is required." } });
+    }else if(credencial_username === undefined || credencial_username === ""){
+        res.send({ errors: { credencial_username: "This field is required." } });
+    }else if(credencial_password === undefined || credencial_password === ""){
+        res.send({ errors: { credencial_password: "This field is required." } });
     }
     else {
-        Client.find({ first_name: first_name }, function(err, client) {
+        Credencial.findOne({ credencial_name: credencial_name, client_id: req.client_id }, function(err, credencial) {
             if (err) {
                 logger.error(err);
                 res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
-            } else if(client.length > 0) {
-                var local_is_unique = true;
-                client.forEach(function(local_client) {
-                    if (local_client.company_id.toString() == req.params.c_id) {
-                        local_is_unique = false;
-                    };
-                });
-                // check is unique for this company
-                if (local_is_unique == false) {
-                    logger.error(new Error("Client " + first_name + " already exists."));
-                    res.send({ errors: {first_name: "Someone already has claimed that name." } });
-                } else {
-                    var client = new Client();
-                    client.company_name = company_name;
-                    client.first_name = first_name;
-                    client.last_name = last_name;
-                    client.first_contact = first_contact;
-                    client.default_task = default_task;
-                    client.second_contact = second_contact;
-                    client.nif = nif;
-                    client.niss = niss;
-                    client.company_id = req.company._id;
-                    client.save(function(err){
-                        if (err) {
-                            logger.debug(err);
-                            res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
-                        } else {
-                            //res.writeHead(200, {'content-type': 'text/json' });
-                            var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
-                                , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                                , default_task: client.default_task, nif: client.nif, niss: client.niss };
-
-                            //res.write(JSON.stringify(client_hash));
-                            //res.end('\n');
-                            req.client_created = client;
-                            req.client_default_task = default_task;
-                            next();
-                        }
-                    });
-                }
+            } else if(credencial != null) {
+                logger.error(new Error("Credencial " + credencial_name + " already exists."));
+                res.send({ errors: {credencial_name: "Someone already has claimed that name." } });
             } else {
-                var client = new Client();
-                client.company_name = company_name;
-                client.first_name = first_name;
-                client.last_name = last_name;
-                client.first_contact = first_contact;
-                client.default_task = default_task;
-                client.second_contact = second_contact;
-                client.nif = nif;
-                client.niss = niss;
-                client.company_id = req.company._id;
-                client.save(function(err){
+                var credencial = new Credencial();
+                credencial.credencial_name = credencial_name;
+                credencial.credencial_description = credencial_description;
+                credencial.credencial_username = credencial_username;
+                credencial.credencial_password = credencial_password;
+                credencial.company_id = req.company._id;
+                credencial.client_id = req.client_model._id;
+                credencial.save(function(err){
                     if (err) {
                         logger.debug(err);
                         res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
                     } else {
-                        //res.writeHead(200, {'content-type': 'text/json' });
-                        var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
-                            , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                            , default_task: client.default_task, nif: client.nif, niss: client.niss };
+                        var updated_by_info = {id: logged_user.id, name: logged_user.name};
+                        res.writeHead(200, {'content-type': 'text/json' });
+                        var credencial_hash = { _id: credencial._id, credencial_name: credencial.credencial_name
+                            , credencial_description: credencial.credencial_description
+                            , credencial_username: credencial.credencial_username
+                            , credencial_password: credencial.credencial_password };
 
-                        //res.write(JSON.stringify(client_hash));
-                        //res.end('\n');
-                        req.client_created = client;
-                        req.client_default_task = default_task;
-                        next();
+                        res.write(JSON.stringify(credencial_hash));
+                        res.end('\n');
                     }
                 });
             }
@@ -179,32 +92,32 @@ exports.add = function(req, res, next) {
 
 exports.update = function(req, res, next) {
 
-    // the client has to be sought by ID because 'client' is a variable used by Websockets
-    Client.findOne({ _id: req.params.client_id }, function(err, client) {
-        if(client != null) {
-            client.company_name = req.body.company_name;
-            client.first_name = req.body.first_name;
-            client.last_name = req.body.last_name;
-            client.first_contact = req.body.first_contact;
-            client.default_task = req.body.default_task;
-            client.second_contact = req.body.second_contact;
+    // the credencial has to be sought by ID because 'credencial' is a variable used by Websockets
+    Credencial.findOne({ _id: req.params.credencial_id }, function(err, credencial) {
+        if(credencial != null) {
+            credencial.company_name = req.body.company_name;
+            credencial.first_name = req.body.first_name;
+            credencial.last_name = req.body.last_name;
+            credencial.first_contact = req.body.first_contact;
+            credencial.default_task = req.body.default_task;
+            credencial.second_contact = req.body.second_contact;
 
-            client.save(function(err) {
+            credencial.save(function(err) {
                 if(err) {
                     logger.error(err);
                     next(err);
                 } else {
                     res.writeHead(200, {'content-type': 'text/json' });
-                    var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
-                        , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                        , default_task: client.default_task};
+                    var credencial_hash = { _id: credencial._id, company_name: credencial.company_name, first_name: credencial.first_name
+                        , last_name: credencial.last_name, first_contact: credencial.first_contact, second_contact: credencial.second_contact
+                        , default_task: credencial.default_task};
 
-                    res.write(JSON.stringify(client_hash));
+                    res.write(JSON.stringify(credencial_hash));
                     res.end('\n');
                 }
             }); 
         } else {
-            next(new Error("Can't find client"));
+            next(new Error("Can't find credencial"));
         }
     });
 
@@ -215,17 +128,17 @@ exports.remove = function(req, res, next) {
     var actor = req.actor;
 
     async.series([ 
-        //delete details associated with the client
-        function remove_client_details(callback) {
-            var client_id = mongoose.Types.ObjectId(req.params.client_id);
-            ClientDetail.find({ client_id: client_id }, function(err, clientDetails) {
+        //delete details associated with the credencial
+        function remove_credencial_details(callback) {
+            var credencial_id = mongoose.Types.ObjectId(req.params.credencial_id);
+            ClientDetail.find({ credencial_id: credencial_id }, function(err, credencialDetails) {
                 if(err) {
                     next(err);
                 } else {
-                    if(clientDetails.length > 0) {
-                        async.each(clientDetails, function(clientDetail, callback) {
-                            // remove client from db.
-                            clientDetail.remove(function(err) {
+                    if(credencialDetails.length > 0) {
+                        async.each(credencialDetails, function(credencialDetail, callback) {
+                            // remove credencial from db.
+                            credencialDetail.remove(function(err) {
                                 if (err) {
                                     res.send({ error: "Oops. Something went wrong. Please try again." });
                                 }
@@ -237,15 +150,15 @@ exports.remove = function(req, res, next) {
             });
             callback(null);
         },
-        //delete the client
-        function removing_client(callback) {
-            // the client has to be sought by ID because 'client' is a variable used by Websockets
-            Client.findOne({ _id: req.params.client_id }, function(err, client) {
+        //delete the credencial
+        function removing_credencial(callback) {
+            // the credencial has to be sought by ID because 'credencial' is a variable used by Websockets
+            Credencial.findOne({ _id: req.params.credencial_id }, function(err, credencial) {
                 if (err) {
                     res.send({ error: "Oops. Something went wrong. Please try again." });
                 } else {
-                    // remove client from db.
-                    client.remove(function(err) {
+                    // remove credencial from db.
+                    credencial.remove(function(err) {
                         if (err) {
                             res.send({ error: "Oops. Something went wrong. Please try again." });
                         } else {
@@ -258,94 +171,4 @@ exports.remove = function(req, res, next) {
         }
 
     ]);
-}
-
-exports.create_defalt_tasks = function(default_task) {
-    var title = "Automatically Generated";
-    var description = "Automatically Generated";
-    var aux_date = "21/";
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-    var end_date = aux_date + month + "/" + year;
-    var alert = true;
-    
-    if(title === undefined || title === "") {
-        res.send({ errors: { title: "This field is required." } });
-    }else if(description === undefined || description === ""){
-        res.send({ errors: { description: "This field is required." } });
-    }else if(end_date === undefined || end_date === ""){
-        res.send({ errors: { end_date: "This field is required." } });
-    }
-    else {
-        ClientDetail.find({ title: title }, function(err, clientDetail) {
-            if (err) {
-                logger.error(err);
-                res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
-            } else if(clientDetail.length > 0) {
-                var local_is_unique = true;
-                clientDetail.forEach(function(local_clientDetail) {
-                    if (local_clientDetail.company_id.toString() == req.params.c_id) {
-                        local_is_unique = false;
-                    };
-                });
-                // check is unique for this company
-                if (local_is_unique == false) {
-                    logger.error(new Error("Client detail " + title + " already exists."));
-                    res.send({ errors: {title: "Someone already has claimed that name." } });
-                } else {
-                    var client_id = mongoose.Types.ObjectId(req.params.client_id);
-                    Client.find({ _id: client_id }, function(err, client) {
-                        var clientDetail = new ClientDetail();
-                        clientDetail.company_name = client[0].company_name;
-                        clientDetail.title = title;
-                        clientDetail.description = description;
-                        clientDetail.end_date = end_date;
-                        clientDetail.alert = alert;
-                        clientDetail.company_id = req.company._id;
-                        clientDetail.client_id = req.params.client_id;
-                        clientDetail.save(function(err){
-                            if (err) {
-                                logger.debug(err);
-                                res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
-                            } else {
-                                res.writeHead(200, {'content-type': 'text/json' });
-                                var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
-                                    , description: clientDetail.description , end_date: clientDetail.end_date
-                                    , alert: clientDetail.alert, company_name: clientDetail.company_name };
-
-                                res.write(JSON.stringify(clientDetail_hash));
-                                res.end('\n');
-                            }
-                        });
-                    });
-                }
-            } else {
-                var client_id = mongoose.Types.ObjectId(req.params.client_id);
-                Client.find({ _id: client_id }, function(err, client) {
-                    var clientDetail = new ClientDetail();
-                    clientDetail.company_name = client[0].company_name;
-                    clientDetail.title = title;
-                    clientDetail.description = description;
-                    clientDetail.end_date = end_date;
-                    clientDetail.alert = alert;
-                    clientDetail.company_id = req.company._id;
-                    clientDetail.client_id = req.params.client_id;
-                    clientDetail.save(function(err){
-                        if (err) {
-                            logger.debug(err);
-                            res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
-                        } else {
-                            res.writeHead(200, {'content-type': 'text/json' });
-                            var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
-                                , description: clientDetail.description , end_date: clientDetail.end_date
-                                , alert: clientDetail.alert, company_name: clientDetail.company_name };
-
-                            res.write(JSON.stringify(clientDetail_hash));
-                            res.end('\n');
-                        }
-                    });
-                });
-            }
-        });
-    }
 }

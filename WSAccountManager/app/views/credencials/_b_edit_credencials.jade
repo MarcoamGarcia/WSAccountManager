@@ -5,27 +5,13 @@ table
             form(class='form-inline', method='POST', action='#')
                 div
                     div.control-group
-                        input.company_name(id='company_name', name='company_name', class="required", type="text", placeholder='Company Name', value='{{company_name}}')
+                        input.credencial_name(id='credencial_name', name='credencial_name', class="required", type="text", placeholder='Credencial Name', value='{{credencial_name}}')
                     div.control-group
-                        input.first_name(id='first_name', name='first_name', class="required", type="text", placeholder='First Name', value='{{first_name}}')
+                        input.credencial_description(id='credencial_description', name='credencial_description', class="required", type="text", placeholder='Credencial Description', value='{{credencial_description}}')
                     div.control-group
-                        input.last_name(id='last_name', name='last_name', class="required", type="text", placeholder='Last Name', value='{{last_name}}')
+                        input.credencial_username(id='credencial_username', name='credencial_username', class="required", type="text", placeholder='Credencial Username', value='{{credencial_username}}')
                     div.control-group
-                        input.first_contact(id='first_contact', name='first_contact', class="required", type="text", placeholder='First Contact', value='{{first_contact}}')
-                    div.control-group
-                        input.second_contact(id='second_contact', name='second_contact', type="text", placeholder='Second Contact', value='{{second_contact}}')
-                    div.control-group
-                        input.nif(id='nif', name='nif', class="required", type="text", placeholder='NIF', value='{{nif}}')
-                    div.control-group
-                        input.niss(id='niss', name='niss', class="required", type="text", placeholder='NISS', value='{{niss}}')
-
-                    -if(typeof existent_tasks != 'undefined') 
-                        div.control-group.existent_tasks
-                            select.sel_tasks(id='default_tasks', name='default_tasks')
-                                option(value='') -- Select Default Task --
-                                - _.each(existent_tasks, function(integr, key, list) {
-                                    option(value='#{key}') #{integr.name}
-                                - })
+                        input.credencial_password(id='credencial_password', name='credencial_password', class="required", type="text", placeholder='Credencial Password', value='{{credencial_password}}')
                 div
                     button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
                     a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

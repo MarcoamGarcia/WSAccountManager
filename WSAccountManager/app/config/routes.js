@@ -27,6 +27,7 @@ var main = require('../controllers/main')
   , client = require('../controllers/company.client') // company clients
   , client_details = require('../controllers/company.client.detail') // client details
   , auth = require('../middlewares/authorization')
+  , credencials = require('../controllers/company.credencials') // client credencials
   , utils = require('../lib/utils');
 
 var Actor = mongoose.model('Actor');
@@ -363,6 +364,14 @@ module.exports = function (app, passport) {
   router.delete('/company/:c_id/client/:client_id/details/:details_id', client_auth, client_details.remove);
   // update client detail
   router.put('/company/:c_id/client/:client_id/details/:details_id', client_auth, client_details.update);
+
+    // ******************** //
+   //  Client Credencials  //
+  // ******************** //
+  // show client credencials
+  router.get('/company/:c_id/client/:client_id/credencials', company_auth, utils.set_active_area("clients"), credencials.show);
+  // add new client credencials
+  router.post('/company/:c_id/client/:client_id/credencials', edit_site_auth, credencials.add);
 
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
         // set routes.

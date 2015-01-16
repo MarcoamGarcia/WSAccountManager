@@ -68,6 +68,7 @@ var ClientView = BaseView.extend({
     var second_contact = self.model.get('second_contact');
     var nif = self.model.get('nif');
     var niss = self.model.get('niss');
+    var address = self.model.get('address');
     var default_task = self.model.get("default_task");
 
     if (default_task == 0) {
@@ -85,7 +86,8 @@ var ClientView = BaseView.extend({
         default_task: default_task,
         second_contact: second_contact,
         nif: nif,
-        niss: niss
+        niss: niss,
+        address: address
     }));
  },
  render_edit: function() {
@@ -99,6 +101,7 @@ var ClientView = BaseView.extend({
     var second_contact = self.model.get('second_contact');
     var nif = self.model.get('nif');
     var niss = self.model.get('niss');
+    var address = self.model.get('address');
     var default_task = self.model.get("default_task");
 
     var self_el = $(self.el);
@@ -111,7 +114,8 @@ var ClientView = BaseView.extend({
         default_task: default_task,
         second_contact: second_contact,
         nif: nif,
-        niss: niss
+        niss: niss,
+        address: address
     }));
 
     // remove value attribute when its empty otherwise in IE8 the type='text' is showed as the value.
@@ -157,11 +161,12 @@ var ClientView = BaseView.extend({
      var second_contact = self_el.find('#second_contact').val();
      var nif = self_el.find('#nif').val();
      var niss = self_el.find('#niss').val();
+     var address = self_el.find('#address').val();
      var sel_tasks = self_el.find('.sel_tasks option:selected').val();
 
      self.model.save(
          { company_name: company_name, first_name: first_name, last_name: last_name, first_contact: first_contact
-         , second_contact: second_contact, default_task: sel_tasks, nif: nif, niss: niss },
+         , second_contact: second_contact, default_task: sel_tasks, nif: nif, niss: niss, address: address },
          {
             wait: true,
             success: self.saved_success,

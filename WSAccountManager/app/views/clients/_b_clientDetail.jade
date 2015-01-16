@@ -10,5 +10,6 @@ table
         td
             a.edit(class='btn btn-primary tiny_left_margin', title='Edit client detail', data-active="Edit", data-loading="Editing...", data-complete="Edited!", href='#') 
                 i(class="icon-pencil")
-            a(class='btn btn-danger delete tiny_left_margin', title='Delete client detail', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
-                i(class="icon-trash")
+            -if(authorized('view', 'admin', ''))
+                a(class='btn btn-danger delete tiny_left_margin', title='Delete client detail', data-active="Delete", data-loading="Deleting...", data-complete="Deleted!", href='#') 
+                    i(class="icon-trash")

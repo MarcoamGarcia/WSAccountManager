@@ -18,6 +18,8 @@ table
                         input.nif(id='nif', name='nif', class="required", type="text", placeholder='NIF', value='{{nif}}')
                     div.control-group
                         input.niss(id='niss', name='niss', class="required", type="text", placeholder='NISS', value='{{niss}}')
+                    div.control-group
+                        input.address(id='address', name='address', class="required", type="text", placeholder='Address', value='{{address}}')
 
                     -if(typeof existent_tasks != 'undefined') 
                         div.control-group.existent_tasks

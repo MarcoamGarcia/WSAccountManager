@@ -16,12 +16,12 @@ var CredentialsSchema = new Schema({
   , client_id : ObjectId
 });
 
-var Credencials = mongoose.model('Credencials', CredentialsSchema);
+var Credencial = mongoose.model('Credencial', CredentialsSchema);
 
-Credencials.TRIBUTARIESSERVICES = 0;
-Credencials.SSECURITY = 1;
+Credencial.TRIBUTARIESSERVICES = 0;
+Credencial.SSECURITY = 1;
 
-Credencials.existent_credencials = {};
+Credencial.existent_credencials = {};
   
-Credencials.existent_credencials[Credencials.TRIBUTARIESSERVICES] = {name: 'Financial' };
-Credencials.existent_credencials[Credencials.SSECURITY] = {name: 'Social Security' };
+Credencial.existent_credencials[Credencial.TRIBUTARIESSERVICES] = {name: 'Financial' };
+Credencial.existent_credencials[Credencial.SSECURITY] = {name: 'Social Security' };
