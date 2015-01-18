@@ -1,1 +1,0 @@
-//= require "app/backoffice/b_company_credencials.js"

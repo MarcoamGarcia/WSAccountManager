@@ -36,7 +36,8 @@ exports.show = function(req, res, next) {
         clients.forEach(function(client) {
             var client_info = {_id: client.id, company_name: client.company_name , first_name: client.first_name
             , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-            , default_task: client.default_task };
+            , default_task: client.default_task, created_by_name: client.created_by_name
+            , updated_by_name: client.updated_by_name, nif: client.nif, niss: client.niss };
             clients_hash.push(client_info);
         });
 
@@ -128,6 +129,10 @@ exports.add = function(req, res, next) {
                     client.niss = niss;
                     client.address = address;
                     client.company_id = req.company._id;
+                    client.created_by_name = logged_user.name;
+                    client.created_by_id = logged_user.id;
+                    client.updated_by_name = logged_user.name;
+                    client.updated_by_id = logged_user.id;
                     client.save(function(err){
                         if (err) {
                             logger.debug(err);
@@ -136,7 +141,9 @@ exports.add = function(req, res, next) {
                             //res.writeHead(200, {'content-type': 'text/json' });
                             var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                                 , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                                , default_task: client.default_task, nif: client.nif, niss: client.niss, address: client.address };
+                                , default_task: client.default_task, nif: client.nif, niss: client.niss, address: client.address
+                                , created_by_name: client.created_by_name, created_by_id: client.created_by_id
+                                , updated_by_name: client.updated_by_name, updated_by_id: client.updated_by_id};
 
                             //res.write(JSON.stringify(client_hash));
                             //res.end('\n');
@@ -158,6 +165,10 @@ exports.add = function(req, res, next) {
                 client.niss = niss;
                 client.address = address;
                 client.company_id = req.company._id;
+                client.created_by_name = logged_user.name;
+                client.created_by_id = logged_user.id;
+                client.updated_by_name = logged_user.name;
+                client.updated_by_id = logged_user.id;
                 client.save(function(err){
                     if (err) {
                         logger.debug(err);
@@ -166,7 +177,9 @@ exports.add = function(req, res, next) {
                         //res.writeHead(200, {'content-type': 'text/json' });
                         var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                             , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                            , default_task: client.default_task, nif: client.nif, niss: client.niss, address: client.address };
+                            , default_task: client.default_task, nif: client.nif, niss: client.niss, address: client.address
+                            , created_by_name: client.created_by_name, created_by_id: client.created_by_id
+                            , updated_by_name: client.updated_by_name, updated_by_id: client.updated_by_id };
 
                         //res.write(JSON.stringify(client_hash));
                         //res.end('\n');
@@ -191,6 +204,12 @@ exports.update = function(req, res, next) {
             client.first_contact = req.body.first_contact;
             client.default_task = req.body.default_task;
             client.second_contact = req.body.second_contact;
+            client.updated_by_name = req.user.name;
+            client.updated_by_id = req.user.id;
+            client.updated_by_date = new Date();
+            client.nif = req.body.nif;
+            client.niss = req.body.niss;
+
 
             client.save(function(err) {
                 if(err) {
@@ -200,7 +219,7 @@ exports.update = function(req, res, next) {
                     res.writeHead(200, {'content-type': 'text/json' });
                     var client_hash = { _id: client._id, company_name: client.company_name, first_name: client.first_name
                         , last_name: client.last_name, first_contact: client.first_contact, second_contact: client.second_contact
-                        , default_task: client.default_task};
+                        , default_task: client.default_task, nif: client.nif, niss: client.niss };
 
                     res.write(JSON.stringify(client_hash));
                     res.end('\n');

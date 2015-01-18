@@ -57,25 +57,29 @@ var ClientDetailView = BaseView.extend({
      return "Are you sure you want to delete this clientDetail?";
  },
  render_show: function(e) {
-     var self = this;
-     var self_el = $(self.el);
+    var self = this;
+    var self_el = $(self.el);
 
-     var company_name = self.model.get("company_name");
-     var title = self.model.get("title");
-     var description = self.model.get('description');
-     var end_date = self.model.get('end_date');
-     var alert = self.model.get('alert');
-     var created = self.model.get('created');
+    var company_name = self.model.get("company_name");
+    var title = self.model.get("title");
+    var description = self.model.get('description');
+    var end_date = self.model.get('end_date');
+    var alert = self.model.get('alert');
+    var created = self.model.get('created');
+    var created_by_name = self.model.get('created_by_name');
+    var updated_by_name = self.model.get('updated_by_name');
 
-     self_el.html(self.show_clientDetail({
-         id: self.model.id,
-         company_name: company_name,
-         title: title,
-         description: description,
-         end_date: end_date,
-         alert: alert,
-         created: created
-     }));
+    self_el.html(self.show_clientDetail({
+        id: self.model.id,
+        company_name: company_name,
+        title: title,
+        description: description,
+        end_date: end_date,
+        alert: alert,
+        created: created,
+        created_by_name: created_by_name,
+        updated_by_name: updated_by_name
+    }));
  },
  render_edit: function() {
      

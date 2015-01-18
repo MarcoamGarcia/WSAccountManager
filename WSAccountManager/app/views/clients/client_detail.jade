@@ -5,7 +5,7 @@ block content
             ul(class="breadcrumb")
                 li
                     -if(session.active_company_id != null)
-                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                        a(href=url_mount('/company/#{session.active_company_id}/client/#{client_model.id}/more_info/'), title='#{client_model.company_name} info') #{client_model.company_name} info
                     -else
                         a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
                     span(class="divider") &nbsp;/&nbsp;
@@ -28,11 +28,16 @@ block content
                           th Created
                           th End Date
                           th Alert
-                          th(style='width: 100px;') &nbsp;
+                          th Created by
+                          th Updated by
+                          -if(authorized('view', 'admin', ''))
+                            th(style='width: 100px;') &nbsp;
+                          -else
+                            th(style='width: 50px;') &nbsp;
                   tbody
                       - if (clientDetails.length == 0)
                           tr.empty_table
-                              td(colspan='5') (no clientDetails to display)
+                              td(colspan='9') (no clientDetails to display)
        
     div#edit-clientDetail-template(style='display:none')
         include _b_edit_clientDetail

@@ -70,6 +70,8 @@ var ClientView = BaseView.extend({
     var niss = self.model.get('niss');
     var address = self.model.get('address');
     var default_task = self.model.get("default_task");
+    var created_by_name = self.model.get('created_by_name');
+    var updated_by_name = self.model.get('updated_by_name');
 
     if (default_task == 0) {
        default_task = "IVA1";
@@ -87,7 +89,9 @@ var ClientView = BaseView.extend({
         second_contact: second_contact,
         nif: nif,
         niss: niss,
-        address: address
+        address: address,
+        created_by_name: created_by_name,
+        updated_by_name: updated_by_name
     }));
  },
  render_edit: function() {

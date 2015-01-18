@@ -25,11 +25,16 @@ block content
                           th Company
                           th First Name
                           th Last Name
-                          th(style='width: 150px;') &nbsp;
+                          th Created by
+                          th Updated by
+                          -if(authorized('view', 'admin', ''))
+                            th(style='width: 150px;') &nbsp;
+                          -else
+                            th(style='width: 100px;') &nbsp;
                   tbody
                       - if (clients.length == 0)
                           tr.empty_table
-                              td(colspan='5') (no clients to display)
+                              td(colspan='6') (no clients to display)
        
     div#edit-client-template(style='display:none')
         include _b_edit_client

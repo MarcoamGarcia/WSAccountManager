@@ -27,7 +27,7 @@ var main = require('../controllers/main')
   , client = require('../controllers/company.client') // company clients
   , client_details = require('../controllers/company.client.detail') // client details
   , auth = require('../middlewares/authorization')
-  , credencials = require('../controllers/company.credencials') // client credencials
+  , credentials = require('../controllers/company.credentials') // client credentials
   , utils = require('../lib/utils');
 
 var Actor = mongoose.model('Actor');
@@ -52,7 +52,7 @@ var router = new express.Router();
 module.exports = function (app, passport) {
 
     // main routes.
-    router.get("/", utils.set_active_area("home"), main.index);
+    router.get("/", utils.set_active_area("login"), main.login);
     router.get("/login_success", utils.set_active_area("login"), main.login_success);  
     
     router.get('/login', utils.set_active_area("login"), main.login);
@@ -366,12 +366,16 @@ module.exports = function (app, passport) {
   router.put('/company/:c_id/client/:client_id/details/:details_id', client_auth, client_details.update);
 
     // ******************** //
-   //  Client Credencials  //
+   //  Client Credentials  //
   // ******************** //
-  // show client credencials
-  router.get('/company/:c_id/client/:client_id/credencials', company_auth, utils.set_active_area("clients"), credencials.show);
-  // add new client credencials
-  router.post('/company/:c_id/client/:client_id/credencials', edit_site_auth, credencials.add);
+  // show client credentials
+  router.get('/company/:c_id/client/:client_id/credentials', company_auth, utils.set_active_area("clients"), credentials.show);
+  // add new client credentials
+  router.post('/company/:c_id/client/:client_id/credentials', edit_site_auth, credentials.add);
+  // update client credentianls
+  router.put('/company/:c_id/client/:client_id/credential/:credentials_id', client_auth, credentials.update);
+  // remove client credentials
+  router.delete('/company/:c_id/client/:client_id/credential/:credentials_id', client_auth, credentials.remove);
 
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
         // set routes.

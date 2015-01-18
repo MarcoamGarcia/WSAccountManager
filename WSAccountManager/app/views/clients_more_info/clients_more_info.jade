@@ -5,7 +5,7 @@ block content
             ul(class="breadcrumb")
                 li
                     -if(session.active_company_id != null)
-                        a(href=url_mount('/company/#{session.active_company_id}/dashboard'), title='Home') Home
+                        a(href=url_mount('/company/#{session.active_company_id}/clients'), title='Clients') Clients
                     -else
                         a(href=url_mount('/profile/#{user.id}/dashboard'), title='Home') Home
                     span(class="divider") &nbsp;/&nbsp;
@@ -20,10 +20,10 @@ block content
                         &nbsp
                         span Show Alerts
                     &nbsp
-                    a.credencials(href=url_mount('/company/#{session.active_company_id}/client/#{client_id}/credencials'), class='btn', title='credencials')
+                    a.credentials(href=url_mount('/company/#{session.active_company_id}/client/#{client_id}/credentials'), class='btn', title='credentials')
                         i(class="icon-briefcase") 
                         &nbsp
-                        span credencials
+                        span credentials
               br
               table#clients_list(class='table table-striped table-bordered')
                   thead
@@ -39,7 +39,7 @@ block content
                   tbody
                       - if (clients.length == 0)
                           tr.empty_table
-                              td(colspan='5') (no clients to display)
+                              td(colspan='8') (no clients to display)
         
     div#edit-client-template(style='display:none')
         include _b_client_more_info.jade

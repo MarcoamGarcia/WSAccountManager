@@ -4,6 +4,8 @@ table
         td {{company_name}}
         td {{first_name}}
         td {{last_name}}
+        td {{created_by_name}}
+        td {{updated_by_name}}
         td
             a.more_info(class='btn btn-info tiny_left_margin', title='More Info', data-active="Search", data-loading="Searching...", data-complete="Searched!", href=url_mount('/company/#{session.active_company_id}/client/{{id}}/more_info/')) 
                 i(class="icon-info-sign")

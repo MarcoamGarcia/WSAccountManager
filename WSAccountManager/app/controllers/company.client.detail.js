@@ -28,7 +28,8 @@ exports.show_details = function(req, res, next) {
                     var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
                         , description: each_clientDetail.description, end_date: each_clientDetail.end_date
                         , alert: each_clientDetail.alert, created: each_clientDetail.created
-                        , company_name: each_clientDetail.company_name };
+                        , company_name: each_clientDetail.company_name, created_by_name: each_clientDetail.created_by_name
+                        , updated_by_name: each_clientDetail.updated_by_name };
                     clientDetails_hash.push(clientDetail_info);
                 };
             };
@@ -101,6 +102,10 @@ exports.add = function(req, res, next) {
                         clientDetail.alert = alert;
                         clientDetail.company_id = req.company._id;
                         clientDetail.client_id = clientDetail_client_id;
+                        clientDetail.created_by_name = logged_user.name;
+                        clientDetail.created_by_id = logged_user.id;
+                        clientDetail.updated_by_name = logged_user.name;
+                        clientDetail.updated_by_id = logged_user.id;
                         clientDetail.save(function(err){
                             if (err) {
                                 logger.debug(err);
@@ -128,6 +133,10 @@ exports.add = function(req, res, next) {
                     clientDetail.alert = alert;
                     clientDetail.company_id = req.company._id;
                     clientDetail.client_id = clientDetail_client_id;
+                    clientDetail.created_by_name = logged_user.name;
+                    clientDetail.created_by_id = logged_user.id;
+                    clientDetail.updated_by_name = logged_user.name;
+                    clientDetail.updated_by_id = logged_user.id;
                     clientDetail.save(function(err){
                         if (err) {
                             logger.debug(err);
@@ -156,6 +165,9 @@ exports.update = function(req, res, next) {
             clientDetail.description = req.body.description;
             clientDetail.end_date = req.body.end_date;
             clientDetail.alert = req.body.alert;
+            clientDetail.updated_by_name = req.user.name;
+            clientDetail.updated_by_id = req.user.id;
+            clientDetail.updated_by_date = new Date();
 
             clientDetail.save(function(err) {
                 if(err) {
