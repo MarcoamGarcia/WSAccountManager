@@ -20,6 +20,8 @@ var ClientDetailSchema = new Schema({
   , updated_by_id: ObjectId
   , created_by_date: { type: Date, default: Date.now }
   , updated_by_date: { type: Date}
+  , resolved: Boolean
+  , resolved_by_name: String
   , company_id : ObjectId
   , client_id : ObjectId
 });

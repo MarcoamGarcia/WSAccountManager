@@ -29,7 +29,7 @@ exports.show_details = function(req, res, next) {
                         , description: each_clientDetail.description, end_date: each_clientDetail.end_date
                         , alert: each_clientDetail.alert, created: each_clientDetail.created
                         , company_name: each_clientDetail.company_name, created_by_name: each_clientDetail.created_by_name
-                        , updated_by_name: each_clientDetail.updated_by_name };
+                        , updated_by_name: each_clientDetail.updated_by_name, resolved: each_clientDetail.resolved };
                     clientDetails_hash.push(clientDetail_info);
                 };
             };
@@ -169,6 +169,12 @@ exports.update = function(req, res, next) {
             clientDetail.updated_by_id = req.user.id;
             clientDetail.updated_by_date = new Date();
 
+            if ((req.body.resolved != clientDetail.resolved) && req.body.resolved == true) {
+                clientDetail.resolved_by_name = req.user.name;
+            };
+
+            clientDetail.resolved = req.body.resolved;
+
             clientDetail.save(function(err) {
                 if(err) {
                     logger.error(err);
@@ -177,7 +183,8 @@ exports.update = function(req, res, next) {
                     res.writeHead(200, {'content-type': 'text/json' });
                     var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
                         , description: clientDetail.description , end_date: clientDetail.end_date
-                        , alert: clientDetail.alert };
+                        , alert: clientDetail.alert, resolved: clientDetail.resolved
+                        , resolved_by_name: clientDetail.resolved_by_name };
 
                     res.write(JSON.stringify(clientDetail_hash));
                     res.end('\n');

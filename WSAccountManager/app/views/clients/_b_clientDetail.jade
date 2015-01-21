@@ -1,6 +1,8 @@
 //- need to add table otherwise jade does not add tr and td.
 table
     tr
+        td
+            input.resolved(id='resolved', name='resolved', type="checkbox", placeholder='Resolved', {{resolved}})
         td {{company_name}}
         td {{title}}
         td {{description}}

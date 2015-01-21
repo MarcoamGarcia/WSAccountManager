@@ -853,6 +853,7 @@ table {
 .table thead:first-child tr:first-child td {
   border-top: 0;
 }
+
 .table tbody + tbody {
   border-top: 2px solid #dddddd;
 }
@@ -5838,4 +5839,9 @@ button.close {
     height: auto !important;
     overflow: visible !important;
   }
+}
+
+table.clientDetails_list > tbody > tr.thr {
+  border-top: 0;
+  text-decoration: line-through;
 }

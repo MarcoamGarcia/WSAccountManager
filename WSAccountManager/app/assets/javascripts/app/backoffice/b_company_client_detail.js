@@ -43,7 +43,8 @@ var ClientDetailView = BaseView.extend({
      return _.extend( {
          'click a.edit':  'edit',
          'click a.cancel':  'cancel',
-         'submit form': 'save'
+         'submit form': 'save',
+         'change input.resolved': 'resolved'
      }, this.constructor.__super__.events);
  },  
  initialize: function(options) {
@@ -52,6 +53,7 @@ var ClientDetailView = BaseView.extend({
    self.actor_type = options.actor_type;
    options.vent.bind("edit", self.edit);
    options.vent.bind("show", self.show);
+   self.resolved();
  },
  delete_message: function(e) {
      return "Are you sure you want to delete this clientDetail?";
@@ -68,6 +70,10 @@ var ClientDetailView = BaseView.extend({
     var created = self.model.get('created');
     var created_by_name = self.model.get('created_by_name');
     var updated_by_name = self.model.get('updated_by_name');
+    var resolved = "";
+    if (self.model.get('resolved')) {
+        resolved = "checked";
+    };
 
     self_el.html(self.show_clientDetail({
         id: self.model.id,
@@ -78,8 +84,10 @@ var ClientDetailView = BaseView.extend({
         alert: alert,
         created: created,
         created_by_name: created_by_name,
-        updated_by_name: updated_by_name
+        updated_by_name: updated_by_name,
+        resolved: resolved
     }));
+    var x;
  },
  render_edit: function() {
      
@@ -146,6 +154,35 @@ var ClientDetailView = BaseView.extend({
          }
       );
      return self;
+ },
+ resolved: function(e) {
+    var self = this;
+    var self_el = $(self.el);
+    var resolved;
+    var checked = false;
+
+    if (typeof e != "undefined") {
+        checked = e.currentTarget.checked;
+    } else if (self.model.get("resolved") == true) {
+        checked = true;
+    }
+
+    if (checked) {
+        self_el.addClass("thr");
+        resolved = true;
+    } else {
+        self_el.removeClass("thr");
+        resolved = false;
+    }
+
+    self.model.save(
+    { resolved: resolved },
+    {
+        wait: true,
+        success: self.saved_success,
+        error: self.saved_error
+    }
+    );
  }
 });
 
