@@ -147,6 +147,7 @@ exports.add = function(req, res, next) {
 
                             //res.write(JSON.stringify(client_hash));
                             //res.end('\n');
+                            req.client_hash = client_hash;
                             req.client_created = client;
                             req.client_default_task = default_task;
                             next();
@@ -183,6 +184,7 @@ exports.add = function(req, res, next) {
 
                         //res.write(JSON.stringify(client_hash));
                         //res.end('\n');
+                        req.client_hash = client_hash;
                         req.client_created = client;
                         req.client_default_task = default_task;
                         next();

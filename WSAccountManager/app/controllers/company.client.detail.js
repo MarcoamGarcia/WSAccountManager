@@ -116,7 +116,12 @@ exports.add = function(req, res, next) {
                                     , description: clientDetail.description , end_date: clientDetail.end_date
                                     , alert: clientDetail.alert, company_name: clientDetail.company_name };
 
-                                res.write(JSON.stringify(clientDetail_hash));
+                                // if it is a automated task send client info, if is not send the client detail info
+                                if (req.client_hash) {
+                                    res.write(JSON.stringify(req.client_hash));
+                                } else {
+                                    res.write(JSON.stringify(clientDetail_hash));
+                                }
                                 res.end('\n');
                             }
                         });
@@ -146,8 +151,13 @@ exports.add = function(req, res, next) {
                             var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
                                 , description: clientDetail.description , end_date: clientDetail.end_date
                                 , alert: clientDetail.alert, company_name: clientDetail.company_name };
-
-                            res.write(JSON.stringify(clientDetail_hash));
+                                
+                            // if it is a automated task send client info, if is not send the client detail info
+                            if (req.client_hash) {
+                                res.write(JSON.stringify(req.client_hash));
+                            } else {
+                                res.write(JSON.stringify(clientDetail_hash));
+                            }
                             res.end('\n');
                         }
                     });
