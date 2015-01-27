@@ -1,5 +1,6 @@
 var  mongoose = require('mongoose')
     , _ = require('underscore')
+    , async = require('async')
     , logger = require('../config/logger').logger();
 
 var ClientDetail = mongoose.model('ClientDetail');
@@ -165,6 +166,131 @@ exports.add = function(req, res, next) {
             }
         });
     }
+}
+
+exports.c_invoices = function(req, res, next) {
+    if (req.client_created) {
+        var info;
+        info.clientDetail_client_id = req.client_created._id;
+        info.logged_user = req.user;
+        info.actor = req.actor;
+        info.title = req.client_created.company_name + " - " + "Comunicação de Faturas AT";
+        info.description = "A comunicação de faturas desta tarefa é referente ao mês anterior.";
+        info.alert = true;
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 25;
+        var current_month = today.getMonth();
+
+
+        async.each(months, function( month, callback) {
+            info.end_date = day + "/" + month + "/" + year;
+
+            adding_detail(req, res, next, info);
+            
+        }, function(err){
+            // if any of the file processing produced an error, err would equal that error
+            if( err ) {
+              // One of the iterations produced an error.
+              // All processing will now stop.
+              console.log('A file failed to process');
+            } else {
+              console.log('All files have been processed successfully');
+            }
+        });
+    };
+}
+
+exports.adding_detail = function(req, res, next, info) {
+    ClientDetail.find({ title: info.title }, function(err, clientDetail) {
+        if (err) {
+            logger.error(err);
+            res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
+        } else if(clientDetail.length > 0) {
+            var local_is_unique = true;
+            clientDetail.forEach(function(local_clientDetail) {
+                if (local_clientDetail.company_id.toString() == req.params.c_id) {
+                    local_is_unique = false;
+                };
+            });
+            // check is unique for this company
+            if (local_is_unique == false) {
+                logger.error(new Error("Client detail " + title + " already exists."));
+                res.send({ errors: {title: "Someone already has claimed that name." } });
+            } else {
+                var client_id = mongoose.Types.ObjectId(info.clientDetail_client_id);
+                Client.find({ _id: client_id }, function(err, client) {
+                    var clientDetail = new ClientDetail();
+                    clientDetail.company_name = client[0].company_name;
+                    clientDetail.title = info.title;
+                    clientDetail.description = info.description;
+                    clientDetail.end_date = info.end_date;
+                    clientDetail.alert = info.alert;
+                    clientDetail.company_id = req.company._id;
+                    clientDetail.client_id = info.clientDetail_client_id;
+                    clientDetail.created_by_name = info.logged_user.name;
+                    clientDetail.created_by_id = info.logged_user.id;
+                    clientDetail.updated_by_name = info.logged_user.name;
+                    clientDetail.updated_by_id = info.logged_user.id;
+                    clientDetail.save(function(err){
+                        if (err) {
+                            logger.debug(err);
+                            res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
+                        } else {
+                            res.writeHead(200, {'content-type': 'text/json' });
+                            var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
+                                , description: clientDetail.description , end_date: clientDetail.end_date
+                                , alert: clientDetail.alert, company_name: clientDetail.company_name };
+
+                            // if it is a automated task send client info, if is not send the client detail info
+                            if (req.client_hash) {
+                                res.write(JSON.stringify(req.client_hash));
+                            } else {
+                                res.write(JSON.stringify(clientDetail_hash));
+                            }
+                            res.end('\n');
+                        }
+                    });
+                });
+            }
+        } else {
+            var client_id = mongoose.Types.ObjectId(info.clientDetail_client_id);
+            Client.find({ _id: client_id }, function(err, client) {
+                var clientDetail = new ClientDetail();
+                clientDetail.company_name = client[0].company_name;
+                clientDetail.title = info.title;
+                clientDetail.description = info.description;
+                clientDetail.end_date = info.end_date;
+                clientDetail.alert = info.alert;
+                clientDetail.company_id = req.company._id;
+                clientDetail.client_id = info.clientDetail_client_id;
+                clientDetail.created_by_name = info.logged_user.name;
+                clientDetail.created_by_id = info.logged_user.id;
+                clientDetail.updated_by_name = info.logged_user.name;
+                clientDetail.updated_by_id = info.logged_user.id;
+                clientDetail.save(function(err){
+                    if (err) {
+                        logger.debug(err);
+                        res.send({ errors: {general: "Oops. Something went wrong. Please try again." } });
+                    } else {
+                        res.writeHead(200, {'content-type': 'text/json' });
+                        var clientDetail_hash = { _id: clientDetail._id, title: clientDetail.title
+                            , description: clientDetail.description , end_date: clientDetail.end_date
+                            , alert: clientDetail.alert, company_name: clientDetail.company_name };
+                            
+                        // if it is a automated task send client info, if is not send the client detail info
+                        if (req.client_hash) {
+                            res.write(JSON.stringify(req.client_hash));
+                        } else {
+                            res.write(JSON.stringify(clientDetail_hash));
+                        }
+                        res.end('\n');
+                    }
+                });
+            });
+        }
+    });
 }
 
 exports.update = function(req, res, next) {
