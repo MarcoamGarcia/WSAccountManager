@@ -97,13 +97,15 @@ exports.new_dashboard = function(req, res, next) {
         res.redirect(res.locals.url_mount("/404"));
     } else {
 
-      ClientDetail.find({company_id: company_id}, {}, function(err, clientDetails) {
+      // find client details sort by end_date
+      ClientDetail.find({company_id: company_id}, {}).sort('end_date').exec(function(err, clientDetails) {
           if (err) {next(err);}
 
           var clientDetails_hash = [];
           
           clientDetails.forEach(function(each_clientDetail) {
-            if (each_clientDetail.alert == true) {
+            // only shows the details that have alert and that are not resolved
+            if (each_clientDetail.alert == true && each_clientDetail.resolved != true) {
               // create page hash with owner information.
               var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
                   , description: each_clientDetail.description, end_date: each_clientDetail.end_date
