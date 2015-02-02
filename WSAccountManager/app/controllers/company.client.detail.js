@@ -57,6 +57,8 @@ exports.add = function(req, res, next) {
     // check if it has to create automatically client details
     if (req.client_created) {
         try {
+            receipt_docs(req, res, next);
+            docs_released_in_accounting(req, res, next);
             c_invoices(req, res, next);
         }
         catch(err) {
@@ -200,6 +202,66 @@ function c_invoices(req, res, next) {
                 res.writeHead(200, {'content-type': 'text/json' });
                 res.write(JSON.stringify(req.client_hash));
                 res.end('\n');  
+            };
+        });
+    };
+}
+
+// gather all info to create receipt of documents automatically
+function receipt_docs(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 15;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Recebimento de Cocumentos",
+                description: "Recebimento de documentos, esta tarefa é referente ao mês anterior.",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) { 
+            };
+        });
+    };
+}
+
+// gather all info to create documents released in accounting automatically
+function docs_released_in_accounting(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 25;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Documentos Lançados em Contabilidade",
+                description: "Documentos lançados em contabilidade, esta tarefa é referente ao mês anterior.",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) {  
             };
         });
     };
