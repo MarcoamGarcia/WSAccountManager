@@ -59,6 +59,9 @@ exports.add = function(req, res, next) {
         try {
             receipt_docs(req, res, next);
             docs_released_in_accounting(req, res, next);
+            pay_social_security(req, res, next);
+            salaries(req, res, next);
+            stamp_duty(req, res, next);
             c_invoices(req, res, next);
         }
         catch(err) {
@@ -262,6 +265,96 @@ function docs_released_in_accounting(req, res, next) {
             
         }, function(err){
             if (err) {  
+            };
+        });
+    };
+}
+
+// gather all info to create pay social security automatically
+function pay_social_security(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 20;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Pagamento de Segurança Social",
+                description: "Pagamento de Segurança Social, esta tarefa é referente ao mês anterior.",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) { 
+            };
+        });
+    };
+}
+
+// gather all info to create salaries automatically
+function salaries(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 8;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Recebimento de Cocumentos",
+                description: "Recebimento de documentos, esta tarefa é referente ao mês anterior.",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) { 
+            };
+        });
+    };
+}
+
+// gather all info to create stamp duty automatically
+function stamp_duty(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 20;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Recebimento de Cocumentos",
+                description: "Recebimento de documentos, esta tarefa é referente ao mês anterior.",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) { 
             };
         });
     };

@@ -104,8 +104,21 @@ exports.new_dashboard = function(req, res, next) {
           var clientDetails_hash = [];
           
           clientDetails.forEach(function(each_clientDetail) {
-            // only shows the details that have alert and that are not resolved
-            if (each_clientDetail.alert == true && each_clientDetail.resolved != true) {
+            var splited_date = each_clientDetail.end_date.split("/");
+            var today = new Date();
+            var current_month = today.getMonth();
+            var current_year = today.getFullYear();
+            var current_day = today.getDate();
+
+            var year_result = parseInt(splited_date[2]) - current_year;
+            var month_result = parseInt(splited_date[1]) - current_month;
+            var day_result = parseInt(splited_date[0]) - current_day;
+
+            // only shows the details that have alert, that are not resolved and that are to 5 days
+            // or less to the end date
+            if ((year_result == 0) && (month_result == 0) && (day_result <= 5) && 
+            each_clientDetail.alert == true && each_clientDetail.resolved != true) {
+
               // create page hash with owner information.
               var clientDetail_info = {_id: each_clientDetail.id, title: each_clientDetail.title
                   , description: each_clientDetail.description, end_date: each_clientDetail.end_date
