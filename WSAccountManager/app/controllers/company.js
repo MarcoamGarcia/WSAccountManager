@@ -111,7 +111,7 @@ exports.new_dashboard = function(req, res, next) {
             var current_day = today.getDate();
 
             var year_result = parseInt(splited_date[2]) - current_year;
-            var month_result = parseInt(splited_date[1]) - current_month;
+            var month_result = parseInt(splited_date[1]) - (current_month + 1);
             var day_result = parseInt(splited_date[0]) - current_day;
 
             // only shows the details that have alert, that are not resolved and that are to 5 days

@@ -62,6 +62,14 @@ exports.add = function(req, res, next) {
             pay_social_security(req, res, next);
             salaries(req, res, next);
             stamp_duty(req, res, next);
+            summary_statement(req, res, next);
+            iva(req, res, next);
+            if (req.body.inq_ine == true) {
+                ine_surveys(req, res, next);
+            };
+            if (req.body.pec == true) {
+                pec(req, res, next);
+            };
             c_invoices(req, res, next);
         }
         catch(err) {
@@ -300,6 +308,36 @@ function pay_social_security(req, res, next) {
     };
 }
 
+// gather all info to create summary statement automatically
+function summary_statement(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 20;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Declaração Recapitulativa",
+                description: "Declaração Recapitulativa (Ex: A de Março corresponde a Janeiro).",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) { 
+            };
+        });
+    };
+}
+
 // gather all info to create salaries automatically
 function salaries(req, res, next) {
     if (req.client_created._id) {
@@ -314,8 +352,8 @@ function salaries(req, res, next) {
                 clientDetail_client_id: req.client_created._id.toString(),
                 logged_user: req.user,
                 actor: req.actor,
-                title: "Recebimento de Cocumentos",
-                description: "Recebimento de documentos, esta tarefa é referente ao mês anterior.",
+                title: "Salários",
+                description: "Esta tarefa é referente ao mês anterior.",
                 alert: true,
                 end_date: day + "/" + (month + 1) + "/" + year
             };
@@ -344,8 +382,8 @@ function stamp_duty(req, res, next) {
                 clientDetail_client_id: req.client_created._id.toString(),
                 logged_user: req.user,
                 actor: req.actor,
-                title: "Recebimento de Cocumentos",
-                description: "Recebimento de documentos, esta tarefa é referente ao mês anterior.",
+                title: "Imposto de Selo",
+                description: "Esta tarefa é referente ao mês anterior.",
                 alert: true,
                 end_date: day + "/" + (month + 1) + "/" + year
             };
@@ -355,6 +393,180 @@ function stamp_duty(req, res, next) {
             
         }, function(err){
             if (err) { 
+            };
+        });
+    };
+}
+
+// gather all info to create quarterly IVA automatically
+function iva(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var title = " Mensal";
+
+        //check if the IVA is IVA3 or IVA1
+        if (req.body.default_task == Client.IVA3) {
+            title = " Trimestral";
+            months = [3,7,9,11];
+        }
+
+        var day = 20;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Iva",
+                description: "IVA" + title,
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (err) { 
+            };
+        });
+    };
+}
+
+// gather all info to create INE surveys automatically
+function ine_surveys(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 10;
+        var day2 = 11;
+        var day3 = 16;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Inquéritos INE",
+                description: "Inquéritos INE",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (!err) {
+                async.each(months, function( month, callback) {
+                    var info = {
+                        clientDetail_client_id: req.client_created._id.toString(),
+                        logged_user: req.user,
+                        actor: req.actor,
+                        title: "Inquéritos INE",
+                        description: "Inquéritos INE",
+                        alert: true,
+                        end_date: day2 + "/" + (month + 1) + "/" + year
+                    };
+
+                    adding_detail(req, res, next, info);
+                    callback();
+                    
+                }, function(err){
+                    if (!err) {
+                        async.each(months, function( month, callback) {
+                            var info = {
+                                clientDetail_client_id: req.client_created._id.toString(),
+                                logged_user: req.user,
+                                actor: req.actor,
+                                title: "Inquéritos INE",
+                                description: "Inquéritos INE",
+                                alert: true,
+                                end_date: day3 + "/" + (month + 1) + "/" + year
+                            };
+
+                            adding_detail(req, res, next, info);
+                            callback();
+                            
+                        }, function(err){
+                            if (err) { 
+                            };
+                        });
+                    };
+                });
+            };
+        });
+    };
+}
+
+// gather all info to create PEC automatically
+function pec(req, res, next) {
+    if (req.client_created._id) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var months = [0,1,2,3,4,5,6,7,8,9,10,11];
+        var day = 10;
+        var day2 = 11;
+        var day3 = 16;
+        var current_month = today.getMonth();
+
+        async.each(months, function( month, callback) {
+            var info = {
+                clientDetail_client_id: req.client_created._id.toString(),
+                logged_user: req.user,
+                actor: req.actor,
+                title: "Pagamento Especial por Conta",
+                description: "Pagamento Especial por Conta",
+                alert: true,
+                end_date: day + "/" + (month + 1) + "/" + year
+            };
+
+            adding_detail(req, res, next, info);
+            callback();
+            
+        }, function(err){
+            if (!err) {
+                async.each(months, function( month, callback) {
+                    var info = {
+                        clientDetail_client_id: req.client_created._id.toString(),
+                        logged_user: req.user,
+                        actor: req.actor,
+                        title: "Pagamento Especial por Conta",
+                        description: "Pagamento Especial por Conta",
+                        alert: true,
+                        end_date: day2 + "/" + (month + 1) + "/" + year
+                    };
+
+                    adding_detail(req, res, next, info);
+                    callback();
+                    
+                }, function(err){
+                    if (!err) {
+                        async.each(months, function( month, callback) {
+                            var info = {
+                                clientDetail_client_id: req.client_created._id.toString(),
+                                logged_user: req.user,
+                                actor: req.actor,
+                                title: "Pagamento Especial por Conta",
+                                description: "Pagamento Especial por Conta",
+                                alert: true,
+                                end_date: day3 + "/" + (month + 1) + "/" + year
+                            };
+
+                            adding_detail(req, res, next, info);
+                            callback();
+                            
+                        }, function(err){
+                            if (err) { 
+                            };
+                        });
+                    };
+                });
             };
         });
     };

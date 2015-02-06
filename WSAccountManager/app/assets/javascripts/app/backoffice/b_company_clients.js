@@ -68,6 +68,8 @@ var ClientView = BaseView.extend({
     var second_contact = self.model.get('second_contact');
     var nif = self.model.get('nif');
     var niss = self.model.get('niss');
+    var inq_ine = self.model.get('inq_ine');
+    var pec = self.model.get('pec');
     var address = self.model.get('address');
     var default_task = self.model.get("default_task");
     var created_by_name = self.model.get('created_by_name');
@@ -89,6 +91,8 @@ var ClientView = BaseView.extend({
         second_contact: second_contact,
         nif: nif,
         niss: niss,
+        inq_ine: inq_ine,
+        pec: pec,
         address: address,
         created_by_name: created_by_name,
         updated_by_name: updated_by_name
@@ -105,6 +109,8 @@ var ClientView = BaseView.extend({
     var second_contact = self.model.get('second_contact');
     var nif = self.model.get('nif');
     var niss = self.model.get('niss');
+    var inq_ine = self.model.get('inq_ine');
+    var pec = self.model.get('pec');
     var address = self.model.get('address');
     var default_task = self.model.get("default_task");
 
@@ -119,6 +125,8 @@ var ClientView = BaseView.extend({
         second_contact: second_contact,
         nif: nif,
         niss: niss,
+        inq_ine: inq_ine,
+        pec: pec,
         address: address
     }));
 
@@ -167,10 +175,13 @@ var ClientView = BaseView.extend({
      var niss = self_el.find('#niss').val();
      var address = self_el.find('#address').val();
      var sel_tasks = self_el.find('.sel_tasks option:selected').val();
+     var inq_ine = self_el.find('#inq_ine').is(":checked");
+     var pec = self_el.find('#pec').is(":checked");
 
      self.model.save(
          { company_name: company_name, first_name: first_name, last_name: last_name, first_contact: first_contact
-         , second_contact: second_contact, default_task: sel_tasks, nif: nif, niss: niss, address: address },
+         , second_contact: second_contact, default_task: sel_tasks, nif: nif, niss: niss, address: address
+         , inq_ine: inq_ine, pec: pec },
          {
             wait: true,
             success: self.saved_success,

@@ -21,11 +21,18 @@ table
 
                     -if(typeof existent_tasks != 'undefined') 
                         div.control-group.existent_tasks
-                            select.sel_tasks(id='default_tasks', name='default_tasks')
+                            select.sel_tasks(id='default_tasks', name='default_tasks', class="required")
                                 option(value='') -- Select Default Task --
                                 - _.each(existent_tasks, function(integr, key, list) {
                                     option(value='#{key}') #{integr.name}
                                 - })
+                    div.control-group
+                        input.inq_ine(id='inq_ine', name='inq_ine', type="checkbox", placeholder='Inquéritos INE', {{inq_ine}})
+                        span &nbsp; Inquéritos INE
+                    div.control-group
+                        input.pec(id='pec', name='pec', type="checkbox", placeholder='Pagamento Especial por Conta', {{pec}})
+                        span &nbsp; Pagamento Especial por Conta
+                        
                 div
                     button.save(type='submit', class="btn btn-primary", data-active="Save", data-loading="Saving...", data-complete="Saved!") Save
                     a.cancel(class="left_margin btn btn-inverse", data-active="Cancel", data-loading="Canceling...", data-complete="Canceled!") Cancel

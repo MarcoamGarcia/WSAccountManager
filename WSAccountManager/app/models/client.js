@@ -17,6 +17,8 @@ var ClientSchema = new Schema({
   , nif: String
   , niss: String
   , default_task: String
+  , inq_ine: Boolean
+  , pec: Boolean
   , created_by_name: String
   , created_by_id: ObjectId
   , updated_by_name: String
@@ -33,5 +35,5 @@ Client.IVA3 = 1;
 
 Client.existent_tasks = {};
   
-Client.existent_tasks[Client.IVA1] = {name: 'Monthly IVA' };
-Client.existent_tasks[Client.IVA3] = {name: 'Quarterly IVA' };
+Client.existent_tasks[Client.IVA1] = {name: 'IVA Mensal' };
+Client.existent_tasks[Client.IVA3] = {name: 'IVA Trimestral' };
