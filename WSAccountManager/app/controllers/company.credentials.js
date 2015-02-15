@@ -4,6 +4,7 @@ var  mongoose = require('mongoose')
     , logger = require('../config/logger').logger();
 
 var Credential = mongoose.model('Credential');
+var Client = mongoose.model('Client');
 
 exports.show = function(req, res, next) {
     var logged_user = req.user;
@@ -32,6 +33,33 @@ exports.show = function(req, res, next) {
             title: client.company_name + ' credentials',
             existent_tasks: Credential.existent_tasks,
             credentials: credentials_hash
+        });
+
+    });
+}
+
+exports.show_header = function(req, res, next) {
+    var logged_user = req.user;
+    var company = req.company;
+    var client = req.client_model;
+    // need to transform string to ObjectId before querying.
+    var company_id = mongoose.Types.ObjectId(company.id);
+
+    Client.find({company_id: company_id}, {}, function(err, clients) {
+        if (err) {next(err);}
+
+        var clients_hash = [];
+        // create page hash with owner information.
+        clients.forEach(function(client) {
+            var client_info = {_id: client.id, company_name: client.company_name  };
+            clients_hash.push(client_info);
+        });
+
+        res.render('credentials/header_credentials/credentials', {
+            actor: logged_user,
+            company: company,
+            title: 'List of clients',
+            clients: clients_hash
         });
 
     });

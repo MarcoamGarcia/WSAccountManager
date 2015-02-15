@@ -377,6 +377,12 @@ module.exports = function (app, passport) {
   // remove client credentials
   router.delete('/company/:c_id/client/:client_id/credential/:credentials_id', client_auth, credentials.remove);
 
+    // ******************** //
+   //  Header Credentials  //
+  // ******************** //
+  // show client credentials
+  router.get('/company/:c_id/credentials', company_auth, utils.set_active_area("clients"), credentials.show_header);
+
   if (fs.existsSync(__dirname + "/routes.saas.js")) {
         // set routes.
         require('./routes.saas.js')(router);

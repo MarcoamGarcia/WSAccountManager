@@ -35,6 +35,10 @@ html(lang='en')
                       ul.nav
                         li.client_link
                             a(href=url_mount('/company/#{session.active_company_id}/clients'), title='Clients') Clients
+                  div(class="nav-collapse")
+                      ul.nav
+                        li.credentials_link
+                            a(href=url_mount('/company/#{session.active_company_id}/credentials'), title='Credentials') Credentials
                               
                           
 
