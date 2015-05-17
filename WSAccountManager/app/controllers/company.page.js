@@ -19,7 +19,6 @@ var Actor = mongoose.model('Actor');
 var Site = mongoose.model('Site');
 var Page = mongoose.model('Page');
 var Company = mongoose.model('Company');
-var HelpSet = mongoose.model('HelpSet');
 
 exports.load_with_site_and_company = function(req, res, next, page_id) {
     
@@ -75,20 +74,7 @@ exports.load_using_key = function(req, res, next, page_key) {
         } else if(page != null) {
             req.page = page;
             // try to find default page helpset.
-            if(page.default_helpset_id != null) {
-                HelpSet.findById(page.default_helpset_id, function(err, helpset) {
-                    if(err) {
-                        logger.error(err);
-                        next(err);
-                    } else {
-                        req.default_helpset = helpset;
-                        req.show_first_time_only = page.default_first_time_only;
-                        next();
-                    }
-                });
-            } else {
-                next();
-            }
+            next()
         } else {
             next();
         }
@@ -143,20 +129,7 @@ exports.load_using_query_url = function(req, res, next){
                         logger.debug("found page: " + page.id);
                         req.page = page;
                         // try to find default page helpset.
-                        if(page.default_helpset_id != null) {
-                            HelpSet.findById(page.default_helpset_id, function(err, helpset) {
-                                if(err) {
-                                    logger.error(err);
-                                    next(err);
-                                } else {
-                                    req.default_helpset = helpset;
-                                    req.show_first_time_only = page.default_first_time_only;
-                                    next();
-                                }
-                            });
-                        } else {
-                            next();
-                        }
+                        next();
                     }
 
                 });
@@ -701,28 +674,6 @@ exports.remove_page = function(req, res, next) {
         var from = (page - 1) * utils.paginate_limit();
 
         async.series([ 
-                //delete helpset associated with the page
-                function remove_helpset_of_page(callback) {
-                    HelpSet.find({ page_id: page_id}, {},{ sort: {"name": 1}, skip: from, limit: utils.paginate_limit }, function(err, helpsets) {
-                        if(err) {
-                            next(err);
-                        } else {
-                            if(helpsets.length > 0) {
-                                async.each(helpsets, function(helpset, callback) {
-                                    var helpset_id = helpset.id;
-                                    helpset.remove(function(err) {
-                                        if(err) {
-                                            logger().error(err);
-                                            res.json({ error: "Oops. can't delete help. Please try again latter" }, 500);
-                                        }
-                                    });
-                                });
-                            }
-                        }
-
-                    });
-                    callback(null);
-                },
                 //delete the page
                 function removing_page(callback) {
                     page.remove(function(err) {

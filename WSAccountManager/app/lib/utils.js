@@ -39,7 +39,6 @@ var Role = mongoose.model('Role');
 var Company = mongoose.model('Company');
 var Site = mongoose.model('Site');
 var Page = mongoose.model('Page');
-var HelpSet = mongoose.model('HelpSet');
 var FAQ = mongoose.model('FAQ');
 
 // Flag state:
@@ -191,7 +190,7 @@ function update_base_url(host, port, secure_port) {
   if(port != 80 && port != 443) {
     replace_str = replace_str + ':' + port;
   }
-  
+  /*
   var filename = __dirname + "/../assets/javascripts/app/start.js";
   var file = fs.readFileSync(filename);
   var file_content = file.toString();
@@ -208,6 +207,6 @@ function update_base_url(host, port, secure_port) {
   file_content = file_content.replace(http_regexp, replace_str);
   var https_regexp = new RegExp('widget.dev.host.secure_port', "g");
   file_content = file_content.replace(https_regexp, replace_str);
-  fs.writeFileSync(filename, file_content);
+  fs.writeFileSync(filename, file_content);*/
     
 }

@@ -20,7 +20,6 @@ var Actor = mongoose.model('Actor');
 var Site = mongoose.model('Site');
 var Company = mongoose.model('Company');
 var Page = mongoose.model('Page');
-var HelpSet = mongoose.model('HelpSet');
 
 exports.load_with_company = function(req, res, next, site_id) {
      
@@ -395,24 +394,6 @@ exports.remove_site = function(req, res, next) {
     //TODO: Add err hyandling if something wrong happens when deleting helpsets or pages
     // so site is not removed.
     async.series([ 
-        function remove_site_helpsets(callback) {
-           HelpSet.find({site_id: site_id}, function(err, helpsets) {
-                 if(err) {
-                    callback(err);
-                } else {
-                    async.each(helpsets, function(helpset, each_callback) {
-                        var helpset_id = helpset.id;
-                        helpset.remove(function(err) {
-                            if(err) {
-                                logger().error(err);
-                                each_callback(err);
-                            }
-                            each_callback(err);
-                        });
-                    }, callback);
-                }
-            });
-        },
         function remove_site_pages(callback) {
             Page.find({ site_id: site_id}, function(err, pages) {
                 if(err) {

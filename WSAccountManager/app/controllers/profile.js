@@ -20,7 +20,6 @@ require('date-utils');
    
 var Actor = mongoose.model('Actor');
 var Role = mongoose.model('Role');
-var HelpSet = mongoose.model('HelpSet');
 
 exports.load_from_token = function(req, res, next, token_id) {
     Actor.findOne({'tokens.value': token_id}, function (err, actor) {
@@ -140,7 +139,7 @@ exports.show_profile_dashboard = function(req, res, next) {
         var profile_name = actor.name;
         async.parallel([
                 function count_helpsets(callback) {
-                    HelpSet.count({ created_by_id: actor.id}, callback);
+                    callback();
                 }
             ], function(err, results) {
                 if(err) {

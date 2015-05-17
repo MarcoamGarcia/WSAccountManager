@@ -13,7 +13,7 @@ var config = require('../config/config'),
     utils = require('../lib/utils'),
     cube = require("cube"),
     _ = require("underscore");
-
+/*
 var client = cube.emitter("ws://"  + config.host + ":" + config.collector.http_port);
 
 var Actor = mongoose.model('Actor');
@@ -1010,4 +1010,4 @@ exports.flag_helpset = function(req, res, next) {
         return;
     }
     
-}
+}*/

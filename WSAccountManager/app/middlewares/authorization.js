@@ -7,7 +7,6 @@ var Actor = mongoose.model('Actor');
 var Role = mongoose.model('Role');
 var Site = mongoose.model('Site');
 var Company = mongoose.model('Company');
-var HelpSet = mongoose.model('HelpSet');
     
 /*
  *  Generic require login routing middleware

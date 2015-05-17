@@ -11,7 +11,6 @@ var Actor = mongoose.model('Actor');
 var Role = mongoose.model('Role');
 var Site = mongoose.model('Site');
 var Company = mongoose.model('Company');
-var HelpSet = mongoose.model('HelpSet');
 var ClientDetail = mongoose.model('ClientDetail');
 
 
@@ -56,9 +55,6 @@ exports.dashboard = function(req, res, next) {
         res.redirect(res.locals.url_mount("/404"));
     } else {
         async.parallel([
-                function count_helpsets(callback) {
-                    HelpSet.count({ company_id: company_id}, callback);
-                },
                 function count_sites(callback) {
                     Site.count({ company_id: company_id}, callback);
                 },

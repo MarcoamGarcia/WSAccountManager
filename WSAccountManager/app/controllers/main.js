@@ -14,7 +14,6 @@ var Role = mongoose.model('Role');
 var Actor = mongoose.model('Actor');
 var Company = mongoose.model('Company');
 var Site = mongoose.model('Site');
-var HelpSet = mongoose.model('HelpSet');
 
 exports.index = function(req, res, next) {
     res.render('index', {
